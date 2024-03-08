@@ -1,0 +1,69 @@
+
+.scrollbar {
+  --sb-track-color: #00000000;
+  --sb-thumb-color: #b79b07;
+  --sb-size: 4px;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: var(--sb-size)
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 11px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 11px;
+  
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .scrollbar {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
+}
+
+
+
+
+.example-container div {
+
+  position: absolute;
+  top: calc(68% - 150px / 2);
+  left: calc(70% - 150px / 2);
+}
+
+
+
+
+body {
+  --sb-track-color: #ffffff;
+  --sb-thumb-color: #000000;
+  --sb-size: 1px;
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size)
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 1px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 1px;
+  
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
+}
