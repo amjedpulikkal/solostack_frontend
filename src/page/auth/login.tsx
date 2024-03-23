@@ -17,19 +17,25 @@ import { useAuthor } from '@/components/switchUser-provider';
 import StudentLogin from './authors/student';
 import TutorLogin from './authors/tutor';
 import Mentor from './authors/mentor';
+import { motion } from 'framer-motion';
+import { useLoginQuery } from '@/reactQuery/student/signUp';
+import { useState } from 'react';
 export default function App(): JSX.Element {
-  
-  const {author}=useAuthor()
-  
+
+  const [ author, setAuthor ] = useState("student")
+
+
   return (
     <>
-      <div className='flex justify-end mt-6 mr-6'>
-        <ModeToggle />
-      </div>
-      {author==="student"?<StudentLogin/>:author==="tutor"?<TutorLogin/>:<Mentor/>}
-      <div className='flex justify-end mt-10 mr-6'>
-        <SwitchUser />
-      </div>
+      
+        <div className='flex justify-end mt-6 mr-6'>
+          <ModeToggle />
+        </div>
+        {author === "student" ? <StudentLogin /> : author === "tutor" ? <TutorLogin /> : <Mentor />}
+        <div className='flex justify-end mr-6'>
+          <SwitchUser author={author} setAuthor={setAuthor} />
+        </div>
+    
     </>
   )
 }

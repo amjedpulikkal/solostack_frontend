@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react"
 import { toast } from "sonner"
 
-type Author = "student" | "mentor" | "tutor"|string
+export type Author = "student" | "mentor" | "tutor"| null
 
 type SwitchProviderProps = {
   children: React.ReactNode
@@ -28,7 +28,7 @@ export function SwitchUserProvider({
   ...props
 }: SwitchProviderProps) {
   const [author, setAuthor] = useState<Author>(
-    () => (localStorage.getItem(storageKey) as Author) || defaultAuthor
+    () => (localStorage.getItem(storageKey) as Author) 
   )
 
   const value = {

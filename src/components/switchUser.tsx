@@ -11,14 +11,13 @@ import {
     DropdownMenuContent
 } from "@/components/ui/dropdown-menu"
 import { useState } from "react";
-import { useAuthor } from "./switchUser-provider";
+import { useAuthor,Author } from "./switchUser-provider";
 import { useTheme } from "./theme-provider";
-export function SwitchUser() {
+export function SwitchUser({ author, setAuthor}) {
 
 
 
-    const { author, setAuthor } = useAuthor()
-
+   
 
     return (
         <DropdownMenu>

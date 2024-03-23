@@ -1,21 +1,49 @@
 
-
-import { GrGoogle } from "react-icons/gr";
-import { ImFacebook2 } from "react-icons/im";
-import { FaGithub } from "react-icons/fa";
-import { GoogleLoginButton } from "../../components/GoogleOAuth"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
 import { useAuthor } from "@/components/switchUser-provider";
+import { Authcomponents } from "@/components/oauth";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { AnimatePresence, motion } from "framer-motion";
+
+
+import { Button } from "@/components/ui/button";
+import { useLoginQuery } from "@/reactQuery/student/signUp";
+
+interface IFormInput {
+  email: string;
+  password: string;
+}
+
+const framer_error = {
+  initial: { opacity: 0, y: 10 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: 10 },
+  transition: { duration: 0.2 },
+}
+
 export default function StudentLogin(): JSX.Element {
- const {author,setAuthor}= useAuthor()
+
+  const { mutateAsync,isError, isLoading, error } = useLoginQuery()
+  const errorData = error?.response?.data as string
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<IFormInput>()
+
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+
+    
+    mutateAsync(data)
+  }
+
+
+
+
+
   return (
     <>
-      
+
       <section className="mt-20 flex items-center justify-center ">
         <div className="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0">
           <div className="absolute  lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center" style={{ backgroundImage: "url(https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80)" }}>
@@ -28,57 +56,59 @@ export default function StudentLogin(): JSX.Element {
             <div className="flex justify-center ">
               <img src="/SoloStack (2).png" className='hidden dark:block' alt="" />
             </div>
-            <div className="py-6 space-x-2">
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
-                  <button className="w-28 h-12 items-center justify-center inline-flex rounded-full font-bold text-lg border-2"><GrGoogle /></button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>google</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
-                  <button className="w-28 h-12 items-center justify-center inline-flex rounded-full font-bold text-lg border-2"><ImFacebook2 /></button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Facebook</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
-                  <button className="w-28 h-12 items-center justify-center inline-flex rounded-full font-bold text-lg border-2"><FaGithub /></button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Github</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-             
-              
-            </div>
+            <Authcomponents />
             <p className=" dark:text-gray-100  text-gray-700 ">
               or use email your account student
             </p>
-            <form action="" className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+
+            <AnimatePresence mode="wait" initial={false}>
+                  {isError && <motion.p
+                    className="text-center gap-1 pt-2 font-semibold text-red-500"
+                    {...framer_error}
+                  >
+                    Incorrect login credentials. Please try again.
+                  </motion.p>
+                  }
+                </AnimatePresence>
+            <form onSubmit={handleSubmit(onSubmit)} className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
               <div className="pb-2 pt-4">
-                <input type="email" name="email" id="email" placeholder="Email" className="block w-full p-4 text-lg rounded-sm dark:bg-black border-2" />
+                <input type="email" {...register("email", {
+                  required: "Email Address is required",
+                  pattern: {
+                    value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    message: "invalid email address"
+                  }
+                })} placeholder="Email" className="block w-full p-4 text-lg rounded-sm dark:bg-black border-2" />
+
+                <AnimatePresence mode="wait" initial={false}>
+                  {errors.email && <motion.p
+                    className="flex items-center gap-1 pt-2 font-semibold text-red-500"
+                    {...framer_error}
+                  >
+                    {errors.email.message}
+                  </motion.p>
+                  }
+                </AnimatePresence>
               </div>
               <div className="pb-2 pt-4">
-                <input className="block w-full p-4 text-lg rounded-sm border-2 bg-white dark:bg-black" type="password" name="password" id="password" placeholder="Password" />
+                <input className="block w-full p-4 text-lg rounded-sm border-2 bg-white dark:bg-black" type="password" {...register("password", { required: "Password  is required" })} placeholder="Password" />
+                <AnimatePresence mode="wait" initial={false}>
+                  {errors.password && <motion.p
+                    className="flex items-center gap-1 pt-2 font-semibold text-red-500"
+                    {...framer_error}
+                  >
+                    {errors.password.message}
+                  </motion.p>
+                  }
+                
+ 
+                </AnimatePresence>
               </div>
               <div className="text-right text-gray-400 hover:underline hover:text-back-100">
                 <a href="#">Forgot your password?</a>
               </div>
               <div className="px-4 pb-2 pt-4">
-                <button className="uppercase block w-full p-4 text-lg rounded-full hover:bg-indigo-600 focus:outline-none" style={{ backgroundColor: "#28CB8B" }}>sign in</button>
+                <Button disabled={!!Object.keys(errors).length} type="submit" className="uppercase  w-full h-14 text-lg rounded-full " style={{ backgroundColor: "#28CB8B" }}>{isLoading ? "lording..." : "sign in"}</Button>
               </div>
 
               <div className="p-4 text-center right-0 left-0 flex justify-center space-x-4 mt-16 lg:hidden ">
@@ -96,7 +126,7 @@ export default function StudentLogin(): JSX.Element {
           </div>
         </div>
       </section>
-      
+
     </>
   )
 }

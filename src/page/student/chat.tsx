@@ -2,6 +2,8 @@ import { ModeToggle } from '../../components/mode-toggle'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default function chat(): JSX.Element {
+    console.log("chat");
+    
     const group: { name: String, img: string }[] = [
         { name: "node js ", img: "/download.png" },
         { name: "Python ", img: "/download.jpg" },

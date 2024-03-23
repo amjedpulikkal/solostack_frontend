@@ -1,0 +1,53 @@
+import { useEffect } from "react";
+import { json, useParams } from "react-router-dom"
+import { useCookies } from "react-cookie"
+import { isOauth } from "@/reactQuery/student/isOauth";
+import { setLoggedIn, setStudentData } from "@/redux/slices/studentSlice";
+import { useDispatch, useSelector, } from "react-redux";
+import { RootState } from "../../redux/store"
+import { StudentData } from "@/type";
+import { useNavigate } from "react-router-dom";
+import { useAuthor } from "@/components/switchUser-provider";
+
+export default function Outh2() {
+    const { setAuthor } = useAuthor()
+    const crateIsOauthUpMutation = isOauth()
+    const navigate = useNavigate();
+    const { provider, token } = useParams()
+    const [cookies, setCookie] = useCookies(['jwtToken']);
+    const dispatch = useDispatch()
+    
+    const data = useSelector((state: RootState) => state.student?.studentData) as unknown as StudentData
+    useEffect(() => {
+        const fetchData = async () => {
+            if (token) {
+                setCookie('jwtToken', token, { path: '/', });
+                console.log(provider, token);
+                try {
+                    const data = await crateIsOauthUpMutation.mutateAsync(token);
+                    console.log(data, "eeeeeeeeeeeeeeeee333333333");
+                    dispatch(setStudentData(data))
+                    
+                    setAuthor("student")
+                    console.log(data, "eeeeeeeeeeeeee«eee333333333");
+                    navigate("/student")
+                    console.log("-----------------------------", token)
+                } catch (error) {
+                    // Handle error appropriately
+                    console.error("Error fetching data:", error);
+                }
+            }
+        };
+        fetchData();
+
+    }, []);
+    return (
+        <>
+            hello world!  hi {data?.email}
+        </>
+    )
+
+
+
+
+}

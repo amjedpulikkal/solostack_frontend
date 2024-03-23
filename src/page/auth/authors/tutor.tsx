@@ -11,11 +11,13 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { useAuthor } from "@/components/switchUser-provider";
+import { Authcomponents } from "@/components/oauth";
+
 export default function TutorLogin(): JSX.Element {
- const {author,setAuthor}= useAuthor()
+  const { author, setAuthor } = useAuthor()
   return (
     <>
-      
+
       <section className="mt-20 flex items-center justify-center ">
         <div className="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0">
           <div className="absolute  lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center" style={{ backgroundImage: "url(https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80)" }}>
@@ -28,42 +30,7 @@ export default function TutorLogin(): JSX.Element {
             <div className="flex justify-center ">
               <img src="/SoloStack (2).png" className='hidden dark:block' alt="" />
             </div>
-            <div className="py-6 space-x-2">
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
-                  <button className="w-28 h-12 items-center justify-center inline-flex rounded-full font-bold text-lg border-2"><GrGoogle /></button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>google</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
-                  <button className="w-28 h-12 items-center justify-center inline-flex rounded-full font-bold text-lg border-2"><ImFacebook2 /></button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Facebook</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
-                  <button className="w-28 h-12 items-center justify-center inline-flex rounded-full font-bold text-lg border-2"><FaGithub /></button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Github</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-             
-              
-            </div>
+            <Authcomponents />
             <p className=" dark:text-gray-100  text-gray-700 ">
               or use email your account tutor
             </p>
@@ -96,7 +63,7 @@ export default function TutorLogin(): JSX.Element {
           </div>
         </div>
       </section>
-      
+
     </>
   )
 }

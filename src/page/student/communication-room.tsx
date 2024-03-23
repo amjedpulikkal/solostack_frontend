@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
 export default function Home(): JSX.Element {
+    console.log("communication ");
     const [arr, setArr] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 
     const handleAdd = () => {
