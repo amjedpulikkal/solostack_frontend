@@ -4,9 +4,11 @@ import { Authcomponents } from "@/components/oauth";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AnimatePresence, motion } from "framer-motion";
 
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { useLoginQuery } from "@/reactQuery/student/signUp";
+import { DrawerForgetPassword } from "../Forgotpassword";
 
 interface IFormInput {
   email: string;
@@ -20,7 +22,9 @@ const framer_error = {
   transition: { duration: 0.2 },
 }
 
+
 export default function StudentLogin(): JSX.Element {
+  const [open, setOpen] = useState(false)
 
   const { mutateAsync,isError, isLoading, error } = useLoginQuery()
   const errorData = error?.response?.data as string
@@ -65,11 +69,12 @@ export default function StudentLogin(): JSX.Element {
                   {isError && <motion.p
                     className="text-center gap-1 pt-2 font-semibold text-red-500"
                     {...framer_error}
+
                   >
                     Incorrect login credentials. Please try again.
                   </motion.p>
                   }
-                </AnimatePresence>
+              </AnimatePresence>
             <form onSubmit={handleSubmit(onSubmit)} className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
               <div className="pb-2 pt-4">
                 <input type="email" {...register("email", {
@@ -105,7 +110,7 @@ export default function StudentLogin(): JSX.Element {
                 </AnimatePresence>
               </div>
               <div className="text-right text-gray-400 hover:underline hover:text-back-100">
-                <a href="#">Forgot your password?</a>
+                <a onClick={()=>setOpen(!open)}>Forgot your password?</a>
               </div>
               <div className="px-4 pb-2 pt-4">
                 <Button disabled={!!Object.keys(errors).length} type="submit" className="uppercase  w-full h-14 text-lg rounded-full " style={{ backgroundColor: "#28CB8B" }}>{isLoading ? "lording..." : "sign in"}</Button>
@@ -126,7 +131,9 @@ export default function StudentLogin(): JSX.Element {
           </div>
         </div>
       </section>
+      <DrawerForgetPassword open={open} setOpen={setOpen}/>
 
     </>
   )
 }
+

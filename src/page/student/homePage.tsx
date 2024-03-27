@@ -42,8 +42,8 @@ export default function Home(): JSX.Element {
   console.log("home")
 
 
-  const date = new Date("2024-03-22T18:00:00")
-  const date1 = new Date("2024-03-21T20:00:00")
+  const date = new Date("2024-03-25T18:00:00")
+  const date1 = new Date("2024-03-26T20:00:00")
 
   return (
     <>

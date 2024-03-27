@@ -8,11 +8,13 @@ import { useNavigate } from "react-router-dom";
 import { useAuthor } from "@/components/switchUser-provider";
 import { studentApi,mentorApi } from "@/api";
 import {FormData} from "../../type"
+import { useCookies } from "react-cookie";
 
 // function errorToast(error) {
 //     toast.error(error)
 
 // }
+
 
 export const useSingUpQuery = () => {
     const queryClient = useQueryClient();
@@ -45,6 +47,8 @@ export const useOtpVerifyQuery = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const queryClient = useQueryClient();
+    const [cookies, setCookie] = useCookies(['jwtToken']);
+
     const otpVerify = async (formData: any) => {
         const response = await axios.post('/api/student/verify', formData);
         return response.data;
@@ -55,7 +59,7 @@ export const useOtpVerifyQuery = () => {
 
             console.log("data", data);
             dispatch(setStudentData(data))
-            navigate('/student/')
+            navigate(`/oauth/provider/${cookies.jwtToken}`)
         },
         onError() {
             toast.error("otp not valid");
@@ -83,6 +87,31 @@ export const useLoginQuery = () => {
             dispatch(setStudentData(data))
             setAuthor("student")
             navigate('/student/')
+        },
+        onError() {
+
+
+        },
+
+    })
+}
+
+export const useForgetPasswordQuery = () => {
+    const queryClient = useQueryClient();
+    // const dispatch = useDispatch()
+    // const navigate = useNavigate()
+    // const {setAuthor} = useAuthor()
+
+
+    const otpVerify = async (formData: {email:string}) => {
+        const response = await axios.post('/api/student/forgetPassword', formData);
+        return response.data;
+    };
+
+    return useMutation(otpVerify, {
+        onSuccess(data) {
+            console.log("data", data);
+            
         },
         onError() {
 

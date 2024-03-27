@@ -48,7 +48,7 @@ export default function App(): JSX.Element {
     console.log(data)
     await mutateAsync({...data,author})
     toast.success("OTP has been sent to email.");
-    setOtp(data.email``)
+    setOtp(data.email)
   }
 
 
