@@ -10,6 +10,7 @@ import { Authcomponents } from "@/components/oauth";
 import {IFormData,Iauthor} from "../../type"
 import { AnimatePresence, motion } from "framer-motion";
 import { useForm, SubmitHandler } from "react-hook-form"
+import DotLoader from "@/components/ui/dot-loardes";
 
 
 
@@ -83,7 +84,7 @@ export default function App(): JSX.Element {
   };
   const password = watch("password", "");
   return (
-    <div className={theme === "dark" ? "signBody w-screen h-screen " : "signBodyw w-screen h-screen "}>
+    <div className=" w-screen h-screen " >
       {!isOtp && (
         <>
           <div className='flex justify-end mt-6 mr-6'>
@@ -183,7 +184,7 @@ export default function App(): JSX.Element {
                     </AnimatePresence>
                   </div>
                   <div className="px-4 pb-2 pt-4">
-                    <Button className="uppercase h-16 w-full text-lg rounded-full " type="submit">{isLoading ? "loading" : "sign in"}</Button>
+                    <Button  className="uppercase h-16 w-full text-lg rounded-full " type="submit">{isLoading ? <DotLoader/>: "sign in"}</Button>
                   </div>
                   <div className="p-4 text-center right-0 left-0 flex justify-center space-x-4 mt-16 lg:hidden ">
                     <a href="#">
@@ -205,7 +206,7 @@ export default function App(): JSX.Element {
           </div>
         </>
       )}
-      {isOtp && <Otp email={isOtp} />}
+      {isOtp && <Otp  email={isOtp} author={author} />}
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import studentReducer from "./slices/studentSlice";
+import authorReducer from "./slices/authorSlice";
 
 const rootReducer = combineReducers({
-    student: studentReducer,
+    author: authorReducer,
 
 });
 

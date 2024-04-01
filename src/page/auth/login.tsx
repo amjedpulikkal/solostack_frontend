@@ -22,20 +22,19 @@ import { useLoginQuery } from '@/reactQuery/student/signUp';
 import { useState } from 'react';
 export default function App(): JSX.Element {
 
-  const [ author, setAuthor ] = useState("student")
+  const [author, setAuthor] = useState("student")
 
 
   return (
     <>
-      
-        <div className='flex justify-end mt-6 mr-6'>
-          <ModeToggle />
-        </div>
-        {author === "student" ? <StudentLogin /> : author === "tutor" ? <TutorLogin /> : <Mentor />}
-        <div className='flex justify-end mr-6'>
-          <SwitchUser author={author} setAuthor={setAuthor} />
-        </div>
-    
+
+      <div className='flex justify-end mt-6 mr-6'>
+        <ModeToggle />
+      </div>
+      <StudentLogin author={author} setAuthor={setAuthor}  />
+      <div className='flex justify-end mr-6'>
+        <SwitchUser author={author} setAuthor={setAuthor} />
+      </div>
     </>
   )
 }

@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const studentSlice = createSlice({
-    name: "student",
+const authorSlice = createSlice({
+    name: "author",
     initialState: {
         isLoggedIn: false,
-        studentData: null,
-        studentNotificationCount: 0,
+        authorData: null,
         searchResults: {
             searchOn: null,
             results: null,
@@ -17,10 +16,10 @@ const studentSlice = createSlice({
             state.isLoggedIn = action.payload;
         },
         setLogout: (state, action) => {
-            state.studentData = null;
+            state.authorData = null;
         },
-        setStudentData: (state, action) => {
-            state.studentData = action.payload;
+        setAuthorData: (state, action) => {
+            state.authorData = action.payload;
         },
         setPresence(state, action) {
             state.presence = action.payload;
@@ -29,9 +28,9 @@ const studentSlice = createSlice({
 });
 export const {
     setLoggedIn,
-    setStudentData,
+    setAuthorData,
     setLogout,
     setPresence
-} = studentSlice.actions;
+} = authorSlice.actions;
 
-export default studentSlice.reducer;
+export default authorSlice.reducer;

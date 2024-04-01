@@ -15,7 +15,7 @@ import { useCookies } from "react-cookie"
 import { useAuthor } from "./switchUser-provider";
 import { useNavigate } from "react-router-dom";
 import { useSignOutQuery } from "@/reactQuery/student/signOut";
-import { setLogout } from "@/redux/slices/studentSlice";
+import { setLogout } from "@/redux/slices/authorSlice";
 import { useDispatch,useSelector, } from "react-redux";
 
 interface LoginDialogProps {
@@ -33,7 +33,7 @@ export function LoginDialog({ isOpen, setOpen }: LoginDialogProps): JSX.Element 
         removeCookie('jwtToken', { path: '/' });
         setAuthor(null)
         signOutApi.mutateAsync().then(() => {
-            navigate("/")
+            
             dispatch(setLogout(null))
         })
     }

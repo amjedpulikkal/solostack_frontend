@@ -18,7 +18,7 @@ import { LoginDialog } from "./logoutdialog"
 import { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { useDispatch } from "react-redux"
-import { setPresence } from "@/redux/slices/studentSlice"
+import { setPresence } from "@/redux/slices/authorSlice"
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom"
 type Props = {
@@ -32,7 +32,7 @@ type Props = {
 export default function UseAvatar({ avatarUrl, userName }: Props): JSX.Element {
 
   const [isOpen, setOpen] = useState(false)
-  const [selectedId, setSelectedId] = useState(null)
+  const [selectedId, setSelectedId] = useState<string|null>(null)
   const dispatch = useDispatch()
   const handleRightClick = (e) => {
     e.preventDefault(); 

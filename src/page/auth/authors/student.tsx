@@ -9,6 +9,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useLoginQuery } from "@/reactQuery/student/signUp";
 import { DrawerForgetPassword } from "../Forgotpassword";
+import DotLoader from "@/components/ui/dot-loardes";
 
 interface IFormInput {
   email: string;
@@ -22,11 +23,15 @@ const framer_error = {
   transition: { duration: 0.2 },
 }
 
+interface props{
+  author:string
+  setAuthor:any
+}
 
-export default function StudentLogin(): JSX.Element {
+export default function StudentLogin({author, setAuthor}:props): JSX.Element {
   const [open, setOpen] = useState(false)
 
-  const { mutateAsync,isError, isLoading, error } = useLoginQuery()
+  const { mutateAsync,isError, isLoading, error, } = useLoginQuery(author)
   const errorData = error?.response?.data as string
   const {
     register,
@@ -36,9 +41,7 @@ export default function StudentLogin(): JSX.Element {
   } = useForm<IFormInput>()
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-
-    
-    mutateAsync(data)
+    mutateAsync({...data,author})
   }
 
 
@@ -113,7 +116,7 @@ export default function StudentLogin(): JSX.Element {
                 <a onClick={()=>setOpen(!open)}>Forgot your password?</a>
               </div>
               <div className="px-4 pb-2 pt-4">
-                <Button disabled={!!Object.keys(errors).length} type="submit" className="uppercase  w-full h-14 text-lg rounded-full " style={{ backgroundColor: "#28CB8B" }}>{isLoading ? "lording..." : "sign in"}</Button>
+                <Button disabled={!!Object.keys(errors).length} type="submit" className="uppercase  w-full h-14 text-lg rounded-full " style={{ backgroundColor: "#28CB8B" }}>{isLoading ? <DotLoader/> : "sign in"}</Button>
               </div>
 
               <div className="p-4 text-center right-0 left-0 flex justify-center space-x-4 mt-16 lg:hidden ">

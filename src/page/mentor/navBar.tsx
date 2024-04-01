@@ -1,14 +1,12 @@
-import UseAvatar from "./userAvatar";
+import { ModeToggle } from "@/components/mode-toggle"
+import { RootState } from "@/redux/store"
+import { useSelector } from "react-redux"
 
-import { ModeToggle } from "./mode-toggle";
 
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
-import { StudentData } from "@/type";
 
 
 export default function NaveBar(): JSX.Element {
-    const data = useSelector((state: RootState) => state.author?.authorData) as unknown as StudentData
+    const data = useSelector((state: RootState) => state.author?.authorData) 
     return (
         <nav className=' h-20 w-full flex justify-between border-b-2 px-6 pt-6 dark:bg-slate-800 bg-white ' >
             <div>
@@ -17,7 +15,7 @@ export default function NaveBar(): JSX.Element {
             </div>
             <div className=" flex gap-8">
                 <ModeToggle />
-                <UseAvatar avatarUrl={data.personal_info.photo} userName={data.personal_info.name} />
+                {/* <UseAvatar avatarUrl={data.personal_info.photo} userName={data.personal_info.name} /> */}
             </div>
         </nav>
     )

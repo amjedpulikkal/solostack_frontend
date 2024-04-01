@@ -1,12 +1,19 @@
-import { Button } from "./ui/button"
 
 
 
-
-export default function Test(): JSX.Element {
+export default function DotLoader(): JSX.Element {
 
     return (
-        <div className="w-screen h-screen flex justify-center items-center">
+
+        <div className="dotLoader"></div>
+
+    )
+}
+export function LogoLoader(): JSX.Element {
+
+    return (
+
+        <div className="w-full h-full flex justify-center items-center">
             <span className="wrapper w-[800px] ">
                 <svg className="">
                     <text x="50%" y="50%" dy=".35em" text-anchor="middle">
@@ -15,6 +22,6 @@ export default function Test(): JSX.Element {
                 </svg>
             </span>
         </div>
-        
+
     )
 }

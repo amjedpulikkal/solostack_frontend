@@ -1,7 +1,8 @@
 .scrollbar {
   --sb-track-color: #ffffff00;
   --sb-thumb-color: #00ff80;
-  --sb-size: 1px; /* Adjust the scrollbar size here */
+  --sb-size: 1px;
+  /* Adjust the scrollbar size here */
 }
 
 .scrollbar::-webkit-scrollbar {
@@ -19,6 +20,7 @@
   /* width: var(--sb-size);
   height: 1px; Adjust the scrollbar thumb size */
 }
+
 .scrollbar::-webkit-scrollbar {
   height: 1px;
   width: 1px;
@@ -32,7 +34,8 @@
 .scrollbar::-webkit-scrollbar-thumb:horizontal {
   background: var(--sb-thumb-color);
   border-radius: 3px;
-  height: var(--sb-size); /* Adjust the scrollbar thumb height */
+  height: var(--sb-size);
+  /* Adjust the scrollbar thumb height */
 }
 
 @supports not selector(::-webkit-scrollbar) {
@@ -167,8 +170,8 @@ body::-webkit-scrollbar-thumb {
   background-color: #FFFFFF
 }
 
-.signBodyw{
-  background-image: linear-gradient(346deg, rgba(55, 55, 55,0.04) 0%, rgba(55, 55, 55,0.04) 22%,rgba(140, 140, 140,0.04) 22%, rgba(140, 140, 140,0.04) 69%,rgba(225, 225, 225,0.04) 69%, rgba(225, 225, 225,0.04) 100%),linear-gradient(31deg, rgba(55, 55, 55,0.04) 0%, rgba(55, 55, 55,0.04) 42%,rgba(140, 140, 140,0.04) 42%, rgba(140, 140, 140,0.04) 85%,rgba(225, 225, 225,0.04) 85%, rgba(225, 225, 225,0.04) 100%),linear-gradient(55deg, rgba(55, 55, 55,0.04) 0%, rgba(55, 55, 55,0.04) 13%,rgba(140, 140, 140,0.04) 13%, rgba(140, 140, 140,0.04) 72%,rgba(225, 225, 225,0.04) 72%, rgba(225, 225, 225,0.04) 100%),linear-gradient(90deg, rgb(250,250,250),rgb(250,250,250));
+.signBodyw {
+  background-image: linear-gradient(346deg, rgba(55, 55, 55, 0.04) 0%, rgba(55, 55, 55, 0.04) 22%, rgba(140, 140, 140, 0.04) 22%, rgba(140, 140, 140, 0.04) 69%, rgba(225, 225, 225, 0.04) 69%, rgba(225, 225, 225, 0.04) 100%), linear-gradient(31deg, rgba(55, 55, 55, 0.04) 0%, rgba(55, 55, 55, 0.04) 42%, rgba(140, 140, 140, 0.04) 42%, rgba(140, 140, 140, 0.04) 85%, rgba(225, 225, 225, 0.04) 85%, rgba(225, 225, 225, 0.04) 100%), linear-gradient(55deg, rgba(55, 55, 55, 0.04) 0%, rgba(55, 55, 55, 0.04) 13%, rgba(140, 140, 140, 0.04) 13%, rgba(140, 140, 140, 0.04) 72%, rgba(225, 225, 225, 0.04) 72%, rgba(225, 225, 225, 0.04) 100%), linear-gradient(90deg, rgb(250, 250, 250), rgb(250, 250, 250));
 }
 
 .signBody {
@@ -193,4 +196,20 @@ body::-webkit-scrollbar-thumb {
       rgba(225, 225, 225, 0.04) 100%),
     linear-gradient(90deg, rgb(0, 0, 0),
       rgb(0, 0, 0));
+}
+
+
+.dotLoader {
+  color: #002b06;
+  width: 4px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow: 19px 0 0 7px, 38px 0 0 3px, 57px 0 0 0;
+  transform: translateX(-38px);
+  animation: l21 .4s infinite alternate linear;
+}
+
+@keyframes l21 {
+  50%  {box-shadow: 19px 0 0 3px, 38px 0 0 7px, 57px 0 0 3px}
+  100% {box-shadow: 19px 0 0 0  , 38px 0 0 3px, 57px 0 0 7px}
 }

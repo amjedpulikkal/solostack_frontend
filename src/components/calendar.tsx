@@ -17,18 +17,27 @@ export function CalendarDemo() {
     return !enabledRanges.some(range => isWithinRange(day, range));
   };
 
-  
+  const modifiers = {
+    specificDate: new Date(2024, 3, 10)
+  };
   const handleDayClick = (day: Date) => {
 
     console.log(day)
     setDate(day);
   };
-  
+  const modifiersStyles = {
+    specificDate: {
+      backgroundColor: 'red',
+      color: 'white',
+    }
+  };
   return (
     <Calendar disabled={isDayDisabled}
       mode="single"
       selected={date}
+      modifiers={modifiers}
       onSelect={handleDayClick} 
+      modifiersStyles={modifiersStyles}
       className="rounded-md border shadow "
     />
   )
@@ -36,10 +45,10 @@ export function CalendarDemo() {
 
 function isWithinRange(date: Date, range: Date[] | { from: Date; to: Date }) {
   if (Array.isArray(range)) {
-    // Check if the date is within a simple date range
+    
     return date >= range[0] && date <= range[1];
   } else {
-    // Check if the date is within a date range object
+      
     return date >= range.from && date <= range.to;
   }
 }

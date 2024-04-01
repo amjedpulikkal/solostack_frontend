@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { json, useParams } from "react-router-dom"
 import { useCookies } from "react-cookie"
 import { isOauth } from "@/reactQuery/student/isOauth";
-import { setLoggedIn, setStudentData } from "@/redux/slices/studentSlice";
+import { setLoggedIn, setAuthorData } from "@/redux/slices/authorSlice";
 import { useDispatch, useSelector, } from "react-redux";
 import { RootState } from "../../redux/store"
 import { StudentData } from "@/type";
@@ -17,7 +17,7 @@ export default function Outh2() {
     const [cookies, setCookie] = useCookies(['jwtToken']);
     const dispatch = useDispatch()
     
-    const data = useSelector((state: RootState) => state.student?.studentData) as unknown as StudentData
+    const data = useSelector((state: RootState) => state.student?.authorData) as unknown as StudentData
     useEffect(() => {
         const fetchData = async () => {
             if (token) {
@@ -26,7 +26,7 @@ export default function Outh2() {
                 try {
                     const data = await crateIsOauthUpMutation.mutateAsync(token);
                     console.log(data, "eeeeeeeeeeeeeeeee333333333");
-                    dispatch(setStudentData(data))
+                    dispatch(setAuthorData(data))
                     
                     setAuthor("student")
                     console.log(data, "eeeeeeeeeeeeee«eee333333333");

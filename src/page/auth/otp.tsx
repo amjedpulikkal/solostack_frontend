@@ -72,7 +72,7 @@ const FormSchema = z.object({
   }),
 })
 
-export default function InputOTPForm({ email }) {
+export default function InputOTPForm({ email,author }) {
   const OtpQuery = useOtpVerifyQuery()
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -83,7 +83,7 @@ export default function InputOTPForm({ email }) {
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data);
-    OtpQuery.mutateAsync({ otp: data.pin, email })
+    OtpQuery.mutateAsync({ otp: data.pin, email ,author})
 
     if (OtpQuery.isSuccess) {
       console.log(OtpQuery.data)
@@ -131,10 +131,6 @@ export default function InputOTPForm({ email }) {
           </form>
         </Form>
       </div >
-
-      <div className='flex justify-end mb-6 mr-6'>
-        <SwitchUser />
-      </div>
     </>
   )
 }

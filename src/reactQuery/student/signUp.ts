@@ -3,13 +3,13 @@ import { useMutation, useQueryClient } from "react-query";
 import axios from 'axios';
 import { toast } from "sonner"
 import { useDispatch } from "react-redux";
-import { setStudentData } from "@/redux/slices/studentSlice";
+import { setAuthorData } from "@/redux/slices/authorSlice";
 import { useNavigate } from "react-router-dom";
 import { useAuthor } from "@/components/switchUser-provider";
-import { studentApi,mentorApi } from "@/api";
-import {FormData} from "../../type"
+import { studentApi, mentorApi } from "@/api";
+import { IFormData } from "../../type"
 import { useCookies } from "react-cookie";
-
+import { Iauthor } from "../../type";
 // function errorToast(error) {
 //     toast.error(error)
 
@@ -19,18 +19,17 @@ import { useCookies } from "react-cookie";
 export const useSingUpQuery = () => {
     const queryClient = useQueryClient();
 
-    const postLogin = async (formData: FormData) => {
-        if(formData.author === "student"){
+    const postLogin = async (formData: IFormData) => {
+        if (formData.author === "student") {
             const response = await axios.post(studentApi.signIn, formData);
             return response.data;
         }
-        if(formData.author === "mentor"){
+        if (formData.author === "mentor") {
             const response = await axios.post(mentorApi.signIn, formData);
             return response.data;
         }
-
     };
-
+    
     return useMutation(postLogin, {
         onSuccess() {
 
@@ -49,16 +48,23 @@ export const useOtpVerifyQuery = () => {
     const queryClient = useQueryClient();
     const [cookies, setCookie] = useCookies(['jwtToken']);
 
-    const otpVerify = async (formData: any) => {
-        const response = await axios.post('/api/student/verify', formData);
-        return response.data;
+    const otpVerify = async (formData: IFormData) => {
+        if (formData.author === "student") {
+            const response = await axios.post(studentApi.verifyOtp, formData);
+            return response.data;
+        }else if(formData.author === "mentor"){
+            const response = await axios.post(mentorApi.verifyOtp, formData);
+            return response.data;
+
+        }
+
     };
 
     return useMutation(otpVerify, {
         onSuccess(data) {
 
             console.log("data", data);
-            dispatch(setStudentData(data))
+            dispatch(setAuthorData(data))
             navigate(`/oauth/provider/${cookies.jwtToken}`)
         },
         onError() {
@@ -69,24 +75,56 @@ export const useOtpVerifyQuery = () => {
     })
 }
 
-export const useLoginQuery = () => {
+interface IFormInput {
+    email: string;
+    password: string;
+    author: Iauthor
+}
+
+export const useLoginQuery = (author:Iauthor) => {
+
+
+    console.log(author,"-----------author------------")
     const queryClient = useQueryClient();
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const {setAuthor} = useAuthor()
+    const { setAuthor } = useAuthor()
 
 
-    const otpVerify = async (formData: any) => {
-        const response = await axios.post('/api/student/login', formData);
-        return response.data;
+    const otpVerify = async (formData: IFormInput) => {
+        if (formData.author === "student") {
+
+            const response = await axios.post(studentApi.login, formData);
+            return response.data;
+
+        } else if (formData.author === "mentor") {
+
+            const response = await axios.post(mentorApi.login, formData);
+            return response.data;
+
+        } else if (formData.author === "tutor") {
+
+            // const response = await axios.post(mentorApi.login, formData);
+            // return response.data;
+
+        }
     };
 
     return useMutation(otpVerify, {
         onSuccess(data) {
-            console.log("data", data);
-            dispatch(setStudentData(data))
-            setAuthor("student")
-            navigate('/student/')
+
+            if(author==="student"){
+
+                dispatch(setAuthorData(data))
+                setAuthor("student")
+                navigate('/student/')
+            }else{
+                
+                dispatch(setAuthorData(data))
+                setAuthor("mentor")
+                navigate('/mentor/')
+
+            }
         },
         onError() {
 
@@ -103,7 +141,7 @@ export const useForgetPasswordQuery = () => {
     // const {setAuthor} = useAuthor()
 
 
-    const otpVerify = async (formData: {email:string}) => {
+    const otpVerify = async (formData: { email: string }) => {
         const response = await axios.post('/api/student/forgetPassword', formData);
         return response.data;
     };
@@ -111,7 +149,26 @@ export const useForgetPasswordQuery = () => {
     return useMutation(otpVerify, {
         onSuccess(data) {
             console.log("data", data);
-            
+
+        },
+        onError() {
+
+
+        },
+
+    })
+}
+export const useVerifyForgetPasswordQuery = () => {
+
+    const otpVerify = async (formData: { password?: string, token?: string }) => {
+        const response = await axios.post('/api/student/verifyForgetPassword', formData);
+        return response.data;
+    };
+
+    return useMutation(otpVerify, {
+        onSuccess(data) {
+            console.log("data", data);
+
         },
         onError() {
 

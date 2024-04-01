@@ -15,10 +15,6 @@ import { useAuthor,Author } from "./switchUser-provider";
 import { useTheme } from "./theme-provider";
 export function SwitchUser({ author, setAuthor}) {
 
-
-
-   
-
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
