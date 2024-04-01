@@ -1,4 +1,5 @@
 import { ModeToggle } from "@/components/mode-toggle"
+import UseAvatar from "@/components/mentor/userAvatar"
 import { RootState } from "@/redux/store"
 import { useSelector } from "react-redux"
 
@@ -15,7 +16,7 @@ export default function NaveBar(): JSX.Element {
             </div>
             <div className=" flex gap-8">
                 <ModeToggle />
-                {/* <UseAvatar avatarUrl={data.personal_info.photo} userName={data.personal_info.name} /> */}
+                <UseAvatar avatarUrl={undefined} userName={undefined} />
             </div>
         </nav>
     )

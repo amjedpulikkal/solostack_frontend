@@ -9,6 +9,7 @@ export const mentorApi= {
     signIn:"/api/mentor/register",
     login:"/api/mentor/login",
     verifyOtp:"/api/mentor/verify",
-    updateAvailableTime:"/update-available-time"
+    updateAvailableTime:"/api/mentor/update-available-time",
+    getAvailableTime:"/api/mentor/get-available-time"
 
 }
