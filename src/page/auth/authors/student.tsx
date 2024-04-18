@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { useLoginQuery } from "@/reactQuery/student/signUp";
 import { DrawerForgetPassword } from "../Forgotpassword";
 import DotLoader from "@/components/ui/dot-loardes";
+import { TurnstileWidget } from '@/components/TurnstileWidget';
 
 interface IFormInput {
   email: string;
@@ -23,15 +24,16 @@ const framer_error = {
   transition: { duration: 0.2 },
 }
 
-interface props{
-  author:string
-  setAuthor:any
+interface props {
+  author: string
+  setAuthor: any
 }
 
-export default function StudentLogin({author, setAuthor}:props): JSX.Element {
+export default function StudentLogin({ author, setAuthor }: props): JSX.Element {
   const [open, setOpen] = useState(false)
+  const [widget, setWidget] = useState("")
 
-  const { mutateAsync,isError, isLoading, error, } = useLoginQuery(author)
+  const { mutateAsync, isError, isLoading, error, } = useLoginQuery(author)
   const errorData = error?.response?.data as string
   const {
     register,
@@ -41,7 +43,7 @@ export default function StudentLogin({author, setAuthor}:props): JSX.Element {
   } = useForm<IFormInput>()
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    mutateAsync({...data,author})
+    mutateAsync({ ...data, author,token:widget })
   }
 
 
@@ -51,7 +53,7 @@ export default function StudentLogin({author, setAuthor}:props): JSX.Element {
   return (
     <>
 
-      <section className="mt-20 flex items-center justify-center ">
+      <section className=" flex items-center justify-center ">
         <div className="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0">
           <div className="absolute  lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center" style={{ backgroundImage: "url(https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80)" }}>
             <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
@@ -69,15 +71,15 @@ export default function StudentLogin({author, setAuthor}:props): JSX.Element {
             </p>
 
             <AnimatePresence mode="wait" initial={false}>
-                  {isError && <motion.p
-                    className="text-center gap-1 pt-2 font-semibold text-red-500"
-                    {...framer_error}
+              {isError && <motion.p
+                className="text-center gap-1 pt-2 font-semibold text-red-500"
+                {...framer_error}
 
-                  >
-                    Incorrect login credentials. Please try again.
-                  </motion.p>
-                  }
-              </AnimatePresence>
+              >
+                Incorrect login credentials. Please try again.
+              </motion.p>
+              }
+            </AnimatePresence>
             <form onSubmit={handleSubmit(onSubmit)} className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
               <div className="pb-2 pt-4">
                 <input type="email" {...register("email", {
@@ -108,15 +110,18 @@ export default function StudentLogin({author, setAuthor}:props): JSX.Element {
                     {errors.password.message}
                   </motion.p>
                   }
-                
- 
+
+
                 </AnimatePresence>
               </div>
-              <div className="text-right text-gray-400 hover:underline hover:text-back-100">
-                <a onClick={()=>setOpen(!open)}>Forgot your password?</a>
+                <div className="text-right text-gray-400 hover:underline hover:text-back-100">
+                  <a onClick={() => setOpen(!open)}>Forgot your password?</a>
+                </div>
+              <div className="pb-2 flex justify-center pt-4">
+                <TurnstileWidget setWidget={setWidget} />
               </div>
               <div className="px-4 pb-2 pt-4">
-                <Button disabled={!!Object.keys(errors).length} type="submit" className="uppercase  w-full h-14 text-lg rounded-full " style={{ backgroundColor: "#28CB8B" }}>{isLoading ? <DotLoader/> : "sign in"}</Button>
+                <Button disabled={!!Object.keys(errors).length} type="submit" className="uppercase  w-full h-14 text-lg rounded-full " style={{ backgroundColor: "#28CB8B" }}>{isLoading ? <DotLoader /> : "sign in"}</Button>
               </div>
 
               <div className="p-4 text-center right-0 left-0 flex justify-center space-x-4 mt-16 lg:hidden ">
@@ -134,7 +139,7 @@ export default function StudentLogin({author, setAuthor}:props): JSX.Element {
           </div>
         </div>
       </section>
-      <DrawerForgetPassword open={open} setOpen={setOpen}/>
+      <DrawerForgetPassword open={open} setOpen={setOpen} />
 
     </>
   )

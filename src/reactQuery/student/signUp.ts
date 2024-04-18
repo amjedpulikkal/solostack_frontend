@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 import axios from 'axios';
 import { toast } from "sonner"
 import { useDispatch } from "react-redux";
-import { setAuthorData } from "@/redux/slices/authorSlice";
+import { setAuthorData, setAuthor } from "@/redux/slices/authorSlice";
 import { useNavigate } from "react-router-dom";
 import { useAuthor } from "@/components/switchUser-provider";
 import { studentApi, mentorApi } from "@/api";
@@ -29,7 +29,7 @@ export const useSingUpQuery = () => {
             return response.data;
         }
     };
-    
+
     return useMutation(postLogin, {
         onSuccess() {
 
@@ -52,7 +52,7 @@ export const useOtpVerifyQuery = () => {
         if (formData.author === "student") {
             const response = await axios.post(studentApi.verifyOtp, formData);
             return response.data;
-        }else if(formData.author === "mentor"){
+        } else if (formData.author === "mentor") {
             const response = await axios.post(mentorApi.verifyOtp, formData);
             return response.data;
 
@@ -81,14 +81,14 @@ interface IFormInput {
     author: Iauthor
 }
 
-export const useLoginQuery = (author:Iauthor) => {
+export const useLoginQuery = (author: Iauthor) => {
 
 
-    console.log(author,"-----------author------------")
+    console.log(author, "-----------author------------")
     const queryClient = useQueryClient();
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { setAuthor } = useAuthor()
+
 
 
     const otpVerify = async (formData: IFormInput) => {
@@ -113,15 +113,15 @@ export const useLoginQuery = (author:Iauthor) => {
     return useMutation(otpVerify, {
         onSuccess(data) {
 
-            if(author==="student"){
-
+            if (author === "student") {
                 dispatch(setAuthorData(data))
-                setAuthor("student")
+               
+                dispatch(setAuthor("student"))
                 navigate('/student/')
-            }else{
-                
+            } else  if( author ==="mentor") {
                 dispatch(setAuthorData(data))
-                setAuthor("mentor")
+                dispatch(setAuthor("mentor"))
+                
                 navigate('/mentor/')
 
             }

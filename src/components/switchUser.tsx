@@ -10,11 +10,10 @@ import {
     DropdownMenuTrigger,
     DropdownMenuContent
 } from "@/components/ui/dropdown-menu"
-import { useState } from "react";
-import { useAuthor,Author } from "./switchUser-provider";
-import { useTheme } from "./theme-provider";
-export function SwitchUser({ author, setAuthor}) {
 
+import { useNavigate } from "react-router-dom";
+export function SwitchUser({ author, handleClick}) {
+    
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -24,7 +23,7 @@ export function SwitchUser({ author, setAuthor}) {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-40 mr-2">
-                <DropdownMenuRadioGroup value={author} onValueChange={setAuthor}>
+                <DropdownMenuRadioGroup value={author} onValueChange={handleClick}>
                     <DropdownMenuRadioItem value="student" >
                         <div className=" flex justify-between items-center">
                             <PiStudentBold size={40} />

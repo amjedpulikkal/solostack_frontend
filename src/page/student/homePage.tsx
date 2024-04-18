@@ -42,7 +42,6 @@ export default function Home(): JSX.Element {
   return (
     <>
 
-      <NaveBar />
       <div className='px-9'>
         <div className='mt-7 grid sm:grid-cols-7 gap-10 grid-cols-1 '>
           <div className='border-2  border-primary col-span-4 h-80 rounded-3xl '>
@@ -61,6 +60,14 @@ export default function Home(): JSX.Element {
             <TabsTrigger value="Channels" className="outline outline-1 outline-primary">Channels</TabsTrigger>
             <TabsTrigger value="Plan" className="outline outline-1 outline-primary" >Plan</TabsTrigger>
           </TabsList>
+          <TabsContent value="Plan" className="h-full w-full p-6">
+
+            <div className="grid grid-cols-6 g ">
+              <div className="border-2 col-span-2 rounded-2xl border-primary w-72 h-96"></div>
+              <div className="border-2 col-span-2 rounded-2xl border-primary w-72 h-96"></div>
+              <div className="border-2 col-span-2 rounded-2xl border-primary w-72 h-96"></div>
+            </div>
+          </TabsContent>
           <TabsContent value="Tutors" className="h-full w-full p-5 ">
             <div className="w-48 h-20">
               <div className="rounded-2xl isolate overflow-hidden shadow-xl shadow-black/5 before:border-t before:border-rose-100/10 relative  before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-rose-100/10 before:to-transparent">
@@ -74,6 +81,7 @@ export default function Home(): JSX.Element {
 
               </div>
             </div>
+           
           </TabsContent>
           <Suspense fallback={<LogoLoader />}>
             <StudentTabs />

@@ -5,10 +5,12 @@ export default function DotLoader(): JSX.Element {
 
     return (
 
-        <div className="dotLoader"></div>
+        <div className="dotLoader cursor-wait"></div>
 
     )
 }
+
+
 export function LogoLoader(): JSX.Element {
 
     return (

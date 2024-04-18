@@ -31,7 +31,6 @@ export function LoginDialog({ isOpen, setOpen }: LoginDialogProps): JSX.Element 
     const [, , removeCookie] = useCookies(['jwtToken']);
     const handleClose = () => {
         removeCookie('jwtToken', { path: '/' });
-        setAuthor(null)
         signOutApi.mutateAsync().then(() => {
             
             dispatch(setLogout(null))

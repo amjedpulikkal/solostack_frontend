@@ -17,7 +17,7 @@ export default function Outh2() {
     const [cookies, setCookie] = useCookies(['jwtToken']);
     const dispatch = useDispatch()
     
-    const data = useSelector((state: RootState) => state.student?.authorData) as unknown as StudentData
+    const data = useSelector((state: RootState) => state.author?.authorData) as unknown as StudentData
     useEffect(() => {
         const fetchData = async () => {
             if (token) {

@@ -2,7 +2,7 @@
 
 import { mentorApi } from "@/api";
 import axios from "axios";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 export const useUpdateAvailableTime = () => {
     const apiCall = async (formData: { date: Date, time: number[] }) => {
 
@@ -31,6 +31,24 @@ export const usGetAvailableTime = () => {
     };
 
     return useMutation(apiCall, {
+        onSuccess() {
+
+        },
+        onError() {
+
+        }
+    })
+}
+export const usGetAllMentor = () => {
+    const apiCall = async () => {
+      
+        const response = await axios.post(mentorApi.getAllMentors);
+        
+        return response.data;
+
+    };
+
+    return useQuery("mentors",apiCall, {
         onSuccess() {
 
         },

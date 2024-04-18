@@ -19,21 +19,46 @@ import TutorLogin from './authors/tutor';
 import Mentor from './authors/mentor';
 import { motion } from 'framer-motion';
 import { useLoginQuery } from '@/reactQuery/student/signUp';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+// import ReCAPTCHA from "react-google-recaptcha";
+
 export default function App(): JSX.Element {
 
-  const [author, setAuthor] = useState("student")
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  console.log(location)
+  const [author, setAuthor] = useState<string>()
+
+  useEffect(() => {
+    const arrLocation = location.pathname.split("/")[1]
+    setAuthor(arrLocation)
+
+  }, [])
 
 
+  const handleClick = (author: Iauthor) => {
+    if (author === "mentor") {
+      navigate("/mentor/login")
+    } else if (author === "tutor") {
+      navigate("/tutor/login")
+    } else if (author === "student") {
+      navigate("/student/login")
+    }
+    setAuthor(author)
+
+  }
+  // console.log(process.env.REACT_APP_API_KEY)
   return (
     <>
 
       <div className='flex justify-end mt-6 mr-6'>
         <ModeToggle />
       </div>
-      <StudentLogin author={author} setAuthor={setAuthor}  />
+      <StudentLogin author={author} setAuthor={setAuthor} />
       <div className='flex justify-end mr-6'>
-        <SwitchUser author={author} setAuthor={setAuthor} />
+        <SwitchUser author={author} handleClick={handleClick} />
       </div>
     </>
   )

@@ -53,7 +53,7 @@ export default function UseAvatar({ avatarUrl, userName }: Props): JSX.Element {
               }}>
 
                 <motion.button onClick={() => setSelectedId(null)} >
-                  <IoMdClose  size={40} />
+                  
                 </motion.button>
               </div>
 

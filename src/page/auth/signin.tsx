@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent, useRef } from "react";
+import { useState, ChangeEvent, FormEvent, useRef, useEffect } from "react";
 import Otp from "./otp";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -7,11 +7,11 @@ import { ModeToggle } from "../../components/mode-toggle";
 import { SwitchUser } from "../../components/switchUser";
 import { useSingUpQuery } from "../../reactQuery/student/signUp"
 import { Authcomponents } from "@/components/oauth";
-import {IFormData,Iauthor} from "../../type"
+import { IFormData, Iauthor } from "../../type"
 import { AnimatePresence, motion } from "framer-motion";
 import { useForm, SubmitHandler } from "react-hook-form"
 import DotLoader from "@/components/ui/dot-loardes";
-
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const framer_error = {
@@ -23,6 +23,10 @@ const framer_error = {
 
 
 export default function App(): JSX.Element {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+
   const {
     register,
     handleSubmit,
@@ -35,8 +39,25 @@ export default function App(): JSX.Element {
   const { mutateAsync, isLoading, isError } = useSingUpQuery()
   const formRef = useRef<HTMLFormElement>(null);
 
-  const [ author, setAuthor ] = useState<Iauthor>("student")
+  const [author, setAuthor] = useState<Iauthor>("student")
 
+  useEffect(() => {
+    const arrLocation = location.pathname.split("/")[1] as Iauthor
+    setAuthor(arrLocation)
+
+  }, [])
+
+  const handleClick = (author: Iauthor) => {
+    if (author === "mentor") {
+      navigate("/mentor/signUp")
+    } else if (author === "tutor") {
+      navigate("/tutor/signUp")
+    } else if (author === "student") {
+      navigate("/student/signUp")
+    }
+    setAuthor(author)
+
+  }
   const handelFrom: SubmitHandler<IFormData> = async (value) => {
 
 
@@ -47,7 +68,7 @@ export default function App(): JSX.Element {
       name: formData.get("username")
     };
     console.log(data)
-    await mutateAsync({...data,author})
+    await mutateAsync({ ...data, author })
     toast.success("OTP has been sent to email.");
     setOtp(data.email)
   }
@@ -142,8 +163,8 @@ export default function App(): JSX.Element {
                   </div>
                   <div className="pb-2 pt-4">
                     <input  {...register("password", {
-                      required:true,
-                      pattern:/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/
+                      required: true,
+                      pattern: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/
                     })} className="block w-full p-4 text-lg rounded-sm border-2 bg-white dark:bg-black" type="password" placeholder="Password" onChange={handelPasswordValidation} />
                   </div>
                   {passValidate[0] &&
@@ -184,7 +205,7 @@ export default function App(): JSX.Element {
                     </AnimatePresence>
                   </div>
                   <div className="px-4 pb-2 pt-4">
-                    <Button  className="uppercase h-16 w-full text-lg rounded-full " type="submit">{isLoading ? <DotLoader/>: "sign in"}</Button>
+                    <Button className="uppercase h-16 w-full text-lg rounded-full " type="submit">{isLoading ? <DotLoader /> : "sign in"}</Button>
                   </div>
                   <div className="p-4 text-center right-0 left-0 flex justify-center space-x-4 mt-16 lg:hidden ">
                     <a href="#">
@@ -202,11 +223,11 @@ export default function App(): JSX.Element {
             </div >
           </motion.div >
           <div className='flex justify-end mb-6 mr-6'>
-            <SwitchUser author={author} setAuthor={setAuthor} />
+            <SwitchUser author={author} handleClick={handleClick}/>
           </div>
         </>
       )}
-      {isOtp && <Otp  email={isOtp} author={author} />}
+      {isOtp && <Otp email={isOtp} author={author} />}
     </div>
   );
 }

@@ -21,6 +21,11 @@ import { Page404 } from './page/404';
 import { StudentProfile } from './page/student/profile';
 import { VerifyForgetPassword } from './page/auth/verifyForgetPassword';
 import { AnimatePresence } from 'framer-motion';
+import { Toaster as Toast } from "@/components/ui/toaster"
+import { SelectAuthor } from "@/page/auth/selectLoginAuthor"
+import { SelectSignUpAuthor } from "@/page/auth/selectSignUoAuthor"
+import { AdminHome } from './page/admin/home';
+import { AllStudent } from './page/admin/allStudent';
 
 function App() {
 
@@ -32,37 +37,47 @@ function App() {
         <SwitchUserProvider>
           <BrowserRouter>
             <Routes>
-              {/* <Route element={<CommonRoute />}> */}
-              <Route path='/login' element={<Login />} />
-              <Route path='/test' element={<Test />} />
-              <Route path='/signUp' element={<Sign />} />
-              <Route path='/oauth/:provider/:token' element={<Oauth2 />} />
-              <Route path='/verify-forget-password/:token' element={<VerifyForgetPassword />} />
-
+              <Route element={<CommonRoute />}>
+                <Route path='/login' element={<SelectAuthor />} />
+                <Route path='/student/login' element={<Login />} />
+                <Route path='/mentor/login' element={<Login />} />
+                <Route path='/test' element={<Test />} />
+                <Route path='/signUp' element={<SelectSignUpAuthor />} />
+                <Route path='/student/signUp' element={<Sign />} />
+                <Route path='/mentor/signUp' element={<Sign />} />
+                <Route path='/verify-forget-password/:token' element={<VerifyForgetPassword />} />
+                <Route path='/oauth/:provider/:token' element={<Oauth2 />} />
+              </Route>
               {/* mentor - Router  */}
 
+              <Route path="/admin/*" element={<AdminHome />}>
+
+                <Route path='' element={<></>} />
+                <Route path='allStudent' element={<AllStudent/>} />
+                <Route path='allMentor' element={<>Mentor</>} />
+               
+              </Route>
               <Route element={<MentorProtectedRouter />}>
                 <Route path='/mentor' element={<MentorHome />} />
-
               </Route>
+
               {/* mentor - Router  */}
+
               {/* Student - Router  */}
-              <Route element={<StudentParentRoute />}>
-                <Route path='/student' element={<Home />} />
-                <Route path='/student/profile/:userName' element={<StudentProfile />} />
-                <Route path='/student/sing/basicInformation' element={<SignBasicInformation />} />
-                <Route path='/student/chat' element={<Chat />} />
-                <Route path='/student/communication-room' element={<CommunicationRoom />} />
+              <Route path="/student/*" element={<StudentParentRoute />}>
+                <Route path='' element={<Home />} />
+                <Route path='profile/:userName' element={<StudentProfile />} />
+                <Route path='sing/basicInformation' element={<SignBasicInformation />} />
+                <Route path='chat' element={<Chat />} />
+                <Route path='communication-room' element={<CommunicationRoom />} />
               </Route>
               {/* Student - Router  */}
-
-              <Route element={<MentorProtectedRouter />}>
-
-              </Route>
+              
 
               <Route path='/*' element={<Page404 />} />
             </Routes>
             <Toaster position="bottom-center" />
+            <Toast />
           </BrowserRouter>
         </SwitchUserProvider>
       </ThemeProvider>

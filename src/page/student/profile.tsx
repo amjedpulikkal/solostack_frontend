@@ -14,13 +14,13 @@ export function StudentProfile(): JSX.Element {
 
     const { userName } = useParams()
     console.log(useParams)
-    const student = useSelector((state: RootState) => state.student?.studentData) as unknown as StudentData
+    const student = useSelector((state: RootState) => state.author?.authorData) as unknown as StudentData
     return (
 
         <>
-            <NaveBar />
-            <div className="w-full h-72  bg-slate-800 flex items-end p-5 rounded-es-3xl ">
-                <div className="bg-slate-500 w-36 h-36 rounded-es-3xl  rounded-se-3xl " style={{ backgroundImage: `url(${student.personal_info.photo})`, backgroundRepeat: "no-repeat", backgroundSize: "contain, cover" }}>
+            
+            <div className="w-full h-72  justify-end bg-slate-800 flex items-end p-5 rounded-ee-3xl ">
+                <div className="bg-slate-500 w-48 h-48 shadow-2xl rounded-ss-3xl  rounded-ee-3xl " style={{ backgroundImage: `url(${student.personal_info.photo})`, backgroundRepeat: "no-repeat", backgroundSize: "contain, cover" }}>
                 </div>
 
             </div>
@@ -28,8 +28,6 @@ export function StudentProfile(): JSX.Element {
                 <div className="pl-16 flex justify-between mt-10">
                     <CalendarDemo />
                     <div className="w-3/4 h-full bg-black">
-
-
                     </div>
                 </div>
                 <div className="flex w-full justify-between px-10 mt-6">

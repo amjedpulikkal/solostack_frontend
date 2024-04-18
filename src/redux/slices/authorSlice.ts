@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const authorSlice = createSlice({
     name: "author",
     initialState: {
+        author: null,
         isLoggedIn: false,
         authorData: null,
         searchResults: {
@@ -12,11 +13,16 @@ const authorSlice = createSlice({
         presence: null
     },
     reducers: {
+        setAuthor: (state,action) => {
+
+            state.author = action.payload;
+        },
         setLoggedIn: (state, action) => {
             state.isLoggedIn = action.payload;
         },
         setLogout: (state, action) => {
             state.authorData = null;
+            state.author = null;
         },
         setAuthorData: (state, action) => {
             state.authorData = action.payload;
@@ -30,7 +36,8 @@ export const {
     setLoggedIn,
     setAuthorData,
     setLogout,
-    setPresence
+    setPresence,
+    setAuthor
 } = authorSlice.actions;
 
 export default authorSlice.reducer;
