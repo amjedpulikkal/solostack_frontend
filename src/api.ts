@@ -11,6 +11,11 @@ export const mentorApi= {
     verifyOtp:"/api/mentor/verify",
     updateAvailableTime:"/api/mentor/update-available-time",
     getAvailableTime:"/api/mentor/get-available-time",
-    getAllMentors:"/api/mentor/get-all-mentors"
+    getAllAvailableTime:"/api/mentor/get-all-available-time",
+    getAllMentors:"/api/mentor/get-all-mentors",
+    getMentorProfile:"/api/mentor",
+    updateMentorProfileImage:"/api/mentor/update-image",
+    sendRequest:"/api/mentor/student/storeRequest"
+
 
 }

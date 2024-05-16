@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { json, useParams } from "react-router-dom"
 import { useCookies } from "react-cookie"
 import { isOauth } from "@/reactQuery/student/isOauth";
-import { setLoggedIn, setAuthorData } from "@/redux/slices/authorSlice";
+import { setAuthor, setAuthorData } from "@/redux/slices/authorSlice";
 import { useDispatch, useSelector, } from "react-redux";
 import { RootState } from "../../redux/store"
 import { StudentData } from "@/type";
@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthor } from "@/components/switchUser-provider";
 
 export default function Outh2() {
-    const { setAuthor } = useAuthor()
+   
     const crateIsOauthUpMutation = isOauth()
     const navigate = useNavigate();
     const { provider, token } = useParams()
@@ -27,8 +27,7 @@ export default function Outh2() {
                     const data = await crateIsOauthUpMutation.mutateAsync(token);
                     console.log(data, "eeeeeeeeeeeeeeeee333333333");
                     dispatch(setAuthorData(data))
-                    
-                    setAuthor("student")
+                    dispatch(setAuthor("student"))
                     console.log(data, "eeeeeeeeeeeeee«eee333333333");
                     navigate("/student")
                     console.log("-----------------------------", token)

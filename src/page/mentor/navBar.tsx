@@ -16,7 +16,7 @@ export default function NaveBar(): JSX.Element {
             </div>
             <div className=" flex gap-8">
                 <ModeToggle />
-                <UseAvatar avatarUrl={undefined} userName={undefined} />
+                <UseAvatar avatarUrl={data.personal_info.photo} userName={data.personal_info.userName} />
             </div>
         </nav>
     )

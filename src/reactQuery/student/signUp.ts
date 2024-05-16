@@ -115,13 +115,13 @@ export const useLoginQuery = (author: Iauthor) => {
 
             if (author === "student") {
                 dispatch(setAuthorData(data))
-               
+
                 dispatch(setAuthor("student"))
                 navigate('/student/')
-            } else  if( author ==="mentor") {
+            } else if (author === "mentor") {
                 dispatch(setAuthorData(data))
                 dispatch(setAuthor("mentor"))
-                
+
                 navigate('/mentor/')
 
             }
@@ -163,6 +163,31 @@ export const useVerifyForgetPasswordQuery = () => {
     const otpVerify = async (formData: { password?: string, token?: string }) => {
         const response = await axios.post('/api/student/verifyForgetPassword', formData);
         return response.data;
+    };
+
+    return useMutation(otpVerify, {
+        onSuccess(data) {
+            console.log("data", data);
+
+        },
+        onError() {
+
+
+        },
+
+    })
+}
+export const useUserNameCheck = () => {
+
+    const otpVerify = async (userName: string) => {
+        try {
+
+            const response = await axios.post('/api/student/userName-validate', { userName });
+            return response.data;
+        } catch (err) {
+            
+            return err.response.data;
+        }
     };
 
     return useMutation(otpVerify, {

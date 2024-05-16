@@ -7,18 +7,20 @@ import {
   QueryClientProvider,
 } from 'react-query'
 import { Provider } from 'react-redux';
-import store ,{persistor}from './redux/store.ts'
+import store, { persistor } from './redux/store.ts'
 const queryClient = new QueryClient()
 import { PersistGate } from 'redux-persist/integration/react';
+import { Socket } from './page/socket';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
+  <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-          <App />
-        </PersistGate>
-      </Provider>
-    </QueryClientProvider>
+        <Socket />
+        <App />
+      </PersistGate>
+    </Provider>
+  </QueryClientProvider>
   // </React.StrictMode>,
 )

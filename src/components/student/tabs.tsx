@@ -1,8 +1,8 @@
 import { TabsContent } from "@radix-ui/react-tabs";
 import { AnimatePresence, motion } from "framer-motion";
 import { Skeleton } from "../ui/skeleton";
-import { useEffect, useState } from "react";
-import { usGetAllMentor } from "@/reactQuery/mentor/mentorQuery";
+import { useEffect, useMemo, useState } from "react";
+import { usGetAvailableTime } from "@/reactQuery/mentor/mentorQuery";
 import { Car } from "lucide-react";
 import { IoMdClose } from "react-icons/io";
 const container = {
@@ -17,7 +17,6 @@ const container = {
   },
 };
 
-
 const item = {
   hidden: { y: 20, opacity: 0 },
   visible: {
@@ -31,64 +30,136 @@ const categoryAnimation = {
   animate: { opacity: 1, y: 0 },
   exit: { opacity: 0, y: 10 },
   transition: { duration: 0.2 },
-}
-import { DatePickerDemo } from '@/components/datePicker'
-import { Input } from '@/components/ui/input'
+};
+import { DatePickerDemo } from "@/components/datePicker";
+import { Input } from "@/components/ui/input";
+import { Button } from "../ui/button";
+import DialogBookMentor from "./dialogBookMentor";
+
 
 export default function StudentTabs(): JSX.Element {
+  const [date, setDate] = useState<Date>(new Date());
+  const [openAndData, setOpenAndData] = useState<{isOpen:boolean,data:string}>({isOpen:false,data:""});
 
-  const { data, isLoading, isSuccess } = usGetAllMentor()
-
-  const [category, setCategory] = useState<string[]>([])
+  const [time, setTime] = useState<number>(() => {
+    return 4;
+  });
+  const { data, isLoading, isSuccess, mutate } = usGetAvailableTime();
+  const [category, setCategory] = useState<string[]>([]);
   if (isSuccess) {
-
-    console.log(data)
+    console.log(data);
   }
+  useEffect(() => {
+    mutate({ date, time });
+  }, [time, date]);
   return (
-    <TabsContent value="Mentors" className="h-full w-full p-5 ">
-      <div className="w-full flex justify-end">
-        <div className="grid grid-cols-3 gap-2">
-          <Input type="search" placeholder="Search mentor" />
-          <Input  onPaste={(e) => setCategory([...category, e.target.value])} type="search" placeholder="category" />
-          <DatePickerDemo />
+    <div className="h-full w-full p-5 ">
+      <div className="w-full flex justify-end relative">
+        <div className="grid grid-cols-6  gap-2 w-full pe-4">
+          <div className="flex col-span-3 justify-end bg-secondary rounded-ss-full  rounded-es-full  rounded-se-full rounded-ee-full">
+            <motion.div className="w-full h-full  gap-1 flex justify-around items-center">
+              {[9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
+                if (time === index) {
+                  return (
+                    <motion.div 
+                      whileHover={{ scale: 1.3 }}
+                      className="w-10 hover:border transition-colors h-10 outline outline-primary  bg-background rounded-full flex justify-center items-center text-primary"
+                    >
+                      {item}
+                    </motion.div>
+                  );
+                }
+                return (
+                  <motion.div
+                    whileHover={{ scale: 1.3 }}
+                    onClick={() => {
+                      setTime(index);
+                    }}
+                    className="w-10 h-10  bg-white  rounded-full flex justify-center items-center text-primary"
+                  >
+                    {item}
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
+          <Input
+            className="col-span-1"
+            type="search"
+            placeholder="Search mentor"
+          />
+          <Input
+            className="col-span-1"
+            onPaste={(e) => setCategory([...category, e.target.value])}
+            type="search"
+            placeholder="category"
+          />
+          <DatePickerDemo date={date} setDate={setDate} />
+
+          <span className="absolute top-0 left-8 transform -translate-y-1/2 w-3.5 h-3.5 bg-red-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
         </div>
       </div>
       <div className="flex justify-start mt-5">
         {/* <AnimatePresence mode="popLayout" > */}
 
         {category.map((item, index) => (
-
-          <motion.div key={index} {...categoryAnimation} className="flex bg-primary ml-2 rounded-full px-3 py-1 ">
+          <motion.div
+            key={index}
+            {...categoryAnimation}
+            className="flex bg-primary ml-2 rounded-full px-3 py-1 "
+          >
             {item}
-            <button className="ml-2" onClick={() => {
-
-              setCategory([...category.filter((t, i) => i !== index)])
-            }}>
+            <button
+              className="ml-2"
+              onClick={() => {
+                setCategory([...category.filter((t, i) => i !== index)]);
+              }}
+            >
               <IoMdClose color="black" size={20} />
             </button>
           </motion.div>
-
         ))}
 
         {/* </AnimatePresence> */}
-
       </div>
-      <motion.div variants={container}
+      <motion.div
+        variants={container}
         initial="hidden"
-        animate="visible" className=' grid mt-14 mb-16 grid-cols-12'>
-        {data?.map((index) => (
-          <motion.div key={index} variants={item} className='item bg-slate-400 mt-3 col-span-2 h-52 w-48 rounded-3xl flex items-end'>
-            <Skeleton className=' h-11 w-full rounded-b-3xl flex justify-between  '>
-              <div className='flex ml-4 mt-2'>
-                {/* <div></div> */}
+        animate="visible"
+        className=" grid mt-14 mb-16 grid-cols-12"
+      >
+        {data?.map((data) => (
+          <>
+            <motion.div
+              className="col-span-2  rounded-3xl h-60  w-48 flex justify-center  items-end"
+              style={{
+                backgroundImage: `url(https://d3sd9xkxgxzd5z.cloudfront.net/${data?.mentorId.personal_info.photo})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: " cover",
+              }}
+            >
+              <div className="w-full flex flex-col justify-center">
+                <div className="flex justify-center">
+                  <div className="h-11 rounded-3xl w-11/12 backdrop-blur-sm bg-black/30 mb-2 flex justify-center px-2 items-center text-primary-foreground dark:text-white ">
+                    <p className="text-lg font-serif  ">
+                      @{data.mentorId.personal_info.userName}
+                    </p>
+                  </div>
+                </div>
+                <Button
+                  onClick={() => setOpenAndData({isOpen:true,data:data?._id})}
+                  className="rounded-ee-3xl rounded-ss-none rounded-se-none rounded-es-3xl"
+                >
+                  Book new
+                </Button>
               </div>
-              <div></div>
-            </Skeleton>
-          </motion.div>
+            </motion.div>
+          </>
         ))}
-
       </motion.div>
-    </TabsContent >
-  )
 
+      <DialogBookMentor openAndData={openAndData} setOpenAndData={setOpenAndData}/>
+      
+    </div>
+  );
 }

@@ -23,7 +23,6 @@ export function SelectAuthor(): JSX.Element {
 
     return (
         <>
-
             <div className='w-screen h-screen  '>
 
                 <div className='flex justify-end mt-6 mr-6'>

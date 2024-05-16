@@ -21,7 +21,17 @@ export function StudentParentRoute(): JSX.Element {
     }
   }, [isStudent, navigate]);
 
-  return isStudent ? <><NaveBar /><Outlet /> </> : <Page404 />;
+  if (isStudent) {
+    return <>
+      <div className='w-screen h-screen overflow-hidden'>
+        <NaveBar />
+        <div className='w-full h-full overflow-auto scrollbar pb-20'>
+          <Outlet />
+        </div>
+      </div>
+    </>
+  }
+
 };
 
 export function CommonRoute(): JSX.Element {
@@ -42,5 +52,22 @@ export function CommonRoute(): JSX.Element {
 
 
 
-  return <><Outlet /> </>
+  return (
+    <>
+      <Outlet />
+      <div aria-hidden="true" className="fixed hidden dark:md:block dark:opacity-70 -bottom-[40%] -left-[20%] -z-10">
+        <img
+          src="docs-left.png"
+          className="relative z-10 opacity-0 shadow-black/5 data-[loaded=true]:opacity-100 shadow-none transition-transform-opacity motion-reduce:transition-none !duration-300 rounded-large"
+          alt="docs left background" data-loaded="true" />
+
+      </div>
+      <div aria-hidden="true"
+        className="fixed hidden dark:md:block dark:opacity-70 -top-[80%] -right-[60%] 2xl:-top-[60%] 2xl:-right-[45%] -z-10 rotate-12">
+        <img src="docs-right.png"
+          className="relative z-10 opacity-0 shadow-black/5 data-[loaded=true]:opacity-100 shadow-none  transition-transform-opacity motion-reduce:transition-none !duration-300 rounded-large"
+          alt="docs right background" data-loaded="true" />
+
+      </div>
+    </>)
 };

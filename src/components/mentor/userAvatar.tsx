@@ -45,19 +45,37 @@ export default function UseAvatar({ avatarUrl, userName }: Props): JSX.Element {
             <AnimatePresence >
                 {selectedId && (
                     <motion.div layoutId={"profile-mentor"} className=" fixed inset-0 z-50 dark:bg-black/80 backdrop-blur-md bg-white/30  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
-                        <div className="w-full h-full flex justify-center items-center">
-                            <div className="h-96 w-96 bg-white rounded-full flex justify-end items-start" style={{
-                                backgroundRepeat: "no-repeat",
-                                backgroundSize: "cover",
-                                backgroundImage: `url(https://github.com/shadcn.png)`
-                            }}>
+                        {avatarUrl ?
 
-                                <motion.button onClick={() => setSelectedId(null)} >
-                                    <IoMdClose size={40} />
-                                </motion.button>
+                            <div className="w-full h-full flex justify-center items-center">
+                                <div className="h-96 w-96 bg-white rounded-full flex justify-end items-start" style={{
+                                    backgroundRepeat: "no-repeat",
+                                    backgroundSize: "cover",
+                                    backgroundImage: `url(https://d3sd9xkxgxzd5z.cloudfront.net/${avatarUrl})`
+                                }}>
+
+                                    <motion.button onClick={() => setSelectedId(null)} >
+                                        <IoMdClose size={40} />
+                                    </motion.button>
+                                </div>
+
                             </div>
+                            :
 
-                        </div>
+                            <div className="w-full h-full flex justify-center items-center">
+                                <div className="h-96 w-96 bg-white rounded-full flex justify-end items-start" style={{
+                                    backgroundRepeat: "no-repeat",
+                                    backgroundSize: "cover",
+                                    backgroundImage: `url(https://github.com/shadcn.png)`
+                                }}>
+
+                                    <motion.button onClick={() => setSelectedId(null)} >
+                                        <IoMdClose size={40} />
+                                    </motion.button>
+                                </div>
+
+                            </div>
+                        }
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -72,7 +90,7 @@ export default function UseAvatar({ avatarUrl, userName }: Props): JSX.Element {
 
                         {avatarUrl ?
                             <Avatar >
-                                <AvatarImage src={avatarUrl} />
+                                <AvatarImage src={`https://d3sd9xkxgxzd5z.cloudfront.net/${avatarUrl}`} />
                                 <AvatarFallback>{userName.toUpperCase()[0] + userName.toUpperCase()[1]}</AvatarFallback>
                             </Avatar>
                             :
@@ -88,7 +106,7 @@ export default function UseAvatar({ avatarUrl, userName }: Props): JSX.Element {
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
-                        <DropdownMenuItem onClick={() => navigate(`/mentor/profile/${userName}`)} >
+                        <DropdownMenuItem onClick={() => navigate(`/mentor/${userName}`)} >
                             {/* <motion.div layoutId={"profile-1234"} onClick={() => dispatch(setPresence("profile-1234"))}> */}
                             Profile
                             {/* </motion.div> */}

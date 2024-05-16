@@ -5,14 +5,14 @@ import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/theme-provider";
 import { ModeToggle } from "../../components/mode-toggle";
 import { SwitchUser } from "../../components/switchUser";
-import { useSingUpQuery } from "../../reactQuery/student/signUp"
+import { useSingUpQuery, useUserNameCheck } from "../../reactQuery/student/signUp"
 import { Authcomponents } from "@/components/oauth";
 import { IFormData, Iauthor } from "../../type"
 import { AnimatePresence, motion } from "framer-motion";
 import { useForm, SubmitHandler } from "react-hook-form"
 import DotLoader from "@/components/ui/dot-loardes";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { UserNameInput } from "@/components/student/auth/Userinput";
 
 const framer_error = {
   initial: { opacity: 0, y: 10 },
@@ -65,13 +65,16 @@ export default function App(): JSX.Element {
     const data = {
       email: formData.get('email'),
       password: formData.get('password'),
-      name: formData.get("username")
+      userName: formData.get("userName")
     };
     console.log(data)
     await mutateAsync({ ...data, author })
     toast.success("OTP has been sent to email.");
     setOtp(data.email)
   }
+
+
+
 
 
   const handelPasswordValidation = (e: ChangeEvent<HTMLInputElement>) => {
@@ -147,25 +150,18 @@ export default function App(): JSX.Element {
                     </AnimatePresence>
                   </div>
                   <div className="pb-2 pt-4">
-                    <input {...register("name", {
-                      required: "name is required"
-
-                    })} className="block w-full p-4 text-lg rounded-sm border-2 bg-white dark:bg-black" type="text" placeholder="user name" />
-                    <AnimatePresence mode="wait" initial={false}>
-                      {errors.name && <motion.p
-                        className="flex items-center gap-1 pt-2 font-semibold text-red-500"
-                        {...framer_error}
-                      >
-                        {errors.name.message}
-                      </motion.p>
-                      }
-                    </AnimatePresence>
+                    <UserNameInput register={register} errors={errors} />
+                  
                   </div>
                   <div className="pb-2 pt-4">
                     <input  {...register("password", {
                       required: true,
-                      pattern: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/
-                    })} className="block w-full p-4 text-lg rounded-sm border-2 bg-white dark:bg-black" type="password" placeholder="Password" onChange={handelPasswordValidation} />
+                      pattern: {
+                        value: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/,
+                        message: "password is required"
+                      },
+                      onChange: handelPasswordValidation
+                    })} className="block w-full p-4 text-lg rounded-sm border-2 bg-white dark:bg-black" type="password" placeholder="Password" />
                   </div>
                   {passValidate[0] &&
                     <div >
@@ -223,7 +219,7 @@ export default function App(): JSX.Element {
             </div >
           </motion.div >
           <div className='flex justify-end mb-6 mr-6'>
-            <SwitchUser author={author} handleClick={handleClick}/>
+            <SwitchUser author={author} handleClick={handleClick} />
           </div>
         </>
       )}

@@ -20,7 +20,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { useDispatch } from "react-redux"
 import { setPresence } from "@/redux/slices/authorSlice"
 import { IoMdClose } from "react-icons/io";
-import { useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 type Props = {
   avatarUrl: string
   userName: string
@@ -32,14 +32,14 @@ type Props = {
 export default function UseAvatar({ avatarUrl, userName }: Props): JSX.Element {
 
   const [isOpen, setOpen] = useState(false)
-  const [selectedId, setSelectedId] = useState<string|null>(null)
+  const [selectedId, setSelectedId] = useState<string | null>(null)
   const dispatch = useDispatch()
   const handleRightClick = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     setSelectedId("profile-1234")
-  
+
   };
-  const navigate =useNavigate()
+  const navigate = useNavigate()
   return (
     <div>
       <AnimatePresence >
@@ -53,7 +53,7 @@ export default function UseAvatar({ avatarUrl, userName }: Props): JSX.Element {
               }}>
 
                 <motion.button onClick={() => setSelectedId(null)} >
-                  
+                  <IoMdClose size={40} />
                 </motion.button>
               </div>
 
@@ -61,7 +61,7 @@ export default function UseAvatar({ avatarUrl, userName }: Props): JSX.Element {
           </motion.div>
         )}
       </AnimatePresence>
-      <LoginDialog setOpen={setOpen} isOpen={isOpen} />
+      <LoginDialog setOpen={setOpen} isOpen={isOpen} />             
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
 
@@ -71,10 +71,10 @@ export default function UseAvatar({ avatarUrl, userName }: Props): JSX.Element {
           }}>
 
             {avatarUrl ?
-              <Avatar >
+              <Avatar className="w-20 h-20 outline" >
                 <AvatarImage src={avatarUrl} />
                 <AvatarFallback>{userName.toUpperCase()[0] + userName.toUpperCase()[1]}</AvatarFallback>
-              </Avatar>
+              </Avatar>   
               :
               <Avatar>
                 <AvatarImage src="https://github.com/shadcn.png" />
@@ -85,17 +85,27 @@ export default function UseAvatar({ avatarUrl, userName }: Props): JSX.Element {
 
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-40 mr-2 mt-2 rounded-xl">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel> 
+          <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem onClick={()=>navigate(`/student/profile/${userName}`)} >
-              {/* <motion.div layoutId={"profile-1234"} onClick={() => dispatch(setPresence("profile-1234"))}> */}
-              Profile
-              {/* </motion.div> */}
-            </DropdownMenuItem>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "*:bg-background  transition-colors" : " *:hover:bg-primary-foreground transition-colors"
+              } to={"/student/mentor"}>
+              <DropdownMenuItem  >
+                Mentors
+              </DropdownMenuItem>
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "*:bg-background  transition-colors" : " *:hover:bg-primary-foreground transition-colors"
+              } to={`/student/${userName}`}>
+              <DropdownMenuItem  >
+                Profile
+              </DropdownMenuItem>
+            </NavLink>
             <DropdownMenuItem>
               Settings
-              {/* <DropdownMenuShortcut>⌘S</DropdownMenuShortcut> */}
             </DropdownMenuItem>
           </DropdownMenuGroup>
           {/* <DropdownMenuSeparator /> */}
@@ -116,7 +126,7 @@ export default function UseAvatar({ avatarUrl, userName }: Props): JSX.Element {
                 New Team
                 <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
               </DropdownMenuItem>
-            </DropdownMenuGroup> */}
+            </DropdownMenuGroup>  */}
           {/* <DropdownMenuSeparator /> */}
           {/* <DropdownMenuSeparator /> */}
           <DropdownMenuItem className="text-red-600 focus:text-red-500 focus:outline-red-500 " onClick={() => setOpen(!isOpen)}>

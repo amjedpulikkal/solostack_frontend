@@ -1,0 +1,40 @@
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import io from 'socket.io-client';
+import { RootState } from "@/redux/store"
+import { toast } from 'sonner';
+
+const socket = io('http://localhost:3000');
+
+export const Socket = () => {
+    const authorData = useSelector((state: RootState) => state.author?.authorData)
+    useEffect(() => {
+
+        socket.on('connect', () => {
+            console.log('Connected to server');
+            // if (authorData?._id) {
+                socket.emit("userID", authorData?._id)
+            // }
+        });
+        socket.on("notification",(data)=>{
+            toast.success(data)
+        })
+        socket.on('disconnect', () => {
+            console.log('Disconnected from server');
+        });
+        return () => {
+
+            socket.disconnect();
+        };
+    }, []);
+
+    
+
+    return (
+        <div>
+
+        </div>
+    );
+};
+
+
