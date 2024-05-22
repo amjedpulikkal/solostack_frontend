@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 
 import * as React from "react"
 
@@ -82,7 +83,7 @@ export default function updatePhoto({ imageUrl }) {
     )
 }
 
-function ProfileForm({ setOpen }) {
+export function ProfileForm({ setOpen }) {
     const [image, setImage] = React.useState("");
     const [error, setError] = React.useState("");
     const [imageFile, setImageFile] = React.useState<string | Blob>("");

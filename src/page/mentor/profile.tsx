@@ -15,7 +15,7 @@ import UpdatePhoto from "./updatePhoto"
 import { useSelector } from "react-redux"
 import { RootState } from "@/redux/store"
 
-export function MentorProfile(): JSX.Element {
+export default function MentorProfile(): JSX.Element {
 
     const { userName } = useParams()
     const [date, setDate] = useState<Date>(new Date())

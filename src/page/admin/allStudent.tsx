@@ -2,7 +2,7 @@
 import { AllAuthors } from '@/components/mentor/allauthor'
 
 
-export const AllStudent = () => {
+export default function AllStudent(){
    
  
     return (

@@ -2,7 +2,7 @@ import React from 'react'
 import { AllAuthors } from '../../components/mentor/allauthor'
 
 
-export const AllMentor = () => {
+export default function AllMentor () {
    
  
     return (

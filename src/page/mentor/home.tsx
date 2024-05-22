@@ -13,7 +13,8 @@ import { useToast } from "@/components/ui/use-toast";
 import { number } from "zod";
 import { DrawerDialogDetails } from "@/components/mentor/detailsdrawer";
 import Requests from "./requests";
-
+import { MdOutlineEventAvailable } from "react-icons/md";
+import { BsGraphUp } from "react-icons/bs";
 const getIndexWithTime = {
   9: 0,
   10: 1,
@@ -72,13 +73,32 @@ export default function homePage(): JSX.Element {
   };
   return (
     <>
-      <div>
+      <div className="w-full h-full">
+
+
         <audio ref={audioRef} className="hidden">
           <source src="/ringtone-126505.mp3" type="audio/mpeg" />
         </audio>
         <NaveBar />
-        <div className="pl-2 pt-2 grid grid-cols-12">
-          <div className="col-span-8">
+
+        {/* <div className="flex w-full h-full"> */}
+        {/* <div className="w-36 h-dvh bg-black flex flex-col gap-4 pt-3 ">
+            <div className=" w-full h-24 flex gap-2 hover:bg-white/10 p-3 transition-colors">
+              <span className="h-full w-1 bg-primary/60 rounded-full"></span>
+              <div className=" w-full  h-full rounded-2xl outline outline-1 outline-primary/25 flex justify-center items-center">
+                <MdOutlineEventAvailable className="text-primary" size={50} />
+              </div>
+            </div>
+            <div className="w-full h-24 flex gap-2 p-3 transition-colors  hover:bg-white/10">
+              <span className="h-full w-1 bg-primary/10 rounded-full"></span>
+              <div className="w-full h-full rounded-2xl outline outline-1 outline-primary/10 flex justify-center items-center">
+              <BsGraphUp className="text-primary/10"  size={50}/>
+              </div>
+            </div>
+
+          </div> */}
+        <div className="pl-2 pt-2 grid grid-cols-12 w-full h-full">
+          <div className="col-span-9">
             <div className="flex justify-evenly mt-10 ">
               <p>AM</p>
               {[9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
@@ -95,9 +115,8 @@ export default function homePage(): JSX.Element {
                       initial={{ scale: 1 }}
                       whileHover={{ scale: 1.4 }}
                       transition={{ duration: 0.1 }}
-                      className={`line-through cursor-not-allowed text-red-500 w-12   dark:dark h-12 rounded-full ${
-                        selectedDate.includes(index) ? "bg-primary" : "bg-black"
-                      }`}
+                      className={`line-through cursor-not-allowed text-red-500 w-12   dark:dark h-12 rounded-full ${selectedDate.includes(index) ? "bg-primary" : "bg-black"
+                        }`}
                     >
                       &nbsp;{item}&nbsp;
                     </motion.button>
@@ -110,9 +129,8 @@ export default function homePage(): JSX.Element {
                       whileHover={{ scale: 1.4 }}
                       transition={{ duration: 0.1 }}
                       whileTap={{ scale: 1.4 }}
-                      className={` text-white w-12   dark:dark h-12 rounded-full ${
-                        selectedDate.includes(index) ? "bg-primary" : "bg-black"
-                      }`}
+                      className={` text-white w-12   dark:dark h-12 rounded-full ${selectedDate.includes(index) ? "bg-primary" : "bg-black"
+                        }`}
                     >
                       &nbsp;{item}&nbsp;
                     </motion.button>
@@ -143,7 +161,7 @@ export default function homePage(): JSX.Element {
                           className="text-white bg-black rounded-sm w-14 h-48 pl-1"
                         >
                           <Requests requests={isTimeAvailable?.requests} />
-                          
+
                         </motion.div>
                       );
                     } else {
@@ -159,11 +177,10 @@ export default function homePage(): JSX.Element {
                           className="text-white bg-black rounded-sm w-14 h-48"
                         >
                           <motion.div
-                            className={`w-full border-4 rounded-md border-black h-14 bg-slate-500 ${
-                              isHovered === index
-                                ? "hovered overflow-hidden"
-                                : ""
-                            }`}
+                            className={`w-full border-4 rounded-md border-black h-14 bg-slate-500 ${isHovered === index
+                              ? "hovered overflow-hidden"
+                              : ""
+                              }`}
                             style={{
                               backgroundImage: `url("/download.jpg")`,
                               backgroundRepeat: "no-repeat",
@@ -210,7 +227,7 @@ export default function homePage(): JSX.Element {
               )}
             </motion.div>
 
-            <div className="flex justify-end mt-5">
+            <div className="flex justify-end mt-5 w-full">
               <Button
                 onClick={handelUpdateDate}
                 className={`${isLoading ? "cursor-wait" : ""}`}
@@ -235,7 +252,7 @@ export default function homePage(): JSX.Element {
               </Button>
             </div>
           </div>
-          <div className="col-span-4 flex justify-center items-center">
+          <div className="col-span-3 flex justify-center items-center">
             <Calendar
               disabled={{ before: new Date() }}
               mode="single"
@@ -244,7 +261,11 @@ export default function homePage(): JSX.Element {
               className="rounded-md border shadow "
             />
           </div>
+          {/* </div> */}
         </div>
+
+
+
       </div>
     </>
   );

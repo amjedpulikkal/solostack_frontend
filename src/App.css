@@ -1,6 +1,6 @@
 .scrollbar {
   --sb-track-color: #ffffff00;
-  --sb-thumb-color: #00ff80;
+  --sb-thumb-color: #0eaa5c;
   --sb-size: 1px;
   /* Adjust the scrollbar size here */
 }
@@ -122,7 +122,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 
-@import url("https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap"); */
 
 .wrapper svg {
   font-family: "Lobster Two", sans-serif;

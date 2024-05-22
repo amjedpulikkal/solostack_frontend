@@ -19,3 +19,9 @@ export const mentorApi= {
 
 
 }
+
+export const ChatGroupApi={
+    createNewGroup:"/api/group-chat/",
+    getAllGroupsWithID:"/api/group-chat/groups/",
+    getChatHistory:"/api/group-chat/chat-history/"
+}

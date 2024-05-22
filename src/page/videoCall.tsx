@@ -92,7 +92,7 @@ import { VideoCallMain } from "./videoCall/mainPage";
 // }
 
 
-export function VideoCall(): JSX.Element {
+export default function VideoCall(): JSX.Element {
   const [isStartingPage,setIsStartingPage] =useState(true)
 
 

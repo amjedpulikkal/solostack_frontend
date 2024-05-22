@@ -4,12 +4,12 @@ import io from 'socket.io-client';
 import { RootState } from "@/redux/store"
 import { toast } from 'sonner';
 
-const socket = io('http://localhost:3000');
+export const socket = io('http://localhost:3000');
 
-export const Socket = () => {
+
+export default function Socket  () {
     const authorData = useSelector((state: RootState) => state.author?.authorData)
     useEffect(() => {
-
         socket.on('connect', () => {
             console.log('Connected to server');
             // if (authorData?._id) {

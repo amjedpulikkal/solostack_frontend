@@ -8,7 +8,7 @@ import { PiChalkboardTeacherFill, PiStudentBold } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
 
 import SelectAuthorCo from "@/components/selectAuthorCo"
-export function SelectAuthor(): JSX.Element {
+export default function SelectAuthor(): JSX.Element {
     const navigate = useNavigate()
 
     const handleClick = (author: Iauthor) => {
