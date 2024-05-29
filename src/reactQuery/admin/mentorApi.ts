@@ -1,0 +1,22 @@
+import { mentorApi,studentApi } from "@/api";
+import axios from "axios";
+import { useMutation, useQuery } from "react-query";
+
+export function useSearchAuthors(author) {
+  let apiCall;
+  if (author === "mentor") {
+    apiCall = async () => {
+      const response = await axios.get(mentorApi.searchMentor);
+
+      return response.data;
+    };
+  } else {
+    apiCall = async () => {
+      const response = await axios.get(studentApi.searchStudent);
+
+      return response.data;
+    };
+  }
+
+  return useQuery("AllMentor", apiCall, { refetchOnWindowFocus: false });
+}

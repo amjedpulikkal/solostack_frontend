@@ -40,121 +40,123 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    user: 3006,
-    userName: "rewrsuccess",
-    email: "ken99@yahoo.com",
-    status: "active"
+// const data: Payment[] = [
+//   {
+//     id: "m5gr84i9",
+//     user: 3006,
+//     userName: "rewrsuccess",
+//     email: "ken99@yahoo.com",
+//     status: "active"
 
-  },
-  {
-    id: "3u1reuv4",
-    user: 242,
-    userName: "rewrsuccess",
-    email: "Abe45@gmail.com",
-    status: "active"
-  },
-  {
-    id: "derv1ws0",
-    user: 837,
-    userName: "rewrprocessing",
-    email: "Monserrat44@gmail.com",
-    status: "active"
-  },
-  {
-    id: "5kma53ae",
-    user: 874,
-    userName: "rewrsuccess",
-    email: "Silas22@gmail.com",
-    status: "active"
-  },
-  {
-    id: "5kma53ae",
-    user: 874,
-    userName: "rewrsuccess",
-    email: "Silas22@gmail.com",
-    status: "active"
-  },
-  {
-    id: "5kma53ae",
-    user: 874,
-    userName: "rewrsuccess",
-    email: "Silas22@gmail.com",
-    status: "active"
-  },
-  {
-    id: "5kma53ae",
-    user: 874,
-    userName: "rewrsuccess",
-    email: "Silas22@gmail.com",
-    status: "active"
-  },
-  {
-    id: "5kma53ae",
-    user: 874,
-    userName: "rewrsuccess",
-    email: "Silas22@gmail.com",
-    status: "active"
-  },
-  {
-    id: "bhqecj4p",
-    user: 721,
-    userName: "rewrfailed",
-    email: "carmella@hotmail.com",
-    status: "active"
-  },
-  {
-    id: "bhqecj4p",
-    user: 721,
-    userName: "rewrfailed",
-    email: "carmella@hotmail.com",
-    status: "active"
-  },
-  {
-    id: "bhqecj4p",
-    user: 721,
-    userName: "rewrfailed",
-    email: "carmella@hotmail.com",
-    status: "active"
-  },
-  {
-    id: "bhqecj4p",
-    user: 721,
-    userName: "rewrfailed---------",
-    email: "carmella@hotmail.com",
-    status: "active"
-  },
-  {
-    id: "bhqecj4p",
-    user: 721,
-    userName: "rewrfailed",
-    email: "carmella@hotmail.com",
-    status: "active"
-  },
-  {
-    id: "bhqecj4p",
-    user: 721,
-    userName: "rewrfailed",
-    email: "carmella@hotmail.com",
-    status: "active"
-  },
-  {
-    id: "bhqecj4p",
-    user: 721,
-    userName: "rewrfailed",
-    email: "carmella@hotmail.com",
-    status: "active"
-  },
-]
+//   },
+//   {
+//     id: "3u1reuv4",
+//     user: 242,
+//     userName: "rewrsuccess",
+//     email: "Abe45@gmail.com",
+//     status: "active"
+//   },
+//   {
+//     id: "derv1ws0",
+//     user: 837,
+//     userName: "rewrprocessing",
+//     email: "Monserrat44@gmail.com",
+//     status: "active"
+//   },
+//   {
+//     id: "5kma53ae",
+//     user: 874,
+//     userName: "rewrsuccess",
+//     email: "Silas22@gmail.com",
+//     status: "active"
+//   },
+//   {
+//     id: "5kma53ae",
+//     user: 874,
+//     userName: "rewrsuccess",
+//     email: "Silas22@gmail.com",
+//     status: "active"
+//   },
+//   {
+//     id: "5kma53ae",
+//     user: 874,
+//     userName: "rewrsuccess",
+//     email: "Silas22@gmail.com",
+//     status: "active"
+//   },
+//   {
+//     id: "5kma53ae",
+//     user: 874,
+//     userName: "rewrsuccess",
+//     email: "Silas22@gmail.com",
+//     status: "active"
+//   },
+//   {
+//     id: "5kma53ae",
+//     user: 874,
+//     userName: "rewrsuccess",
+//     email: "Silas22@gmail.com",
+//     status: "active"
+//   },
+//   {
+//     id: "bhqecj4p",
+//     user: 721,
+//     userName: "rewrfailed",
+//     email: "carmella@hotmail.com",
+//     status: "active"
+//   },
+//   {
+//     id: "bhqecj4p",
+//     user: 721,
+//     userName: "rewrfailed",
+//     email: "carmella@hotmail.com",
+//     status: "active"
+//   },
+//   {
+//     id: "bhqecj4p",
+//     user: 721,
+//     userName: "rewrfailed",
+//     email: "carmella@hotmail.com",
+//     status: "active"
+//   },
+//   {
+//     id: "bhqecj4p",
+//     user: 721,
+//     userName: "rewrfailed---------",
+//     email: "carmella@hotmail.com",
+//     status: "active"
+//   },
+//   {
+//     id: "bhqecj4p",
+//     user: 721,
+//     userName: "rewrfailed",
+//     email: "carmella@hotmail.com",
+//     status: "active"
+//   },
+//   {
+//     id: "bhqecj4p",
+//     user: 721,
+//     userName: "rewrfailed",
+//     email: "carmella@hotmail.com",
+//     status: "active"
+//   },
+//   {
+//     id: "bhqecj4p",
+//     user: 721,
+//     userName: "rewrfailed",
+//     email: "carmella@hotmail.com",
+//     status: "active"
+//   },
+// ]
 
 export type Payment = {
   id: string
   user: number
-  userName: string
+  personal_info:{
+    userName: string
+  }
   email: string
-  status: string
+  joinedAt: string
 }
 
 export const columns: ColumnDef<Payment>[] = [
@@ -182,7 +184,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
   {
     accessorKey: "userName",
-    header: "Status",
+    header: "Profile",
     cell: ({ row }) => (
       <div className="capitalize">
         <img src="https://github.com/shadcn.png" className="rounded-full w-10 h-10" alt="" />
@@ -190,7 +192,7 @@ export const columns: ColumnDef<Payment>[] = [
     ),
   },
   {
-    accessorKey: "userName",
+    accessorKey: "personal_info",
     header: ({ column }) => {
       return (
         <Button
@@ -201,7 +203,7 @@ export const columns: ColumnDef<Payment>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="">{row.getValue("userName")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue("personal_info").name}</div>,
   },
   {
     accessorKey: "email",
@@ -219,6 +221,36 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
   },
   {
+    accessorKey: "wallet",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          wallet
+        
+        </Button>
+      )
+    },
+    cell: ({ row }) => <div className="lowercase ">{row.getValue("wallet")}</div>,
+  },
+  {
+    accessorKey: "isBlocked",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          isBlocked
+          {/* <CaretSortIcon className="ml-2 h-4 w-4" /> */}
+        </Button>
+      )
+    },
+    cell: ({ row }) => <div className="lowercase">{row.getValue("isBlocked")?"Blocked":"Active"}</div>,
+  },
+  {
     accessorKey: "status",
     header: ({ column }) => {
       return (
@@ -231,11 +263,11 @@ export const columns: ColumnDef<Payment>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("status")}</div>,
+    cell: ({ row }) => <div className="lowercase">{row.getValue("status")?"Blocked":"online"}</div>,
   },
 ]
 
-export function   DataTable({rowSelection,setRowSelection}) {
+export function   DataTable({rowSelection,setRowSelection,data}) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

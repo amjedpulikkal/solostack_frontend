@@ -2,6 +2,7 @@ export const  studentApi={
     signIn:"/api/student/register",
     login:"/api/student/login",
     verifyOtp:'/api/student/verify',
+    searchStudent:"/api/student/searchStudent"
     
 }
 
@@ -15,13 +16,16 @@ export const mentorApi= {
     getAllMentors:"/api/mentor/get-all-mentors",
     getMentorProfile:"/api/mentor",
     updateMentorProfileImage:"/api/mentor/update-image",
-    sendRequest:"/api/mentor/student/storeRequest"
+    sendRequest:"/api/mentor/student/storeRequest",
+    searchMentor:"/api/mentor/searchMentor"
 
 
 }
 
 export const ChatGroupApi={
     createNewGroup:"/api/group-chat/",
+    joinNewGroup:"/api/group-chat/join",
     getAllGroupsWithID:"/api/group-chat/groups/",
-    getChatHistory:"/api/group-chat/chat-history/"
+    getChatHistory:"/api/group-chat/chat-history/",
+    
 }

@@ -1,6 +1,8 @@
 import { ChatGroupApi } from "@/api";
+import { RootState } from "@/redux/store";
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
+import { useSelector } from "react-redux";
 
 export const useGetGroup = (userID: string) => {
   const apiCall = async () => {
@@ -16,21 +18,44 @@ export const useGetGroup = (userID: string) => {
 
 export const useChatHistory = (groupID, setChatData) => {
   const apiCall = async () => {
-    if(groupID){
-        
-        const response = await axios.post(ChatGroupApi.getChatHistory,{groupId:groupID});
-        console.log(response);
-        return response.data;
+    if (groupID) {
+      const response = await axios.post(ChatGroupApi.getChatHistory, {
+        groupId: groupID,
+      });
+      console.log(response);
+      return response.data
     }
   };
   return useQuery([`groups${groupID}`, groupID], apiCall, {
-    onSuccess: ({data}) => {
-        console.log(data)
-        if(data.length){
-
-              setChatData(data);
-        }
+    onSuccess: ({ data }) => {
+   
+     
+        setChatData(data);
+      
     },
-    refetchOnWindowFocus: false 
+    refetchOnWindowFocus: false,
   });
 };
+
+export const useGetAllGroup = () => {
+
+  const apiCall = async () => {
+    const response = await axios.get(ChatGroupApi.createNewGroup);
+    console.log(response);
+    return response.data.data
+  };
+
+  return useQuery("AllGroups", apiCall,{refetchOnWindowFocus:false});
+};
+
+export const useJoinGroup=()=>{
+
+  const user = useSelector((state:RootState)=>state.author?.authorData)
+  const apiCall = async (groupID:string) => {
+    const response = await axios.post(ChatGroupApi.joinNewGroup,{groupID,id:user?._id});
+    console.log(response);
+    return response.data.data
+  };
+  return  useMutation(apiCall);
+
+}

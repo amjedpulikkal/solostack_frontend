@@ -13,17 +13,19 @@ import {
 } from "@/components/ui/table"
 import { DataTable } from '@/components/mentor/dataTable'
 import { motion } from 'framer-motion'
+import { useSearchAuthors } from '@/reactQuery/admin/mentorApi'
 
 
 export const AllAuthors = ({author}) => {
     const [rowSelection, setRowSelection] = React.useState({})
+    const {data}=useSearchAuthors(author)
     console.log(rowSelection)
     return (
         <motion.div className=''>
             <div className=' grid grid-cols-12 item-center'>
                 <div className='w-36 md:w-64  md:ml-10 col-span-6 md:col-span-3  h-32 md:h-36 rounded-2xl  border border-primary'>
                     <p className='ml-3 mt-3 font-semibold text-base md:text-xl'>Total {author}</p>
-                    <p className='text-5xl md:text-7xl text-center' >1032</p>
+                    <p className='text-5xl md:text-7xl text-center' >{data?.length || 0}</p>
                 </div>
                 <div className=' w-36 md:w-64 col-span-6 md:col-span-3 ml-10 h-32 md:h-36 rounded-2xl  border border-primary'>
                     <p className='ml-3 mt-3 font-semibold text-base md:text-xl'>Total online
@@ -38,7 +40,7 @@ export const AllAuthors = ({author}) => {
                 </div>
             </div>
             <div>
-                <DataTable rowSelection={rowSelection} setRowSelection={setRowSelection} />
+                <DataTable data={data||[]} rowSelection={rowSelection} setRowSelection={setRowSelection} />
             </div>
         </motion.div>
     )
