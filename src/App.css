@@ -225,3 +225,23 @@ body::-webkit-scrollbar-thumb {
 }
 
 
+
+
+.zen-dots-regular {
+  font-family: "Zen Dots", sans-serif;
+  
+  font-style: normal;
+}
+
+.yantramanav-regular {
+  font-family: "Yantramanav", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.indicator {
+  stroke: #fafafa;
+  stroke-width: 10px;
+}
+

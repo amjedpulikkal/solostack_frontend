@@ -68,27 +68,28 @@ export default function Chat(): JSX.Element {
   // obj.find(i => i._id === data.groupId).messages = [...obj.find(i => i._id === data.groupId), data]
   // setGroup(obj)
 
-  useMemo(() => {
+  useEffect(() => {
     console.log("chatData=------------------", currentChatData)
+    const obj = [...group]
     if (currentChatData) {
-
       if (currentGroup?._id === currentChatData.groupId) {
         console.log("-------sffsdfsd----------")
         audioRef.current?.play();
 
         setChatData([currentChatData, ...chatData]);
       }
-      const obj = [...group]
       const chatObj = obj.find(i => i._id === currentChatData.groupId)
       chatObj.messages = [...chatObj.messages, currentChatData]
 
       if (chatObj?._id !== currentGroup?._id) {
-        chatObj.notification = typeof chatObj.notification === "number" ? chatObj.notification += 1 : 0
+        chatObj.notification = typeof chatObj.notification === "number" ? chatObj.notification += 1 : chatObj.notification===undefined?1:0
       }
-      // console.log(chatObj)
-      obj.sort((a, b) => (b.notification || 0) -( a.notification || 0));
-      setGroup(obj)
     }
+    obj.sort((a, b) => {
+      return (new Date(b.messages[b.messages?.length - 1]?.date)) - (new Date(a.messages[a.messages?.length - 1]?.date))
+    });
+    console.log(obj)
+    setGroup(obj)
   }, [currentChatData])
 
   console.log("data");
@@ -131,7 +132,7 @@ export default function Chat(): JSX.Element {
         <div className="w-1/4 h-full hidden md:block dark:bg-black rounded-3xl  outlie dark:border-none border-2  pb-2 ">
           <div className="w-full h-20 flex justify-around items-center">
             <img
-              src=""
+              src={author.personal_info?.photo}
               className="bg-slate-400 rounded-full w-10 h-10"
               alt=""
             />
@@ -139,7 +140,7 @@ export default function Chat(): JSX.Element {
               type="text"
               className="bg-transparent outline pl-4 outline-1 outline-primary/30 rounded-full h-10"
             />
-             <ModeToggle />
+            <ModeToggle />
             <div className="flex items-center text-xl">
               <DropdownMenu  >
                 <DropdownMenuTrigger asChild>
@@ -184,7 +185,7 @@ export default function Chat(): JSX.Element {
                         {item.groupName}
                       </p>
                       <p className="text-white/40">
-                       @{item?.messages[0]?.senderData?.personal_info?.userName || item.user}:<span>{item?.messages[0]?.message?.data}</span>
+                        @{item?.messages[item?.messages?.length - 1]?.senderData?.personal_info?.userName || item?.messages[item?.messages?.length - 1].user}:<span>{item?.messages[item?.messages?.length - 1]?.message?.data}</span>
                       </p>
                     </div>
                     {item.notification >= 1 &&

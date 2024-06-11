@@ -11,13 +11,17 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '../ui/button';
 import { useSendRequest } from '@/reactQuery/mentor/mentorQuery';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
 export default function DialogBookMentor({ openAndData, setOpenAndData }) {
+
+  const student = useSelector((state:RootState)=>state.author?.authorData)
   const { isLoading, mutate } = useSendRequest();
   const [requestData, setRequestData] = useState('');
 
   const textAreaRef = useRef(null);
-
+  console.log(openAndData,student)
   const handleRequest = () => {
   
     const requestDataValue = textAreaRef.current.value;
@@ -25,7 +29,7 @@ export default function DialogBookMentor({ openAndData, setOpenAndData }) {
 
     if (requestDataValue.trim() !== '') {
   
-      mutate({data:requestDataValue,mentorRVId:openAndData.data});
+      mutate({data:requestDataValue,mentorRVId:openAndData.data?._id});
 
       setRequestData('');
       setOpenAndData({ isOpen: false, data: '' });
@@ -39,8 +43,8 @@ export default function DialogBookMentor({ openAndData, setOpenAndData }) {
           <AlertDialogTitle>Book new session</AlertDialogTitle>
           {/* Display user avatar or profile image */}
           <div className="w-full flex justify-center gap-20 items-center h-28">
-            <div className="w-24 h-24 rounded-full div1 bg-slate-950"></div>
-            <div className="w-24 h-24 rounded-full div2 bg-slate-950"></div>
+            <img src={`https://d3sd9xkxgxzd5z.cloudfront.net/${openAndData.data?.mentorId?.personal_info?.photo}`}       className="w-24 h-24 rounded-full div1 bg-slate-950"/>
+            <img src={student?.personal_info?.photo}  className="w-24 h-24 rounded-full div1 bg-slate-950"/>
           </div>
           <AlertDialogDescription>
             <Textarea

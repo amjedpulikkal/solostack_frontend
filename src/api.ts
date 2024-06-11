@@ -2,7 +2,8 @@ export const  studentApi={
     signIn:"/api/student/register",
     login:"/api/student/login",
     verifyOtp:'/api/student/verify',
-    searchStudent:"/api/student/searchStudent"
+    searchStudent:"/api/student/searchStudent",
+    getTodyReview:"/api/student/getTodyReview"
     
 }
 
@@ -17,7 +18,8 @@ export const mentorApi= {
     getMentorProfile:"/api/mentor",
     updateMentorProfileImage:"/api/mentor/update-image",
     sendRequest:"/api/mentor/student/storeRequest",
-    searchMentor:"/api/mentor/searchMentor"
+    searchMentor:"/api/mentor/searchMentor",
+    acceptRequest:"/api/mentor/student/acceptRequest"
 
 
 }

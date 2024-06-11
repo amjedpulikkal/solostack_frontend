@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { AnimatePresence, motion } from "framer-motion";
 import { LogoLoader } from "@/components/ui/dot-loardes";
 import { NavLink } from "react-router-dom";
+import { useGetTodyReview } from "@/reactQuery/student/baseApi";
 
 
 
@@ -17,7 +18,9 @@ const STimerTab = lazy(() => import("@/components/student/studentTimerTabs"));
 
 export default function Home(): JSX.Element {
   console.log("home")
-
+  
+  const {data} =useGetTodyReview()
+  console.log(data,"data-----------")
 
   const date = new Date("2024-03-30T18:00:00")
   const date1 = new Date("2024-03-30T20:00:00")

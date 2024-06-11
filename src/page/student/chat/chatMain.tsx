@@ -182,9 +182,9 @@ export default function ChatMain({ chatData, handleKeyPress, inputRef, handleSen
                 <motion.div key={item._id} {...framerAni} className="w-full flex mt-5 ">
 
                   <div className="py-3 text-black/80 px-4 bg-black/5 dark:bg-white/5 rounded-b-3xl rounded-tr-3xl   dark:text-white md:w-1/2 w-10/12">
-                    <div className="flex gap-2 items-center ">
+                    <div className="flex gap-2 items-center "> 
                       <Avatar>
-                        <AvatarImage src={item.senderData?.personal_info?.photo} />
+                        <AvatarImage   className='w-12 rounded-full' src={item.senderData?.personal_info?.photo} />
                         <AvatarFallback>CN</AvatarFallback>
                       </Avatar>
                       <div className="">

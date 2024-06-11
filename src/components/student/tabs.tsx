@@ -39,7 +39,7 @@ import DialogBookMentor from "./dialogBookMentor";
 
 export default function StudentTabs(): JSX.Element {
   const [date, setDate] = useState<Date>(new Date());
-  const [openAndData, setOpenAndData] = useState<{isOpen:boolean,data:string}>({isOpen:false,data:""});
+  const [openAndData, setOpenAndData] = useState<{ isOpen: boolean, data: string }>({ isOpen: false, data: "" });
 
   const [time, setTime] = useState<number>(() => {
     return 4;
@@ -61,7 +61,7 @@ export default function StudentTabs(): JSX.Element {
               {[9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
                 if (time === index) {
                   return (
-                    <motion.div 
+                    <motion.div
                       whileHover={{ scale: 1.3 }}
                       className="w-10 hover:border transition-colors h-10 outline outline-primary  bg-background rounded-full flex justify-center items-center text-primary"
                     >
@@ -96,7 +96,7 @@ export default function StudentTabs(): JSX.Element {
           />
           <DatePickerDemo date={date} setDate={setDate} />
 
-          <span className="absolute top-0 left-8 transform -translate-y-1/2 w-3.5 h-3.5 bg-red-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+          {/* <span className="absolute top-0 left-8 transform -translate-y-1/2 w-3.5 h-3.5 bg-red-400 border-2 border-white dark:border-gray-800 rounded-full"></span> */}
         </div>
       </div>
       <div className="flex justify-start mt-5">
@@ -122,12 +122,50 @@ export default function StudentTabs(): JSX.Element {
 
         {/* </AnimatePresence> */}
       </div>
+      {(!data?.length && !isLoading) && <div className="w-screen h-full flex justify-center flex-col gap-4">
+
+        <img src="/undraw_diary_re_4jpc.svg" className="h-3/4" alt="" />
+
+        <p className="text-center text-pri text-4xl">No results found</p>
+      </div>}
+
+
       <motion.div
         variants={container}
+        
         initial="hidden"
         animate="visible"
-        className=" grid mt-14 mb-16 grid-cols-12"
+        className=" grid mt-14 mb-16 grid-cols-12 gap-3"
       >
+        {isLoading &&
+          [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2].map(() =>
+            <motion.div  className="col-span-2 animate-pulse  bg-muted  rounded-3xl h-60  w-48 flex justify-center  items-end ">
+              {/* <Skeleton
+                className=""
+
+              > */}
+                <div className="w-full flex flex-col justify-center">
+                  <div className="flex justify-center">
+                    <div className="h-11 rounded-3xl w-11/12 backdrop-blur-sm bg-black/30 mb-2 flex justify-center px-2 items-center text-primary-foreground dark:text-white ">
+                      <p className="text-lg font-serif  ">
+                        {/* @{data.mentorId.personal_info.userName} */}
+                      </p>
+                    </div>
+                  </div>
+                  <Button
+                    // onClick={() => setOpenAndData({ isOpen: true, data: data?._id })}
+                    className="rounded-ee-3xl bg-primary-foreground  rounded-ss-none rounded-se-none rounded-es-3xl"
+                  >
+                    Book new
+                  </Button>
+                </div>
+
+
+              {/* </Skeleton> */}
+            </motion.div>
+          )
+        }
+        {/* {!group.length &&} */}
         {data?.map((data) => (
           <>
             <motion.div
@@ -147,7 +185,7 @@ export default function StudentTabs(): JSX.Element {
                   </div>
                 </div>
                 <Button
-                  onClick={() => setOpenAndData({isOpen:true,data:data?._id})}
+                  onClick={() => setOpenAndData({ isOpen: true, data: data })}
                   className="rounded-ee-3xl rounded-ss-none rounded-se-none rounded-es-3xl"
                 >
                   Book new
@@ -158,8 +196,8 @@ export default function StudentTabs(): JSX.Element {
         ))}
       </motion.div>
 
-      <DialogBookMentor openAndData={openAndData} setOpenAndData={setOpenAndData}/>
-      
-    </div>
+      <DialogBookMentor openAndData={openAndData} setOpenAndData={setOpenAndData} />
+
+    </div >
   );
 }

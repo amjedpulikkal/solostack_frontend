@@ -106,7 +106,9 @@ function App() {
                 <Route path="*" element={<Page404 />} />
               </Route>
               <Route element={<MentorProtectedRouter />}>
-              <Route path="/mentor" element={<SuspenseFn Element={<MentorHome />} />} />
+              {/* <Route path="/mentor" element={<SuspenseFn Element={<MentorHome />} />} /> */}
+              <Route path="/mentor" element={<MentorHome />} />
+
               </Route>
               <Route element={<ProfileProtectedRouter />}>
               <Route path="/mentor/:userName" element={<SuspenseFn Element={<MentorProfile />} />} />
@@ -114,7 +116,7 @@ function App() {
               </Route>
 
               <Route path="/student/*" element={<StudentParentRoute />}>
-                <Route path="" element={<SuspenseFn Element={<Home />} />} />
+                <Route index element={<SuspenseFn Element={<Home />} />} />
                 <Route path="chat" element={<SuspenseFn Element={<Chat />} />} /> 
                 <Route path="mentor" element={<StudentTabs />} />
                 {/* <Route path='sing/basicInformation' element={<SignBasicInformation />} /> */}

@@ -23,8 +23,9 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
+import { useAcceptRequest } from '@/reactQuery/mentor/mentorQuery'
 
-function DrawerDialog({data,open,setOpen}) {
+function DrawerDialog({data,open,setOpen,handelAcceptRequest}) {
   // const [open, setOpen] = React.useState(false)
   const isDesktop = useMediaQuery("(min-width: 768px)")
   // console.log(data,"-234-   ")
@@ -32,7 +33,7 @@ function DrawerDialog({data,open,setOpen}) {
     return (
       <Dialog open={open} defaultOpen={true} onOpenChange={setOpen}>
         <DialogContent className="sm:max-w-[425px]">
-          <ProfileForm data={data}/>
+          <ProfileForm handelAcceptRequest={handelAcceptRequest} data={data}/>
         </DialogContent>
       </Dialog>
     )
@@ -47,7 +48,7 @@ function DrawerDialog({data,open,setOpen}) {
          <DrawerHeader className="text-left">
            <DrawerTitle>Details</DrawerTitle>
          </DrawerHeader>
-         <ProfileForm   />
+         <ProfileForm handelAcceptRequest={handelAcceptRequest} data={data}/>
          <DrawerFooter className="pt-2">
            <DrawerClose asChild>
              <Button variant="outline">Cancel</Button>
@@ -63,7 +64,7 @@ function DrawerDialog({data,open,setOpen}) {
 
 
 
-function ProfileForm({data}) {
+function ProfileForm({data,handelAcceptRequest}) {
 
 console.log(data,"11111111111111111111111")
 
@@ -80,7 +81,7 @@ console.log(data,"11111111111111111111111")
           <p className='break-words'>for&nbsp;{data.reviewFor}</p>
           <div className='flex justify-between'>
           <Button  variant="destructive" className="mt-5 bg">Reject</Button>
-          <Button  className="mt-5 bg">Accept</Button>
+          <Button  className="mt-5 bg" onClick={()=>handelAcceptRequest(data)}>Accept</Button>
 
           </div>
         </div>
@@ -90,13 +91,21 @@ console.log(data,"11111111111111111111111")
 }
 
 
-export default function Requests({requests}) {
+export default function  Requests({requests,getAvailableTime}) {
   const [open, setOpen] = useState(false)
   const [user,setUser] = useState()
 
+  const {mutate}=useAcceptRequest(getAvailableTime)
+
+  const handelAcceptRequest = ()=>{
+    console.log(user,"------www-------")
+    mutate({requests,user})
+    setOpen()
+  }
+
   return (
     <div className=" overflow-hidden h-full overflow-y-auto">
-    {requests.map((item) => {
+    {requests.requests.map((item) => {
      
 
       return (
@@ -112,7 +121,7 @@ export default function Requests({requests}) {
         </div>
       );
     })}
-     <DrawerDialog open={open} setOpen={setOpen} data={user}/>
+     <DrawerDialog open={open} setOpen={setOpen} handelAcceptRequest={handelAcceptRequest} data={user}/>
   </div>
   )
 }

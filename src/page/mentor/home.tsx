@@ -15,46 +15,16 @@ import { DrawerDialogDetails } from "@/components/mentor/detailsdrawer";
 import Requests from "./requests";
 import { MdOutlineEventAvailable } from "react-icons/md";
 import { BsGraphUp } from "react-icons/bs";
-const getIndexWithTime = {
-  9: 0,
-  10: 1,
-  11: 2,
-  12: 3,
-  13: 4,
-  14: 5,
-  15: 6,
-  16: 7,
-  17: 8,
-  18: 9,
-  19: 10,
-  20: 11,
-  21: 12,
-};
 
-export default function homePage(): JSX.Element {
+export default function HomePage(): JSX.Element {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [date, setDate] = useState<Date>(new Date());
   const [isHovered, setIsHovered] = useState<null | number>(null);
-  const GetAvailableTime = useGetAvailableTime();
-  const { isLoading, isError, data, mutate } = useUpdateAvailableTime();
   const [selectedDate, setSelectedDate] = useState<number[]>([]);
+  const GetAvailableTime = useGetAvailableTime(setSelectedDate, date);
+  const { isLoading, isError, data, mutate } = useUpdateAvailableTime(GetAvailableTime.refetch);
   const bigToast = useToast();
 
-  useEffect(() => {
-    console.log("called", date);
-    GetAvailableTime.mutateAsync({ date }).then((data) => {
-      const time = data.map((i) => getIndexWithTime[i.time]);
-      console.log(time, "time");
-      setSelectedDate(time || []);
-      console.log("called");
-      console.log(GetAvailableTime.data);
-    });
-  }, [date]);
-
-  // useMemo(()=>{
-
-  //     return
-  // },[GetAvailableTime.data])
 
   const handelSelectedDate = (index: number) => {
     if (selectedDate.includes(index)) {
@@ -108,7 +78,10 @@ export default function homePage(): JSX.Element {
                   date1.getFullYear() === date2.getFullYear() &&
                   date1.getMonth() === date2.getMonth() &&
                   date1.getDate() === date2.getDate();
-                if (isSameDate && new Date().getHours() - 9 >= index) {
+                const beforeNew = date1.getFullYear() < date2.getFullYear() ||
+                  date1.getMonth() < date2.getMonth() ||
+                  date1.getDate() < date2.getDate()
+                if (isSameDate && new Date().getHours() - 9 >= index || beforeNew) {
                   return (
                     <motion.button
                       onClick={() => handelInvalidSelectedDate()}
@@ -148,23 +121,8 @@ export default function homePage(): JSX.Element {
                   )[0];
 
                   if (isTimeAvailable) {
-                    if (isTimeAvailable?.requests?.length) {
-                      return (
-                        <motion.div
-                          key={index}
-                          onMouseEnter={() => setIsHovered(index)}
-                          onMouseLeave={() => setIsHovered(null)}
-                          whileHover={{
-                            width: "auto",
-                            transition: { duration: 0.3 },
-                          }}
-                          className="text-white bg-black rounded-sm w-14 h-48 pl-1"
-                        >
-                          <Requests requests={isTimeAvailable?.requests} />
 
-                        </motion.div>
-                      );
-                    } else {
+                    if (isTimeAvailable.isBooked) {
                       return (
                         <motion.div
                           key={index}
@@ -209,6 +167,41 @@ export default function homePage(): JSX.Element {
                         </motion.div>
                       );
                     }
+
+                    if (isTimeAvailable?.requests?.length) {
+                      return (
+                        <motion.div
+                          key={index}
+                          onMouseEnter={() => setIsHovered(index)}
+                          onMouseLeave={() => setIsHovered(null)}
+                          whileHover={{
+                            width: "auto",
+                            transition: { duration: 0.3 },
+                          }}
+                          className="text-white bg-black rounded-sm w-14 h-48 pl-1"
+                        >
+                          <Requests getAvailableTime={GetAvailableTime} requests={isTimeAvailable} />
+
+                        </motion.div>
+                      );
+                    } else {
+
+                      return (
+                        <motion.div
+                          key={index}
+                          onMouseEnter={() => setIsHovered(index)}
+                          onMouseLeave={() => setIsHovered(null)}
+                          whileHover={{
+                            width: "144px",
+                            transition: { duration: 0.3 },
+                          }}
+                          className="text-white bg-black rounded-sm w-14 h-48 flex justify-center items-center"
+                        >
+                          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="rotate-90 text-2xl font-bold">No&nbsp;Booked</motion.p>
+                        </motion.div>
+                      );
+                    }
+
                   } else {
                     return (
                       <motion.div
@@ -234,7 +227,7 @@ export default function homePage(): JSX.Element {
               >
                 {!isLoading ? "update" : "lording"}
               </Button>
-              <Button
+              {/* <Button
                 onClick={() => {
                   audioRef.current?.play();
                   bigToast.toast({
@@ -249,12 +242,12 @@ export default function homePage(): JSX.Element {
                 }}
               >
                 Show Toast
-              </Button>
+              </Button> */}
             </div>
           </div>
           <div className="col-span-3 flex justify-center items-center">
             <Calendar
-              disabled={{ before: new Date() }}
+              // disabled={{ before: new Date() }}
               mode="single"
               selected={date}
               onSelect={setDate}
