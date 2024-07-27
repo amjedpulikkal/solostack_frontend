@@ -1,23 +1,21 @@
-import React, {
+import  {
   Dispatch,
   RefObject,
   SetStateAction,
-  useEffect,
-  useState,
+  
 } from "react";
-import { MdNetworkCheck } from "react-icons/md";
-import { MdOutlineSignalWifiStatusbarConnectedNoInternet4 } from "react-icons/md";
+
+
 import { CiMicrophoneOff } from "react-icons/ci";
 import { BsFillCameraVideoOffFill } from "react-icons/bs";
 import { BsFillCameraVideoFill } from "react-icons/bs";
 import { CiMicrophoneOn } from "react-icons/ci";
-import { ReactInternetSpeedMeter } from "react-internet-meter";
+
 import ReactMic from "@/components/ReactMic";
 import { RoundCountdownTimer } from "../page/videoCall/RoundCountdowntimer";
 import IntelPage from "../page/videoCall/intelPage";
 import { Button } from "./ui/button";
-// import ReactMic from 'react-mic';
-import { FaChevronDown } from "react-icons/fa";
+
 import { ChangeVideo } from "@/page/videoCall/changeVideo";
 import { ChangeVoice } from "@/page/videoCall/changeVoice";
 import { ChangeAudioinput } from "@/page/videoCall/chageAudiooutput";
@@ -43,7 +41,6 @@ type props = {
     startPage: Dispatch<SetStateAction<boolean>>;
   },
   peerId:string,
-  callFn
 };
 export default function QATest({
   videoRef,
@@ -52,11 +49,9 @@ export default function QATest({
   videoMuted,
   toggle,
   peerId,
-  callFn
 }: props) {
-  const [speedMeter, SetSpeedMeter] = useState(0);
+
   const { id } = useParams();
-  const[pid,setId] = useState(null)
   const author = useSelector((state: RootState) => state.author?.author)
   const handleButton =()=>{
 
@@ -67,17 +62,7 @@ export default function QATest({
 
   return (
     <>
-      <ReactInternetSpeedMeter
-        outputType=""
-        customClassName={null}
-        pingInterval={2000} // milliseconds
-        thresholdUnit="megabyte" // "byte" , "kilobyte", "megabyte"
-        threshold={100}
-        imageUrl="https://images.pexels.com/photos/3396664/pexels-photo-3396664.jpeg"
-        downloadSize="1781287" //bytes
-        callbackFunctionOnNetworkDown={(speed) => SetSpeedMeter(speed)}
-        callbackFunctionOnNetworkTest={(speed) => SetSpeedMeter(speed)}
-      />
+     
       <div className="w-screen h-screen bg-white dark:bg-black p-8 pl-20 gap-6 flex">
         <div className=" w-3/5 h-3/5">
           <div className="relative rounded-2xl">
@@ -136,16 +121,11 @@ export default function QATest({
           </div>
         </div>
         <div className=" w-1/2 ">
-          <div className="flex mt-8 gap-2 text-xl">
-            <MdNetworkCheck className="text-primary" size={30} /> : {speedMeter}
-            mb
-          </div>
           <div className=" mt-10 flex justify-center ">
             <IntelPage />
           </div>
           <div>
-          <input type="text" onChange={(e)=>setId(e.target.value)} />
-          <button onClick={()=>callFn(pid)}>add</button>
+         
           
             <Button className="mt-10" onClick={handleButton}>
               join new

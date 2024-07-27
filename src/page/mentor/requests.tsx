@@ -8,24 +8,27 @@ import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+ 
 } from "@/components/ui/dialog"
 import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
+
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
 import { useAcceptRequest } from '@/reactQuery/mentor/mentorQuery'
-
-function DrawerDialog({data,open,setOpen,handelAcceptRequest}) {
+import { UseQueryResult } from 'react-query'
+type DrawerDialogProps={
+  open: boolean,
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  handelAcceptRequest: () => void,
+  data:any
+}
+function DrawerDialog({data,open,setOpen,handelAcceptRequest}:DrawerDialogProps) {
   // const [open, setOpen] = React.useState(false)
   const isDesktop = useMediaQuery("(min-width: 768px)")
   // console.log(data,"-234-   ")
@@ -90,8 +93,12 @@ console.log(data,"11111111111111111111111")
   
 }
 
-
-export default function  Requests({requests,getAvailableTime}) {
+type props ={
+ 
+  getAvailableTime:UseQueryResult<unknown, unknown>,
+  requests:{requests:any[]}
+}
+export default function  Requests({requests,getAvailableTime}:props) {
   const [open, setOpen] = useState(false)
   const [user,setUser] = useState()
 

@@ -2,9 +2,9 @@
 
 import * as React from "react"
 
-import { cn } from "@/lib/utils"
+
 import { LuPenSquare } from 'react-icons/lu'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 import { useMediaQuery } from "@/hooks/use-media-query"
@@ -15,7 +15,7 @@ import {
     DialogDescription,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
+    
 } from "@/components/ui/dialog"
 import {
     Drawer,
@@ -25,15 +25,14 @@ import {
     DrawerFooter,
     DrawerHeader,
     DrawerTitle,
-    DrawerTrigger,
+    
 } from "@/components/ui/drawer"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+
 import { useUpdateProfileIMage } from "@/reactQuery/mentor/profile/profileQuery"
 
-export default function updatePhoto({ imageUrl }) {
+export default function updatePhoto({ imageUrl }:{imageUrl:string}): JSX.Element {
     console.log(imageUrl)
-    const [open,  setOpen] = React.useState(false)
+    const [open,  setOpen] = useState(false)
     const isDesktop = useMediaQuery("(min-width: 768px)")
 
     if (isDesktop) {
@@ -83,8 +82,8 @@ export default function updatePhoto({ imageUrl }) {
     )
 }
 
-export function ProfileForm({ setOpen }) {
-    const [image, setImage] = React.useState("");
+export function ProfileForm({ setOpen }:{ setOpen:React.Dispatch<React.SetStateAction<boolean>>}) {
+    const [image, setImage] = React.useState<string|ArrayBuffer>("");
     const [error, setError] = React.useState("");
     const [imageFile, setImageFile] = React.useState<string | Blob>("");
     const { mutate, isLoading } = useUpdateProfileIMage(setOpen)
@@ -100,7 +99,7 @@ export function ProfileForm({ setOpen }) {
             return;
         }
         setImageFile(file)
-        let reader = new FileReader();
+        const reader = new FileReader();
         reader.onload = (e) => {
             setImage(e.target.result);
             setError("");
@@ -129,7 +128,7 @@ export function ProfileForm({ setOpen }) {
                 )}
                 {image && (
                     <div className="bg-zinc-900 outline-dotted  rounded-2xl p-14 " {...getRootProps()}>
-                        <img src={image} alt="" />
+                        <img src={(image as string)} alt="" />
                     </div>
                 )}
                 {error && <p className="text-red-500">{error}</p>}

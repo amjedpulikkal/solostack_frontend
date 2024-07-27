@@ -1,10 +1,9 @@
 
-import { useAuthor } from "@/components/switchUser-provider";
-import { Authcomponents } from "@/components/oauth";
+
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import { useVerifyForgetPasswordQuery } from "@/reactQuery/student/signUp";
@@ -26,10 +25,9 @@ const framer_error = {
 export  function VerifyForgetPassword(): JSX.Element {
 
     const { token } = useParams()
-    const [open, setOpen] = useState(false)
 
-    const { mutateAsync, isError,data, isLoading, error ,isSuccess} = useVerifyForgetPasswordQuery()
-    const errorData = error?.response?.data as string
+    const { mutateAsync, isError,data, isLoading,  } = useVerifyForgetPasswordQuery()
+
     const {
         register,
         handleSubmit,

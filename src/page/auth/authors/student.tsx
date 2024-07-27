@@ -1,5 +1,5 @@
 
-import { useAuthor } from "@/components/switchUser-provider";
+
 import { Authcomponents } from "@/components/oauth";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AnimatePresence, motion } from "framer-motion";
@@ -11,10 +11,12 @@ import { useLoginQuery } from "@/reactQuery/student/signUp";
 import { DrawerForgetPassword } from "../Forgotpassword";
 import DotLoader from "@/components/ui/dot-loardes";
 import { TurnstileWidget } from '@/components/TurnstileWidget';
+import { Iauthor } from "@/type";
 
 interface IFormInput {
   email: string;
   password: string;
+  token:string
 }
 
 const framer_error = {
@@ -25,20 +27,19 @@ const framer_error = {
 }
 
 interface props {
-  author: string
-  setAuthor: any
+  author: Iauthor
+  
 }
 
-export default function StudentLogin({ author, setAuthor }: props): JSX.Element {
+export default function StudentLogin({ author }: props): JSX.Element {
   const [open, setOpen] = useState(false)
   const [widget, setWidget] = useState("")
 
-  const { mutateAsync, isError, isLoading, error, } = useLoginQuery(author)
-  const errorData = error?.response?.data as string
+  const { mutateAsync, isError, isLoading, } = useLoginQuery(author)
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<IFormInput>()
 

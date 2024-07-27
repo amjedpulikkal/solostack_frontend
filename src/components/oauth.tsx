@@ -1,6 +1,6 @@
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip"
-import react from "react"
+
 import { FaGithub } from "react-icons/fa"
 import { GrGoogle } from "react-icons/gr"
 import { FaLinkedin } from "react-icons/fa6";

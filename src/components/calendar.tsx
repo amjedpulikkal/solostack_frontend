@@ -20,7 +20,7 @@ export function CalendarDemo() {
   const modifiers = {
     specificDate: new Date(2024, 3, 10)
   };
-  const handleDayClick = (day: Date) => {
+  const handleDayClick:any = (day: Date) => {
 
     console.log(day)
     setDate(day);

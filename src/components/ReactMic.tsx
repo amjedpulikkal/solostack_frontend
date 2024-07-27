@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, MutableRefObject } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const ReactMic: React.FC<{
@@ -17,7 +17,7 @@ const ReactMic: React.FC<{
         // const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         const stream = props.stream
 
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const audioContext = new window.AudioContext();
         const analyser = audioContext.createAnalyser();
         const source = audioContext.createMediaStreamSource(stream);
         source.connect(analyser);

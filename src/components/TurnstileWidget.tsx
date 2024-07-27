@@ -1,9 +1,9 @@
-import Turnstile, { useTurnstile } from "react-turnstile";
+import Turnstile from "react-turnstile";
 
 
 
-export function TurnstileWidget({setWidget}) {
-  const turnstile = useTurnstile();
+export function TurnstileWidget({setWidget}:{setWidget: React.Dispatch<React.SetStateAction<string>>}) {
+  // const turnstile = useTurnstile();
   
   return (
     <Turnstile

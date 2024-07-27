@@ -1,20 +1,10 @@
 
 
-import { GrGoogle } from "react-icons/gr";
-import { ImFacebook2 } from "react-icons/im";
-import { FaGithub } from "react-icons/fa";
-import { GoogleLoginButton } from "../../components/GoogleOAuth"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { useAuthor } from "@/components/switchUser-provider";
+
 import { Authcomponents } from "@/components/oauth";
 
 export default function MentorLog(): JSX.Element {
-  const { author, setAuthor } = useAuthor()
+
   return (
     <>
 

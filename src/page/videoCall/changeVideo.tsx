@@ -2,14 +2,14 @@
 import * as React from "react"
 import { BsFillCameraVideoFill } from "react-icons/bs";
 
-import { Button } from "@/components/ui/button"
+
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuLabel,
+  
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-  DropdownMenuSeparator,
+  
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useEffect ,useState} from "react";
@@ -28,14 +28,12 @@ export function ChangeVideo() {
 
        const devices = await navigator.mediaDevices.enumerateDevices();
        const videoDevices = devices.filter(device => device.kind === 'videoinput');
-       // const audioDevices = devices.filter(device => device.kind === 'audioinput');
+      
        console.log(videoDevices)
        setVideList(videoDevices)
       },3000)
 
-      //  console.log('Available video devices:', videoDevices);
-      //  // console.log('Available audio devices:', audioDevices);
- 
+      
      } catch (error) {
        console.error('Error enumerating media devices:', error);
      }

@@ -1,10 +1,6 @@
 
-import { Button } from "@/components/ui/button";
-import NaveBar from "../../components/navBar";
-// import { GoogleLoginPage } from "../../components/GoogleOAuth";
 import { Suspense, lazy } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { AnimatePresence, motion } from "framer-motion";
+
 import { LogoLoader } from "@/components/ui/dot-loardes";
 
 

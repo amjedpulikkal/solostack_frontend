@@ -18,7 +18,7 @@ import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom"
 type Props = {
     avatarUrl?: string
-    userName?: string
+    userName: string
 }
 
 
@@ -29,8 +29,8 @@ export default function UseAvatar({ avatarUrl, userName }: Props): JSX.Element {
     const [isOpen, setOpen] = useState(false)
     const [selectedId, setSelectedId] = useState<string | null>(null)
 
-    const handleRightClick = (e:) => {
-        e.preventDefault();
+    const handleRightClick = (e: { preventDefault: () => void }) => {
+        e?.preventDefault();
         setSelectedId("profile-mentor")
 
     };
@@ -86,7 +86,7 @@ export default function UseAvatar({ avatarUrl, userName }: Props): JSX.Element {
                         {avatarUrl ?
                             <Avatar >
                                 <AvatarImage src={`https://d3sd9xkxgxzd5z.cloudfront.net/${avatarUrl}`} />
-                                <AvatarFallback>{userName.toUpperCase()[0] + userName.toUpperCase()[1]}</AvatarFallback>
+                                <AvatarFallback>{userName?.toUpperCase()[0] + userName?.toUpperCase()[1]}</AvatarFallback>
                             </Avatar>
                             :
                             <Avatar>

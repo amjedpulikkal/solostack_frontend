@@ -1,22 +1,8 @@
 import { mentorApi } from "@/api";
 import axios from "axios";
 import { useMutation, useQuery } from "react-query";
-
-const getTimeWithIndex = {
-  0: 9,
-  1: 10,
-  2: 11,
-  3: 12,
-  4: 13,
-  5: 14,
-  6: 15,
-  7: 16,
-  8: 17,
-  9: 18,
-  10: 19,
-  11: 20,
-  12: 21,
-};
+import React from "react"
+const getTimeWithIndex = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
 const getIndexWithTime = {
   9: 0,
   10: 1,
@@ -65,26 +51,23 @@ export const useAvailableTime = () => {
 
   return useMutation(apiCall, {
     onSuccess() {},
-    onError() {
-     
-    },
+    onError() {},
   });
 };
 
-export const useGetAvailableTime = (setSelectedDate, date: Date) => {
+export const useGetAvailableTime = (setSelectedDate: React.Dispatch<React.SetStateAction<number[]>>, date: Date) => {
   const apiCall = async () => {
-    date = new Date(date).toDateString();
+    const dateNew = new Date(date).toDateString();
 
-    const response = await axios.post(mentorApi.getAvailableTime, { date });
+    const response = await axios.post(mentorApi.getAvailableTime, { date:dateNew });
     return response.data;
   };
 
   return useQuery(["AvailableTime", date], apiCall, {
     onSuccess(data) {
+      
       const time = data.map((i) => getIndexWithTime[i.time]);
-
       setSelectedDate(time || []);
-     
     },
     onError() {},
   });
@@ -119,9 +102,10 @@ export const useMentorProfile = (setMentor) => {
     onSuccess(data) {
       setMentor(data);
     },
-    onError() {},
+
   });
 };
+
 export const useSendRequest = () => {
   const apiCall = async (body: { data: string; mentorRVId: string }) => {
     const response = await axios.put(mentorApi.sendRequest, body);
@@ -129,20 +113,16 @@ export const useSendRequest = () => {
     return response.data;
   };
 
-  return useMutation(apiCall, {
-    onSuccess(data) {},
-    onError() {},
-  });
-};
+  return useMutation(apiCall) 
+}
 
 export const useAcceptRequest = (getAvailableTime) => {
-  const apiCall = async ({requests, user }) => {
-
-    console.log(user,"-------")
+  const apiCall = async ({ requests, user }) => {
+    console.log(user, "-------");
 
     const body = {
-        reviewTime:requests,
-        studentID:user?.studentId?._id        ||null
+      reviewTime: requests,
+      studentID: user?.studentId?._id || null,
     };
     const response = await axios.post(mentorApi.acceptRequest, body);
 
@@ -150,9 +130,9 @@ export const useAcceptRequest = (getAvailableTime) => {
   };
 
   return useMutation(apiCall, {
-    onSuccess(data) {
-      getAvailableTime.re
+    onSuccess() {
+      getAvailableTime.re;
     },
-    onError() {},
+
   });
 };

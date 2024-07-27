@@ -1,12 +1,12 @@
 import { useTheme } from "@/components/theme-provider";
-import React, { useEffect, useRef } from "react";
+import  { useEffect, useRef } from "react";
 
 
-export function RoundCountdownTimer({time}) {
+export function RoundCountdownTimer({time}:{time:number}) {
  const {theme} =useTheme()
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   let fill: NodeJS.Timeout 
-  let no  = useRef(time)
+  const no  = useRef(time)
   useEffect(() => {
     const canvas = canvasRef.current;
 
@@ -30,7 +30,7 @@ export function RoundCountdownTimer({time}) {
     ctx.textAlign = "center";
     ctx.font = "40px monospace";
     ctx.fillStyle = theme == "dark"?"white":"black"
-    ctx.fillText(no.current, 110, 125);
+    ctx.fillText(no.current.toString(), 110, 125);
   
     ctx.beginPath();
     ctx.arc(110, 110, 70, 4.72, diff / 10 + 4.72);

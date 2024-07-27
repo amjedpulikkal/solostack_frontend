@@ -13,38 +13,49 @@ import { Button } from '../ui/button';
 import { useSendRequest } from '@/reactQuery/mentor/mentorQuery';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
+import { ReviewDbObj } from "@/type";
 
-export default function DialogBookMentor({ openAndData, setOpenAndData }) {
+type props = {
+  openAndData: {
+    isOpen: boolean;
+    data: ReviewDbObj|null;
+  },
+  setOpenAndData: React.Dispatch<React.SetStateAction<{
+    isOpen: boolean;
+    data:  ReviewDbObj|null;
+  }>>
+}
+export default function DialogBookMentor({ openAndData, setOpenAndData }: props) {
 
-  const student = useSelector((state:RootState)=>state.author?.authorData)
+  const student = useSelector((state: RootState) => state.author?.authorData)
   const { isLoading, mutate } = useSendRequest();
   const [requestData, setRequestData] = useState('');
 
-  const textAreaRef = useRef(null);
-  console.log(openAndData,student)
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+
   const handleRequest = () => {
-  
-    const requestDataValue = textAreaRef.current.value;
+
+    const requestDataValue = textAreaRef.current!.value;
 
 
     if (requestDataValue.trim() !== '') {
-  
-      mutate({data:requestDataValue,mentorRVId:openAndData.data?._id});
+
+      mutate({ data: requestDataValue, mentorRVId: openAndData.data!._id });
 
       setRequestData('');
-      setOpenAndData({ isOpen: false, data: '' });
+      setOpenAndData({ isOpen: false, data: null });
     }
   };
 
   return (
-    <AlertDialog open={openAndData.isOpen} onOpenChange={(isOpen) => setOpenAndData({ isOpen, data: '' })}>
+    <AlertDialog open={openAndData.isOpen} onOpenChange={(isOpen) => setOpenAndData({ isOpen, data: null })}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Book new session</AlertDialogTitle>
           {/* Display user avatar or profile image */}
           <div className="w-full flex justify-center gap-20 items-center h-28">
-            <img src={`https://d3sd9xkxgxzd5z.cloudfront.net/${openAndData.data?.mentorId?.personal_info?.photo}`}       className="w-24 h-24 rounded-full div1 bg-slate-950"/>
-            <img src={student?.personal_info?.photo}  className="w-24 h-24 rounded-full div1 bg-slate-950"/>
+            <img src={`https://d3sd9xkxgxzd5z.cloudfront.net/${openAndData.data?.mentorId?.personal_info?.photo}`} className="w-24 h-24 rounded-full div1 bg-slate-950" />
+            <img src={student?.personal_info!.photo} className="w-24 h-24 rounded-full div1 bg-slate-950" />
           </div>
           <AlertDialogDescription>
             <Textarea
@@ -58,11 +69,11 @@ export default function DialogBookMentor({ openAndData, setOpenAndData }) {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          
-          <AlertDialogCancel onClick={() => setOpenAndData({ isOpen: false, data: '' })}>
+
+          <AlertDialogCancel onClick={() => setOpenAndData({ isOpen: false, data: null })}>
             Cancel
           </AlertDialogCancel>
-    
+
           <Button onClick={handleRequest} disabled={isLoading}>
             {isLoading ? 'Sending...' : 'Send Request'}
           </Button>

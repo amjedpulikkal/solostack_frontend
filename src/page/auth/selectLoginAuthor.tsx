@@ -2,9 +2,7 @@
 
 import { ModeToggle } from '@/components/mode-toggle';
 import { Iauthor } from '@/type';
-import { useState } from 'react';
-import { GiTeacher } from 'react-icons/gi';
-import { PiChalkboardTeacherFill, PiStudentBold } from 'react-icons/pi';
+
 import { useNavigate } from 'react-router-dom';
 
 import SelectAuthorCo from "@/components/selectAuthorCo"

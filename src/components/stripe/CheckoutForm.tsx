@@ -64,7 +64,7 @@ export default function PaymentInitial({ price, setPrice, type, setType, setIsIn
 
     };
     const handelOnClick = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-        setType(e.target.value)
+        setType((e.target as HTMLInputElement).value);
     }
     return (
         <>

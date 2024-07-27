@@ -1,21 +1,19 @@
 import { Calendar } from "@/components/ui/calendar";
 import NaveBar from "./navBar";
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
+import {  motion } from "framer-motion";
+import {  useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   useGetAvailableTime,
   useUpdateAvailableTime,
 } from "@/reactQuery/mentor/mentorQuery";
 import { toast } from "sonner";
-import DotLoader from "@/components/ui/dot-loardes";
-import { useToast } from "@/components/ui/use-toast";
-import { number } from "zod";
+
+// import { useToast } from "@/components/ui/use-toast";
+
 import { DrawerDialogDetails } from "@/components/mentor/detailsdrawer";
 import Requests from "./requests";
-import { MdOutlineEventAvailable } from "react-icons/md";
-import { BsGraphUp } from "react-icons/bs";
-import { ApexChart } from "@/components/mentor/ApexChart";
+
 
 export default function HomePage(): JSX.Element {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -23,8 +21,8 @@ export default function HomePage(): JSX.Element {
   const [isHovered, setIsHovered] = useState<null | number>(null);
   const [selectedDate, setSelectedDate] = useState<number[]>([]);
   const GetAvailableTime = useGetAvailableTime(setSelectedDate, date);
-  const { isLoading, isError, data, mutate } = useUpdateAvailableTime(GetAvailableTime.refetch);
-  const bigToast = useToast();
+  const { isLoading, mutate } = useUpdateAvailableTime(GetAvailableTime.refetch);
+  // const bigToast = useToast();
 
 
   const handelSelectedDate = (index: number) => {
@@ -118,13 +116,13 @@ export default function HomePage(): JSX.Element {
               {[9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21].map(
                 (item, index) => {
                   const isTimeAvailable = GetAvailableTime.data?.filter(
-                    (obj) => obj.time === item
+                    (obj: { time: number; }) => obj.time === item
                   )[0];
 
                   if (isTimeAvailable) {
 
                     if (isTimeAvailable.isBooked) {
-                       const studentData = isTimeAvailable.requests.filter(item=>item?.studentId._id === isTimeAvailable.bookedId?.studentId)[0]?.studentId
+                       const studentData = isTimeAvailable.requests.filter((item: { studentId: { _id: any; }; })=>item?.studentId._id === isTimeAvailable.bookedId?.studentId)[0]?.studentId
                        console.log(studentData,"-s--------------------studentData")
                       return (
                         <motion.div

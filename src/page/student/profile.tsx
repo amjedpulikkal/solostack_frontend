@@ -1,4 +1,4 @@
-import NaveBar from "@/components/navBar"
+
 import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 
@@ -7,31 +7,22 @@ import { RootState } from "@/redux/store"
 import { StudentData } from "@/type"
 import { CalendarDemo } from "@/components/calendar"
 import { Button } from "@/components/ui/button"
-import { AnimatePresence, motion } from "framer-motion"
-import { DrawerDialogForText } from "@/components/profile/model"
+import {  motion } from "framer-motion"
+
 import { useState } from "react"
 import { toast } from "sonner"
-import { DrawerDialogDetails } from "@/components/mentor/detailsdrawer"
+
 
 export function StudentProfile(): JSX.Element {
-    const { userName } = useParams()
-    const [date, setDate] = useState<Date>(new Date())
-    const [selectedDate, setSelectedDate] = useState<number[]>([])
+
+    const [date,] = useState<Date>(new Date())
+    const [selectedDate] = useState<number[]>([])
     const [isHovered, setIsHovered] = useState<null | number>(null);
 
     console.log(useParams)
 
     const student = useSelector((state: RootState) => state.author?.authorData) as unknown as StudentData
-    const handelSelectedDate = (index: number) => {
-
-        if (selectedDate.includes(index)) {
-            setSelectedDate(selectedDate.filter(item => item !== index));
-        } else {
-            setSelectedDate([...selectedDate, index])
-        }
-        console.log(selectedDate)
-
-    }
+   
     const handelInvalidSelectedDate = () => {
 
         toast.error("You cannot select a time before now.");
@@ -71,7 +62,7 @@ export function StudentProfile(): JSX.Element {
                             } else {
 
                                 return (
-                                    <motion.button onClick={() => handelUpdateDate(index)} initial={{ scale: 1 }}
+                                    <motion.button onClick={() => handelUpdateDate()} initial={{ scale: 1 }}
                                         whileHover={{ scale: 1.4 }}
                                         transition={{ duration: 0.1 }} whileTap={{ scale: 1.4 }} className={` text-white w-12   dark:dark h-12 rounded-full ${selectedDate.includes(index) ? "bg-primary" : "bg-black"}`}>
                                         &nbsp;{item}&nbsp;
@@ -84,7 +75,7 @@ export function StudentProfile(): JSX.Element {
                     </div>
 
                     <motion.div className="flex justify-evenly mt-5 px-7">
-                        {[9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
+                        {[9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((index) => (
 
                             // <motion.div whileHover={{ width: "144px", transition: { duration: 0.3 } }} className="text-white  bg-black rounded-sm w-14 h-48 ">
                             //     <div className="rotate-90  w-full flex justify-center items-center  h-36" >

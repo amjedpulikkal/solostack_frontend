@@ -1,9 +1,9 @@
-import { TabsContent } from "@radix-ui/react-tabs";
-import { AnimatePresence, motion } from "framer-motion";
-import { Skeleton } from "../ui/skeleton";
-import { useEffect, useMemo, useState } from "react";
+
+import {  motion } from "framer-motion";
+
+import { useEffect, useState } from "react";
 import { useAvailableTime } from "@/reactQuery/mentor/mentorQuery";
-import { Car } from "lucide-react";
+
 import { IoMdClose } from "react-icons/io";
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -17,13 +17,7 @@ const container = {
   },
 };
 
-const item = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-  },
-};
+
 
 const categoryAnimation = {
   initial: { opacity: 0, y: 10 },
@@ -35,11 +29,12 @@ import { DatePickerDemo } from "@/components/datePicker";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import DialogBookMentor from "./dialogBookMentor";
+import { ReviewDbObj } from "@/type";
 
 
 export default function StudentTabs(): JSX.Element {
   const [date, setDate] = useState<Date>(new Date());
-  const [openAndData, setOpenAndData] = useState<{ isOpen: boolean, data: string }>({ isOpen: false, data: "" });
+  const [openAndData, setOpenAndData] = useState<{ isOpen: boolean, data: ReviewDbObj|null }>({ isOpen: false, data: null });
   const [time, setTime] = useState<number>(4);
   const { data, isLoading, isSuccess, mutate } = useAvailableTime();
   const [category, setCategory] = useState<string[]>([]);
@@ -87,7 +82,7 @@ export default function StudentTabs(): JSX.Element {
           />
           <Input
             className="col-span-1"
-            onPaste={(e) => setCategory([...category, e.target.value])}
+            // onPaste={(e) => setCategory([...category, e.target?.value])}
             type="search"
             placeholder="category"
           />
@@ -109,7 +104,7 @@ export default function StudentTabs(): JSX.Element {
             <button
               className="ml-2"
               onClick={() => {
-                setCategory([...category.filter((t, i) => i !== index)]);
+                setCategory([...category.filter((i) => i !== index.toString())]);
               }}
             >
               <IoMdClose color="black" size={20} />
@@ -163,7 +158,7 @@ export default function StudentTabs(): JSX.Element {
           )
         }
         {/* {!group.length &&} */}
-        {data?.map((data) => (
+        {data?.map((data:ReviewDbObj) => (
           <>
             <motion.div
               className="col-span-2  rounded-3xl h-60  w-48 flex justify-center  items-end"

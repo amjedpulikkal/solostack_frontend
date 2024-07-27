@@ -1,15 +1,15 @@
 
 
-import { setAuthorData, setAuthor } from "@/redux/slices/authorSlice";
+import { setAuthorData } from "@/redux/slices/authorSlice";
 import { useDispatch } from "react-redux";
 
 import { mentorApi } from "@/api";
 import axios from "axios";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 
-export const useUpdateProfileIMage = (setOpen) => {
+export const useUpdateProfileIMage = (setOpen:React.Dispatch<React.SetStateAction<boolean>>) => {
     const dispatch = useDispatch()
-    const apiCall = async (image: Blob) => {
+    const apiCall = async (image: Blob|string) => {
 
         const formData = new FormData()
         formData.append("image", image)

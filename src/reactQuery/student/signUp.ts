@@ -79,6 +79,8 @@ interface IFormInput {
     email: string;
     password: string;
     author: Iauthor
+    token:string
+
 }
 
 export const useLoginQuery = (author: Iauthor) => {

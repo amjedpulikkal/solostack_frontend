@@ -1,93 +1,6 @@
-//  import React, { useEffect, useRef, useState } from 'react';
-//  import Peer from 'peerjs';
 
-// import { motion } from "framer-motion";
-
-// export function VideoCall(): JSX.Element{
-//     const constraintsRef = useRef<HTMLDivElement>(null);
-//     const userVideoRef = useRef<HTMLVideoElement>(null);
-//     const remoteVideoRef = useRef<HTMLVideoElement>(null);
-//     const currentUserVideoRef = useRef<HTMLVideoElement>(null);
-//     const peerInstance = useRef<Peer.Instance | null>(null);
-
-//     const [peerId, setPeerId] = useState<string>('');
-//     const [remotePeerIdValue, setRemotePeerIdValue] = useState<string>('');
-
-//     const call = (remotePeerId: string): void => {
-//         var getUserMedia = navigator.getUserMedia  || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-//                getUserMedia({ video: true, audio: true }, (mediaStream) => {
-//                  currentUserVideoRef.current.srcObject = mediaStream;
-//                  currentUserVideoRef.current.play();
-//                  const call = peerInstance.current.call(remotePeerId, mediaStream)
-//                  call.on('stream', (remoteStream) => {
-//                    remoteVideoRef.current.srcObject = remoteStream
-//                    remoteVideoRef.current.play();
-//                  });
-//                });
-//     }
-
-//     useEffect(() => {
-//         // navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(data => {
-//         //     if (userVideoRef.current) {
-//         //         userVideoRef.current.style.display = 'block';
-//         //         userVideoRef.current.srcObject = data;
-
-//         //         userVideoRef.current.onended = () => {};
-//         //     }
-//         // });
-
-//         const peer = new Peer();
-
-//         peer.on('open', (id) => {
-//             setPeerId(id)
-//         });
-
-//         peer.on('call', (call) => {
-//             navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(mediaStream => {
-//                 userVideoRef.current!.srcObject = mediaStream;
-//                 userVideoRef.current!.play();
-//                 call.answer(mediaStream)
-//                 call.on('stream', function(remoteStream) {
-//                     remoteVideoRef.current!.srcObject = remoteStream
-//                     remoteVideoRef.current!.play();
-//                 });
-//             });
-//         })
-
-//         peerInstance.current = peer;
-//     }, []);
-//     return (
-//         <div className="w-dvw h-dvh bg-black pt-10">
-//         <div className="flex justify-center w-full h-4/5 ">
-//             <motion.div className="bg-slate-600 drag-area h-full w-9/12 rounded-3xl " ref={constraintsRef}>
-//                 <video ref={remoteVideoRef} autoPlay playsInline muted className="rounded-2xl w-full h-full" ></video>
-//                 <div className="example-container">
-//                     <motion.div drag      whileTap={{ cursor: "grabbing" }} dragConstraints={constraintsRef} >
-//                         <video ref={userVideoRef} autoPlay playsInline muted width={180} height={160} src="" className="rounded-3xl" ></video>
-//                     </motion.div>
-//                 </div>
-//             </motion.div>
-//             <div className="bg-slate-600 h-full w-1/5 rounded-3xl ml-3">
-//                 <h1>{peerId}</h1>
-//                 <input type="text" value={remotePeerIdValue} onChange={e => setRemotePeerIdValue(e.target.value)} />
-//                 <button onClick={() => call(remotePeerIdValue)}>Call</button>
-//             </div>
-//         </div>
-//         <div className="flex justify-center w-dvw h-32 pt-7">
-//             <div className=" w-1/2 flex justify-between">
-//                 <div className="w-10 h-10"></div>
-//                 <div className="w-10 h-10"></div>
-//                 <div className="bg-slate-800 w-10 h-10"></div>
-//                 <div className="bg-slate-800 w-10 h-10"></div>
-//                 <div className="bg-slate-800 w-10 h-10"></div>
-//                 <div className="bg-slate-800 w-10 h-10"></div>
-//             </div>
-//         </div>
-//     </div>
-//     );
-// }
 import { MdCallEnd } from "react-icons/md";
-import React, { RefObject, useEffect, useRef, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
 
 import { motion } from "framer-motion";
 import {
@@ -115,8 +28,8 @@ type props = {
   };
   
   
-  remoteVideoStream,
-  remoteVideoRef
+  remoteVideoStream: MediaStream,
+
   //  startPage:Dispatch<SetStateAction<boolean>>
 };
 export function VideoCallMain({

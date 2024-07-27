@@ -23,7 +23,6 @@ const SwitchUserProviderContext = createContext<SwitchUserProviderState>(initial
 
 export function SwitchUserProvider({
   children,
-  defaultAuthor = "student",
   storageKey = "switch-user",
   ...props
 }: SwitchProviderProps) {
@@ -34,7 +33,7 @@ export function SwitchUserProvider({
   const value = {
     author,
     setAuthor: (author: Author) => {
-      localStorage.setItem(storageKey, author)
+      localStorage.setItem(storageKey, author!)
       setAuthor(author)
       toast.success(`Theme changed to ${author}!`)
     },

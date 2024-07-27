@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { IoCloseSharp } from "react-icons/io5";
 
 
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import {  NavLink, Outlet } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 

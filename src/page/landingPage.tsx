@@ -1,5 +1,4 @@
-import { ModeToggle } from '@/components/mode-toggle'
-import { Button } from '@/components/ui/button'
+
 import { motion, useScroll } from 'framer-motion'
 import React, { useEffect, useRef } from 'react'
 

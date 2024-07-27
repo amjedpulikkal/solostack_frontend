@@ -1,25 +1,18 @@
 import { ModeToggle } from "../../components/mode-toggle";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Input } from "@/components/ui/input";
-import { useEffect, useMemo, useState } from "react";
+
+
+import { useEffect, useState } from "react";
 // import { RiCheckDoubleLine } from "react-icons/ri";
-import { IoSendOutline } from "react-icons/io5";
-import { MdAddCircleOutline } from "react-icons/md";
+
 import { socket } from "../socket";
 import { useRef } from "react";
 import { LayoutGroup, motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import ChatMain from "./chat/chatMain";
-import { useChatHistory, useGetGroup } from "@/reactQuery/student/chatQuery";
+
 import { useNavigate } from 'react-router-dom';
 
-const framerAni = {
-  initial: { opacity: 0, y: 10 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: 10 },
-  transition: { duration: 0.2 },
-};
 import {
   DropdownMenu,
   DropdownMenuItem,
@@ -27,7 +20,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent
 } from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button";
+
 import { CiMenuKebab } from "react-icons/ci";
 import JoinNewGroup from "./chat/joinNewGroup";
 import { IoMdArrowRoundBack } from "react-icons/io";
@@ -90,8 +83,11 @@ export default function Chat(): JSX.Element {
       }
     }
     obj.sort((a, b) => {
-      return (new Date(b.messages[b.messages?.length - 1]?.date)) - (new Date(a.messages[a.messages?.length - 1]?.date))
+      const dateA = new Date(a.messages[a.messages?.length - 1]?.date).getTime();
+      const dateB = new Date(b.messages[b.messages?.length - 1]?.date).getTime();
+      return dateB - dateA; 
     });
+    
     console.log(obj)
     setGroup(obj)
   }, [currentChatData])

@@ -10,8 +10,7 @@ const framer_error = {
   transition: { duration: 0.2 },
 }
 import { useGetTodyReview } from "@/reactQuery/student/baseApi";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ReviewTamp } from "../reviewTamp";
+import { Tabs, TabsContent } from "@/components/ui/tabs"
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 export default function STimerTab(): JSX.Element {
@@ -19,7 +18,8 @@ export default function STimerTab(): JSX.Element {
   const{data}  =useGetTodyReview()
   const date = new Date(data?.date)
   date.setHours(data?.time)
-  const isEnded = (new Date()> (new Date(data?.date)).setHours(data?.time))
+  const isEnded = false
+
   console.log("date",isEnded)
   return (
     <Tabs defaultValue="review" className=' relative border-2 border-primary col-span-4 sm:col-span-3 h-80 rounded-3xl grid sm:grid-cols-12 grid-cols-1'>
@@ -40,23 +40,19 @@ export default function STimerTab(): JSX.Element {
               <div  className="text-xl mt-3">
                 <p>Time remaining</p>
               </div>
-              <div key={date}  className="font-medium text-5xl mt-1 ">
+              <div key={date.toString()}  className="font-medium text-5xl mt-1 ">
              {!isEnded ?<CountdownTimer endTime={date} />:<>00:00:00</>}
               </div>
             </motion.div>
           </TabsContent>
           <div className=" m-3 flex justify-center w-full" >
-            {/* <TabsList className="rounded-2xl">
-              <TabsTrigger value="review">Review</TabsTrigger>
-        
-            </TabsList> */}
           <Link to={`/videoCall/${data?._id}`}> <Button  className="rounded-lg">  Join now</Button></Link>
           </div>
         </div>
         <div className="hidden md:block col-span-12 sm:col-span-7">
           {isEnded &&<TabsContent value="review"  >
             <div className="absolute pt-4 z-10 top-[130px] right-[232px]">
-              <Button className=" rounded-2xl px-7 py-7 text-xl">Booknew</Button>
+            <Button className="rounded-2xl px-7 py-7 text-xl">Book new</Button>
             </div>
           </TabsContent>}
           {/* <TabsContent value="Conversations" className={true ? "h-full w-full p-5  dark:bg-black/80 blur-md bg-white/30  " : "h-full w-full p-5"}  >

@@ -16,6 +16,10 @@ import {
 } from "@/components/ui/dialog"
 import { useDropzone } from 'react-dropzone';
 import { Input } from '@/components/ui/input';
+import { groupsObj } from '@/type';
+
+
+
 
 
 export default function AdminChat() {
@@ -25,46 +29,59 @@ export default function AdminChat() {
         startedDate: "",
         isFreezed: false,
         subscripts: [],
+        image:"",
     }]);
-    const { isLoading } = useGetAllGroups(setData)
-    const [selectedId, setSelectedId] = useState()
+   useGetAllGroups(setData)
+    const [selectedId, setSelectedId] = useState<groupsObj|null>(null)
 
 
 
     const [image, setImage] = useState("");
     const [error, setError] = useState("");
     const [imageFile, setImageFile] = useState<string | Blob>("");
-    // const { mutate, isLoading } = useUpdateProfileIMage(setOpen)
-    const onDrop = useCallback(acceptedFiles => {
+  
+    const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles.length === 0) {
             setError("Please upload a valid image file.");
             return;
         }
-
+    
         const file = acceptedFiles[0];
         if (!file.type.startsWith("image/")) {
             setError("Please upload an image file.");
             return;
         }
-        setImageFile(file)
+    
+        setImageFile(file);
+    
         const reader = new FileReader();
-        reader.onload = (e) => {
-            setImage(e.target.result);
-            setError("");
+        reader.onload = (e: ProgressEvent<FileReader>) => {
+            if (e.target && e.target.result) {
+                setImage(e.target.result as string);
+                setError("");
+            }
         };
         reader.readAsDataURL(file);
     }, []);
 
-
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
     const { mutate} = useCreateNewGroups()
-    const handelCreateGroups=(e:React.FormEvent<HTMLFormElement>)=>{
-        e.preventDefault()
+    // const handelCreateGroups=(e:React.FormEvent<HTMLFormElement>)=>{
+    //     e.preventDefault()
      
-        // console.log(   "=========",)
-        mutate({imageFile,groupName:e.target.groupName.value})
+    //     // console.log(   "=========",)
+    //     mutate({imageFile,groupName:e.target?.groupName?.value})
+    // }
+    const handelCreateGroups = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+    
+        const form = e.target as HTMLFormElement;
+        const groupName = (form.elements.namedItem('groupName') as HTMLInputElement)?.value;
+    
+        mutate({ imageFile, groupName });
     }
+    
     return (
         <>
             <div className='flex justify-end w-full'>
@@ -122,9 +139,9 @@ export default function AdminChat() {
                         exit={{ opacity: 0 }}
                         className='flex flex-wrap gap-4 justify-around w-full pt-10'
                     >
-                        {data.map((i, index) => (
-                            <motion.div layoutId={i._id} onClick={() => setSelectedId(i)}
-                                key={i._id}
+                        {data.map((i:groupsObj, index) => (
+                            <motion.div key={index} layoutId={i._id} onClick={() => setSelectedId(i)}
+                               
                                 layout
                                 whileHover={{ scale: 0.95 }}
                                 className='h-36 outline outline-1  rounded-3xl outline-primary flex gap-2'
@@ -153,7 +170,7 @@ export default function AdminChat() {
                             <div>
 
 
-                                <div layoutId={selectedId._id}
+                                <motion.div layoutId={selectedId._id}
                                     key={selectedId._id}
                                     layout
                                     whileHover={{ scale: 0.95 }}
@@ -167,7 +184,7 @@ export default function AdminChat() {
                                     <div className='mt-2 w-full '>
                                         <div className='flex justify-end mr-2'>
 
-                                            <button className='bg-background p-2 rounded-full' onClick={() => setSelectedId("")}><IoMdClose size={20} /></button>
+                                            <button className='bg-background p-2 rounded-full' onClick={() => setSelectedId(null)}><IoMdClose size={20} /></button>
                                         </div>
                                         {/* <p className='capitalize text-center text-2xl'>{i.groupName}</p> */}
                                         {/* <p className='text-sm mt-2'>Total students :{i}</p> */}
@@ -178,7 +195,7 @@ export default function AdminChat() {
                                         {/* </p> */}
                                     </div>
 
-                                </div>
+                                </motion.div>
                             </div>
 
                         </motion.div>

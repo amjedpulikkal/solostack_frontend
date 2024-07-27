@@ -1,26 +1,21 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
+ 
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { LoginDialog } from "./logoutdialog"
 import { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
-import { useDispatch } from "react-redux"
-import { setPresence } from "@/redux/slices/authorSlice"
+
 import { IoMdClose } from "react-icons/io";
-import { NavLink, useNavigate } from "react-router-dom"
+import { NavLink, } from "react-router-dom"
 type Props = {
   avatarUrl: string
   userName: string
@@ -33,13 +28,13 @@ export default function UseAvatar({ avatarUrl, userName }: Props): JSX.Element {
 
   const [isOpen, setOpen] = useState(false)
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const dispatch = useDispatch()
-  const handleRightClick = (e) => {
-    e.preventDefault();
-    setSelectedId("profile-1234")
 
+  const handleRightClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setSelectedId("profile-1234");
   };
-  const navigate = useNavigate()
+  
+
   return (
     <div>
       <AnimatePresence >

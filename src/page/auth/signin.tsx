@@ -1,11 +1,11 @@
-import { useState, ChangeEvent, FormEvent, useRef, useEffect } from "react";
+import { useState, ChangeEvent, useRef, useEffect } from "react";
 import Otp from "./otp";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { useTheme } from "@/components/theme-provider";
+
 import { ModeToggle } from "../../components/mode-toggle";
 import { SwitchUser } from "../../components/switchUser";
-import { useSingUpQuery, useUserNameCheck } from "../../reactQuery/student/signUp"
+import { useSingUpQuery } from "../../reactQuery/student/signUp"
 import { Authcomponents } from "@/components/oauth";
 import { IFormData, Iauthor } from "../../type"
 import { AnimatePresence, motion } from "framer-motion";
@@ -33,10 +33,10 @@ export default function App(): JSX.Element {
     watch,
     formState: { errors },
   } = useForm<IFormData>()
-  const { theme } = useTheme()
+
   const [passValidate, setPassValidate] = useState<string[]>([]);
   const [isOtp, setOtp] = useState("");
-  const { mutateAsync, isLoading, isError } = useSingUpQuery()
+  const { mutateAsync, isLoading,  } = useSingUpQuery()
   const formRef = useRef<HTMLFormElement>(null);
 
   const [author, setAuthor] = useState<Iauthor>("student")
@@ -45,7 +45,7 @@ export default function App(): JSX.Element {
     const arrLocation = location.pathname.split("/")[1] as Iauthor
     setAuthor(arrLocation)
 
-  }, [])
+  }, [location.pathname])
 
   const handleClick = (author: Iauthor) => {
     if (author === "mentor") {
@@ -58,19 +58,20 @@ export default function App(): JSX.Element {
     setAuthor(author)
 
   }
-  const handelFrom: SubmitHandler<IFormData> = async (value) => {
+  const handelFrom: SubmitHandler<IFormData> = async () => {
 
 
-    const formData = new FormData(formRef.current);
+    const formData = new FormData(formRef.current!);
     const data = {
       email: formData.get('email'),
       password: formData.get('password'),
-      userName: formData.get("userName")
+      userName: formData.get("userName"),
+      otp:""
     };
     console.log(data)
     await mutateAsync({ ...data, author })
     toast.success("OTP has been sent to email.");
-    setOtp(data.email)
+    setOtp(data?.email?.toString())
   }
 
 

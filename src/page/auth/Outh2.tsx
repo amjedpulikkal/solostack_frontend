@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { json, useParams } from "react-router-dom"
+import {  useParams } from "react-router-dom"
 import { useCookies } from "react-cookie"
 import { isOauth } from "@/reactQuery/student/isOauth";
 import { setAuthor, setAuthorData } from "@/redux/slices/authorSlice";
@@ -7,13 +7,14 @@ import { useDispatch, useSelector, } from "react-redux";
 import { RootState } from "../../redux/store"
 import { StudentData } from "@/type";
 import { useNavigate } from "react-router-dom";
-import { useAuthor } from "@/components/switchUser-provider";
+
 
 export default function Outh2() {
    
     const crateIsOauthUpMutation = isOauth()
     const navigate = useNavigate();
     const { provider, token } = useParams()
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [cookies, setCookie] = useCookies(['jwtToken']);
     const dispatch = useDispatch()
     
@@ -39,7 +40,7 @@ export default function Outh2() {
         };
         fetchData();
 
-    }, []);
+    }, [crateIsOauthUpMutation, dispatch, navigate, provider, setCookie, token]);
     return (
         <>
             hello world!  hi {data?.email}

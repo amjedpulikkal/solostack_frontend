@@ -1,6 +1,6 @@
 import { AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
-import { useChatHistory } from '@/reactQuery/student/chatQuery';
+
 import { RootState } from '@/redux/store';
 import { Avatar } from '@radix-ui/react-avatar';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -12,15 +12,7 @@ import { FaRegFileImage } from "react-icons/fa6";
 import { FaPoll } from "react-icons/fa";
 import { FaRegFileCode } from "react-icons/fa";
 type props = {
-  chatData: [
-    user: {
-      type: string,
-      user: string,
-      data: string,
-      Url: string,
-      date: Date
-    }
-  ],
+  chatData: any[],
 
   handleKeyPress
   inputRef
@@ -108,7 +100,7 @@ export default function ChatMain({ chatData, handleKeyPress, inputRef, handleSen
             </span>
           </div>
         ) : (
-          chatData.map((item, i) => {
+          chatData.map((item) => {
             const dateObject = new Date(item.date);
 
             const formattedDate = dateObject.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });

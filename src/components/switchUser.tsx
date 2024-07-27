@@ -10,9 +10,13 @@ import {
     DropdownMenuTrigger,
     DropdownMenuContent
 } from "@/components/ui/dropdown-menu"
+import { Iauthor } from "@/type";
 
-import { useNavigate } from "react-router-dom";
-export function SwitchUser({ author, handleClick}) {
+type props ={
+    author: Iauthor,
+    handleClick: (author: Iauthor) => void
+}
+export function SwitchUser({ author, handleClick}:props) {
     
     return (
         <DropdownMenu>
@@ -23,7 +27,7 @@ export function SwitchUser({ author, handleClick}) {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-40 mr-2">
-                <DropdownMenuRadioGroup value={author} onValueChange={handleClick}>
+                <DropdownMenuRadioGroup value={author} onValueChange={(v)=>handleClick((v as Iauthor))}>
                     <DropdownMenuRadioItem value="student" >
                         <div className=" flex justify-between items-center">
                             <PiStudentBold size={40} />

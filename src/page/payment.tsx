@@ -1,7 +1,7 @@
 import PaymentIntal from '@/components/stripe/CheckoutForm'
 import StripeElements from '@/components/stripe/stripe'
 
-import React, { useState } from 'react'
+import  { useState } from 'react'
 
 export default function PaymentPage() {
     const [price, setPrice] = useState('100')

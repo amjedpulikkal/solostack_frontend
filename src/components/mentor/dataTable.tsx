@@ -41,7 +41,8 @@ export type Payment = {
     userName: string
   }
   email: string
-  joinedAt: string
+  joinedAt: string,
+  status:string
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -50,10 +51,10 @@ export const columns: ColumnDef<Payment>[] = [
     id: "select",
     header: ({ table }) => (
       <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
+        // checked={
+        //   table.getIsAllPageRowsSelected() ||
+        //   (table.getIsSomePageRowsSelected() && "indeterminate")
+        // }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
       />
@@ -71,7 +72,7 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "userName",
     header: "Profile",
-    cell: ({ row }) => (
+    cell: () => (
       <div className="capitalize">
         <img src="https://github.com/shadcn.png" className="rounded-full w-10 h-10" alt="" />
       </div>
@@ -89,7 +90,7 @@ export const columns: ColumnDef<Payment>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="">{row.getValue("personal_info").name}</div>,
+    cell: ({ row }) => <div className="">{row.getValue("personal_info")}</div>,
   },
   {
     accessorKey: "email",

@@ -1,10 +1,11 @@
 
 
 
+import { Iauthor } from '@/type';
 import { GiTeacher } from 'react-icons/gi';
 import { PiChalkboardTeacherFill, PiStudentBold } from 'react-icons/pi';
 
-export default function App({handleClick}): JSX.Element {
+export default function App({handleClick}:{handleClick: (author: Iauthor) => void}): JSX.Element {
 
     return (
 

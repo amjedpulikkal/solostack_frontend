@@ -1,8 +1,9 @@
 import { mentorApi,studentApi } from "@/api";
 import axios from "axios";
-import { useMutation, useQuery } from "react-query";
+import {  useQuery } from "react-query";
+import {Iauthor} from "@/type"
 
-export function useSearchAuthors(author) {
+export function useSearchAuthors(author:Iauthor) {
   let apiCall;
   if (author === "mentor") {
     apiCall = async () => {

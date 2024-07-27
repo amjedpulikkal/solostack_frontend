@@ -1,5 +1,5 @@
 import { ModeToggle } from "@/components/mode-toggle";
-import { SwitchUser } from "@/components/switchUser";
+// import { SwitchUser } from "@/components/switchUser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -31,7 +31,7 @@ export default function App(): JSX.Element {
 
             </div>
             <div className='flex justify-end mr-6'>
-                <SwitchUser author={undefined} setAuthor={undefined} />
+                {/* <SwitchUser author={undefined} setAuthor={undefined} /> */}
             </div>
         </div>
     </>

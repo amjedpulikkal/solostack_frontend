@@ -1,46 +1,6 @@
 
 import { ModeToggle } from "../../components/mode-toggle";
-// import { GoogleLoginButton } from "../../components/GoogleOAuth"
-import { SwitchUser } from "../../components/switchUser";
-// import {
-//   InputOTP,
-//   InputOTPGroup,
-//   InputOTPSeparator,
-//   InputOTPSlot,
-// } from "@/components/ui/input-otp"
-// import React from "react";
-// import { JSX } from "react/jsx-runtime";
 
-// export default function Otp(): JSX.Element {
-
-
-//   return (
-//     <>
-//       <div className='flex justify-end mt-6 mr-6'>
-//         <ModeToggle />
-//       </div>
-//       <div className="w-screen flex justify-center items-center h-[80vh]">
-//         <InputOTP
-//           maxLength={6}
-//           render={({ slots }) => (
-//             <InputOTPGroup className="gap-2 ">
-//               {slots.map((slot: JSX.IntrinsicAttributes & Omit<any, "ref"> & React.RefAttributes<HTMLDivElement>, index: React.Key | null | undefined) => (
-//                 <React.Fragment key={index}>
-//                   <InputOTPSlot className="rounded-md border h-24 w-24 text-4xl" {...slot} />
-//                   {index !== slots.length - 1 && <InputOTPSeparator />}
-//                 </React.Fragment>
-//               ))}{" "}
-//             </InputOTPGroup>
-//           )}
-//         />
-//       </div>
-
-//       <div className='flex justify-end mb-6 mr-6'>
-//         <SwitchUser />
-//       </div>
-//     </>
-//   )
-// }
 
 
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -62,9 +22,9 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp"
-import { toast } from "sonner"
 
 import { useOtpVerifyQuery } from "../../reactQuery/student/signUp"
+import { Iauthor } from "@/type";
 
 const FormSchema = z.object({
   pin: z.string().min(6, {
@@ -72,18 +32,28 @@ const FormSchema = z.object({
   }),
 })
 
-export default function InputOTPForm({ email,author }) {
+
+type props= {
+  author:Iauthor,
+  email:string
+}
+
+export default function InputOTPForm({ email,author }:props) {
   const OtpQuery = useOtpVerifyQuery()
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      pin: "",
+      pin: ""
     },
   })
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data);
-    OtpQuery.mutateAsync({ otp: data.pin, email ,author})
+    OtpQuery.mutateAsync({
+      otp: data.pin, email, author,
+      password: "",
+      userName: ""
+    })
 
     if (OtpQuery.isSuccess) {
       console.log(OtpQuery.data)
@@ -108,9 +78,9 @@ export default function InputOTPForm({ email,author }) {
                       maxLength={6}
                       render={({ slots }) => (
                         <InputOTPGroup className="gap-2 ">
-                          {slots.map((slot: JSX.IntrinsicAttributes & Omit<any, "ref"> & React.RefAttributes<HTMLDivElement>, index: React.Key | null | undefined) => (
+                          {slots.map((slot: JSX.IntrinsicAttributes & Omit<unknown, "ref"> & React.RefAttributes<HTMLDivElement>) => (
 
-                            <InputOTPSlot className="rounded-md border h-24 w-24 text-4xl" {...slot} />
+                            <InputOTPSlot isActive={false} char={""} hasFakeCaret={false} className="rounded-md border h-24 w-24 text-4xl" {...slot} />
 
 
                           ))}{" "}

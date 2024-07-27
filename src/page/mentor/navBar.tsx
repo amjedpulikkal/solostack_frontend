@@ -3,12 +3,13 @@ import UseAvatar from "@/components/mentor/userAvatar"
 import { RootState } from "@/redux/store"
 import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
+import { StudentData } from "@/type"
 
 
 
 
 export default function NaveBar(): JSX.Element {
-    const data = useSelector((state: RootState) => state.author?.authorData) 
+    const data = useSelector((state: RootState) => state.author?.authorData)  as StudentData
     return (
         <nav className='  h-20 w-full flex justify-between border-b-2 px-6 pt-6 dark:bg-stone-900 bg-white' >
             <div>
@@ -40,7 +41,7 @@ export default function NaveBar(): JSX.Element {
             </div>
             <div className=" flex gap-8">
                 <ModeToggle />
-                <UseAvatar avatarUrl={data.personal_info.photo} userName={data.personal_info.userName} />
+                <UseAvatar avatarUrl={data.personal_info.photo!} userName={data.personal_info.userName!} />
             </div>
         </nav>
     )

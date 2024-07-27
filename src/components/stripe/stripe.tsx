@@ -1,6 +1,6 @@
-import React, { useState, useEffect, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 import { useStripe, useElements, PaymentElement, Elements, ElementsConsumer } from '@stripe/react-stripe-js';
-import { loadStripe, StripeElementsOptions } from '@stripe/stripe-js';
+import { loadStripe, PaymentIntent, StripeElementsOptions, StripeError } from '@stripe/stripe-js';
 import { Button } from '../ui/button';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useStripeAPi } from '@/reactQuery/stripe';
@@ -16,6 +16,7 @@ const CheckoutForm: React.FC<{ clientSecret: string, amount: number, type: strin
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -30,18 +31,24 @@ const CheckoutForm: React.FC<{ clientSecret: string, amount: number, type: strin
       confirmParams: {
         return_url: 'http://localhost:5173/student/paymentSuccess',
       },
-    });
+    }) as { error: StripeError; paymentIntent?: PaymentIntent };
 
     setLoading(false);
 
     if (error) {
-      setError(error.message);
+      setError((error?.message as string));
     } else if (paymentIntent?.status === 'succeeded') {
       setSuccess(true);
       setError(null);
     }
   };
 
+
+  useEffect(() => {
+    if (elements) {
+      setIsLoading(false);
+    }
+  }, [elements]);
   return (
     <>
       <div className='flex p-10'>
@@ -54,11 +61,18 @@ const CheckoutForm: React.FC<{ clientSecret: string, amount: number, type: strin
         </div>
         <div className='w-1/2 h-full'>
 
+            {isLoading && <div className="w-full h-full flex justify-center items-center">
+              <span className="loader12 text-primary"></span>
+            </div>
+            }
           <form onSubmit={handleSubmit}>
-            {clientSecret && <PaymentElement  />}
+            {clientSecret && <PaymentElement />}
             <Button type="submit" className='mt-8 w-full' disabled={!stripe || loading}>
               {loading ? 'Processing...' : 'Pay'}
             </Button>
+            <div>
+
+            </div>
           </form>
           {error && <div style={{ color: 'red' }}>{error}</div>}
           {success && <div style={{ color: 'green' }}>Payment succeeded!</div>}
@@ -94,8 +108,8 @@ const StripeElements: React.FC<props> = ({ amount, type, setIsInitial }) => {
 
   const options: StripeElementsOptions = {
     clientSecret: clientSecret!,
-    appearance : {
-      theme: theme=="dark"?"night":"flat"
+    appearance: {
+      theme: theme == "dark" ? "night" : "flat"
     }
   };
   if (clientSecret) {
@@ -103,8 +117,8 @@ const StripeElements: React.FC<props> = ({ amount, type, setIsInitial }) => {
     return (
       <Elements stripe={stripePromise} options={options}>
         <ElementsConsumer>
-          {({ stripe, elements }) => (
-            clientSecret && <CheckoutForm setIsInitial={setIsInitial} amount={amount} type={type} stripe={stripe} elements={elements} clientSecret={clientSecret}  />
+          {() => (
+            clientSecret && <CheckoutForm setIsInitial={setIsInitial} amount={amount} type={type} clientSecret={clientSecret} />
           )}
         </ElementsConsumer>
       </Elements>

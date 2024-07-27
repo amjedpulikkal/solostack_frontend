@@ -52,7 +52,7 @@ export function CountdownTimer({ endTime }: props): JSX.Element {
       toast({
         title: "Uh oh! Something went wrong.",
         description: "There was a problem with your request.",
-        action: <Button altText="Try again">Try again</Button>,
+        action: <Button >Try again</Button>,
       })
       clearInterval(timer);
     }
