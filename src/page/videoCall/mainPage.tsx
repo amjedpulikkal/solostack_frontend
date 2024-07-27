@@ -86,9 +86,9 @@
 //     </div>
 //     );
 // }
-
+import { MdCallEnd } from "react-icons/md";
 import React, { RefObject, useEffect, useRef, useState } from "react";
-import Peer,{Peer as Ipeer}from "peerjs";
+
 import { motion } from "framer-motion";
 import {
   BsFillCameraVideoFill,
@@ -113,6 +113,10 @@ type props = {
     toggleAudioMute: () => void;
     toggleVideoMute: () => void;
   };
+  
+  
+  remoteVideoStream,
+  remoteVideoRef
   //  startPage:Dispatch<SetStateAction<boolean>>
 };
 export function VideoCallMain({
@@ -120,56 +124,30 @@ export function VideoCallMain({
   toggle,
   videoMuted,
   audioMuted,
+
+  remoteVideoStream,
+  
 }: props): JSX.Element {
   const constraintsRef = useRef<HTMLDivElement>(null);
-  const [peerId, setPeerId] = useState("");
-  const [remoteVideoStream, setRemoteVideoStream] = useState<MediaStream | null>(null);
 
-  const [remotePeerIdValue, setRemotePeerIdValue] = useState("");
-  const remoteVideoRef = useRef(null);
   const currentUserVideoRef = useRef<HTMLVideoElement>(null);
-  const peerInstance = useRef(null);
+  const remoteVideoRef = useRef<HTMLVideoElement>(null);
+ 
 
-  useEffect(() => {
-   
-    const peer = new Peer();
-
-    peer.on("open", (id) => {
-        console.log(id)
-      setPeerId(id);
-    });
-
-
-    peerInstance.current = peer;
-  }, []);
 
   useEffect(()=>{
     if (videoStream) {
       currentUserVideoRef!.current!.srcObject = videoStream;
     }
-    const peer =  peerInstance.current as Ipeer
+    if(remoteVideoStream){
+      remoteVideoRef!.current!.srcObject =  remoteVideoStream
 
-    peer.on("call", (call) => {
-      call.answer(videoStream);
-      call.on("stream", function (remoteStream) {
-          setRemoteVideoStream(remoteStream)
-        remoteVideoRef!.current!.srcObject = remoteStream;
-        remoteVideoRef!.current!.play();
-      });
-    });
-
-      peerInstance.current = peer;
+    }
+   
    
   },[videoStream]);
     
-  const call = (remotePeerId:string) => {
-      const call = peerInstance.current.call(remotePeerId, videoStream);
-      call.on("stream", (remoteStream:MediaStream) => {
-        setRemoteVideoStream(remoteStream)
-        remoteVideoRef.current!.srcObject = remoteStream;
-        remoteVideoRef.current!.play();
-      });
-  };
+  
 
   return (
     <div>
@@ -188,11 +166,10 @@ export function VideoCallMain({
             // ref={currentUserVideoRef} 
             style={{ transform: "scaleX(-1)" }} 
               playsInline
-              muted
               className="rounded-2xl  outline-primary  w-full h-full"
             ></video>
             <div className="example-container"> 
-            <motion.div   drag   whileTap={{ cursor: "grabbing" }} className="relative outline outline-2 outline-primary rounded-2xl"   dragConstraints={constraintsRef} >
+            <motion.div   drag   whileTap={{ cursor: "grabbing" }} className="relative  outline outline-2 outline-primary rounded-2xl"   dragConstraints={constraintsRef} >
                 <video autoPlay style={{ transform: "scaleX(-1)" }} ref={currentUserVideoRef} muted width={180} height={180} src="" className="rounded-2xl bg-slate-200"></video>
                 {/* <div className=""> */}
                     <ReactMic className="bg-primary rounded-full absolute bottom-1 left-1  " width={35} height={30} stream={videoStream}/>
@@ -201,11 +178,7 @@ export function VideoCallMain({
             </div>
           <ReactMic className="bg-primary rounded-full absolute bottom-1 left-1  " width={50} height={40} stream={remoteVideoStream!}/>
           </motion.div>
-          <div className="bg-slate-600 h-full w-1/5 rounded-3xl ml-3">
-               <h1>{peerId}</h1>
-               <input type="text" value={remotePeerIdValue} onChange={e => setRemotePeerIdValue(e.target.value)} />
-               <button onClick={() => call(remotePeerIdValue)}>Call</button>
-           </div>
+          
 
         </div>
         <div className="flex w-full h-14 justify-center mt-4 gap-2">
@@ -229,6 +202,12 @@ export function VideoCallMain({
               <CiMicrophoneOff className="text-primary" size={30} />
             )}
           </div>
+          <div className="outline outline-1 dark:outline-white/40 outline-black/40 dark:hover:bg-white/15  hover:bg-black/15 transition-colors flex justify-center items-center rounded-full p-3">
+          
+              <MdCallEnd className="text-primary" size={30} />
+          
+          </div>
+          
         </div>
       </div>
     </div>

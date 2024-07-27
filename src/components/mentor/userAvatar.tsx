@@ -1,24 +1,19 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
+
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
-    DropdownMenuPortal,
+
     DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { LoginDialog } from "../logoutdialog"
 import { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
-import { useDispatch } from "react-redux"
-import { setPresence } from "@/redux/slices/authorSlice"
+
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom"
 type Props = {
@@ -33,8 +28,8 @@ export default function UseAvatar({ avatarUrl, userName }: Props): JSX.Element {
 
     const [isOpen, setOpen] = useState(false)
     const [selectedId, setSelectedId] = useState<string | null>(null)
-    const dispatch = useDispatch()
-    const handleRightClick = (e) => {
+
+    const handleRightClick = (e:) => {
         e.preventDefault();
         setSelectedId("profile-mentor")
 
@@ -100,53 +95,24 @@ export default function UseAvatar({ avatarUrl, userName }: Props): JSX.Element {
                             </Avatar>
                         }
                     </motion.div>
-
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-40 mr-2 mt-2 rounded-xl">
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
                         <DropdownMenuItem onClick={() => navigate(`/mentor/${userName}`)} >
-                            {/* <motion.div layoutId={"profile-1234"} onClick={() => dispatch(setPresence("profile-1234"))}> */}
                             Profile
-                            {/* </motion.div> */}
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                             Settings
-                            {/* <DropdownMenuShortcut>⌘S</DropdownMenuShortcut> */}
                         </DropdownMenuItem>
                     </DropdownMenuGroup>
-                    {/* <DropdownMenuSeparator /> */}
-                    {/* <DropdownMenuGroup>
-              <DropdownMenuItem>Team</DropdownMenuItem>
-              <DropdownMenuSub>
-                <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
-                <DropdownMenuPortal>
-                  <DropdownMenuSubContent>
-                    <DropdownMenuItem>Email</DropdownMenuItem>
-                    <DropdownMenuItem>Message</DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>More...</DropdownMenuItem>
-                  </DropdownMenuSubContent>
-                </DropdownMenuPortal>
-              </DropdownMenuSub>
-              <DropdownMenuItem>
-                New Team
-                <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-              </DropdownMenuItem>
-            </DropdownMenuGroup> */}
-                    {/* <DropdownMenuSeparator /> */}
-                    {/* <DropdownMenuSeparator /> */}
                     <DropdownMenuItem className="text-red-600 focus:text-red-500 focus:outline-red-500 " onClick={() => setOpen(!isOpen)}>
                         Log out
-                        {/* <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut> */}
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
-
-
         </div >
-
 
     )
 

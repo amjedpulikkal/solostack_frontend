@@ -1,4 +1,4 @@
-import { useAuthor } from '@/components/switchUser-provider';
+
 import { Page404 } from '@/page/404';
 import { RootState } from '@/redux/store';
 import { Iauthor } from '@/type';
@@ -20,5 +20,5 @@ export function MentorProtectedRouter(): JSX.Element {
   }, [isMentor, navigate]);
 
   return isMentor ? <Outlet /> : <Page404 />;
-};
+}
 

@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import ChatMain from "./chat/chatMain";
 import { useChatHistory, useGetGroup } from "@/reactQuery/student/chatQuery";
+import { useNavigate } from 'react-router-dom';
 
 const framerAni = {
   initial: { opacity: 0, y: 10 },
@@ -29,6 +30,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { CiMenuKebab } from "react-icons/ci";
 import JoinNewGroup from "./chat/joinNewGroup";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 
 
@@ -40,7 +42,9 @@ export default function Chat(): JSX.Element {
   const author = useSelector((state: RootState) => state.author?.authorData)
   const [isCGOpen, setIsCGopen] = useState(false)
   const [currentChatData, setCurrentChatData] = useState(null);
+  const navigate = useNavigate();
 
+  // const socket = useSelector((state: RootState) => state.socket?.socket);
   // const {isLoading,data }=useGetGroup(author._id)
 
   const [chatData, setChatData] = useState([]);
@@ -82,7 +86,7 @@ export default function Chat(): JSX.Element {
       chatObj.messages = [...chatObj.messages, currentChatData]
 
       if (chatObj?._id !== currentGroup?._id) {
-        chatObj.notification = typeof chatObj.notification === "number" ? chatObj.notification += 1 : chatObj.notification===undefined?1:0
+        chatObj.notification = typeof chatObj.notification === "number" ? chatObj.notification += 1 : chatObj.notification === undefined ? 1 : 0
       }
     }
     obj.sort((a, b) => {
@@ -93,7 +97,7 @@ export default function Chat(): JSX.Element {
   }, [currentChatData])
 
   console.log("data");
-  socket.on("receiveData", ({ data }) => {
+  socket.on("receiveData", ({ data }) => {  
     console.log("receive--", data);
     setCurrentChatData(data)
 
@@ -131,15 +135,17 @@ export default function Chat(): JSX.Element {
         <JoinNewGroup isCGOpen={isCGOpen} setIsCGopen={setIsCGopen} />
         <div className="w-1/4 h-full hidden md:block dark:bg-black rounded-3xl  outlie dark:border-none border-2  pb-2 ">
           <div className="w-full h-20 flex justify-around items-center">
+          
+
+          <IoMdArrowRoundBack className='text-3xl  hover:text-primary transition-colors' onClick={() => navigate(-1)} />
+          
+
             <img
               src={author.personal_info?.photo}
               className="bg-slate-400 rounded-full w-10 h-10"
               alt=""
             />
-            <input
-              type="text"
-              className="bg-transparent outline pl-4 outline-1 outline-primary/30 rounded-full h-10"
-            />
+
             <ModeToggle />
             <div className="flex items-center text-xl">
               <DropdownMenu  >
@@ -149,14 +155,10 @@ export default function Chat(): JSX.Element {
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="rounded-2xl" >
-                  {/* <DropdownMenuRadioGroup > */}
+
                   <DropdownMenuItem className="rounded-2xl" onClick={() => setIsCGopen(true)} >
                     join new Groups
                   </DropdownMenuItem >
-                  {/* <DropdownMenuItem className="flex justify-between"  >
-                    <p>Them</p>  <ModeToggle />
-                  </DropdownMenuItem > */}
-
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
@@ -185,7 +187,7 @@ export default function Chat(): JSX.Element {
                         {item.groupName}
                       </p>
                       <p className="text-white/40">
-                        @{item?.messages[item?.messages?.length - 1]?.senderData?.personal_info?.userName || item?.messages[item?.messages?.length - 1].user}:<span>{item?.messages[item?.messages?.length - 1]?.message?.data}</span>
+                        @{item?.messages[item?.messages?.length - 1]?.senderData?.personal_info?.userName || item?.messages[item?.messages?.length - 1]?.user}:<span>{item?.messages[item?.messages?.length - 1]?.message?.data}</span>
                       </p>
                     </div>
                     {item.notification >= 1 &&

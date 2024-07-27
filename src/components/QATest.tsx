@@ -21,6 +21,10 @@ import { FaChevronDown } from "react-icons/fa";
 import { ChangeVideo } from "@/page/videoCall/changeVideo";
 import { ChangeVoice } from "@/page/videoCall/changeVoice";
 import { ChangeAudioinput } from "@/page/videoCall/chageAudiooutput";
+import {socket} from "@/page/socket";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 type props = {
   videoRef: RefObject<HTMLVideoElement>;
@@ -37,7 +41,9 @@ type props = {
     toggleAudioMute: () => void;
     toggleVideoMute: () => void;
     startPage: Dispatch<SetStateAction<boolean>>;
-  };
+  },
+  peerId:string,
+  callFn
 };
 export default function QATest({
   videoRef,
@@ -45,29 +51,18 @@ export default function QATest({
   audioMuted,
   videoMuted,
   toggle,
+  peerId,
+  callFn
 }: props) {
   const [speedMeter, SetSpeedMeter] = useState(0);
-  // useEffect(()=>{
-  //   navigator.mediaDevices.enumerateDevices()
-  //   .then(function(devices) {
-  //       const cameras: MediaDeviceInfo[] = [];
-  //       const microphones: MediaDeviceInfo[] = [];
+  const { id } = useParams();
+  const[pid,setId] = useState(null)
+  const author = useSelector((state: RootState) => state.author?.author)
+  const handleButton =()=>{
 
-  //       devices.forEach(function(device) {
-  //           if (device.kind === 'videoinput') {
-  //               cameras.push(device);
-  //           } else if (device.kind === 'audioinput') {
-  //               microphones.push(device);
-  //           }
-  //       });
-
-  //       console.log('Available Cameras:', cameras);
-  //       console.log('Available Microphones:', microphones);
-  //   })
-  //   .catch(function(err) {
-  //       console.error('Error enumerating devices:', err);
-  //   });
-  // },[])
+    socket.emit("joinVideoCall",{peerId:peerId,id,author})
+    // toggle.startPage(false)
+  }
 
 
   return (
@@ -149,12 +144,15 @@ export default function QATest({
             <IntelPage />
           </div>
           <div>
-            <Button className="mt-10" onClick={() => toggle.startPage(false)}>
+          <input type="text" onChange={(e)=>setId(e.target.value)} />
+          <button onClick={()=>callFn(pid)}>add</button>
+          
+            <Button className="mt-10" onClick={handleButton}>
               join new
             </Button>
           </div>
         </div>
-
+                 
         <div className="absolute top-0 right-0">
           <RoundCountdownTimer time={60} />
         </div>

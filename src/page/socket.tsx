@@ -4,6 +4,9 @@ import io from 'socket.io-client';
 import { RootState } from "@/redux/store"
 import { toast } from 'sonner';
 
+// export const useAuthorData = ():string => {
+//     return useSelector((state: RootState) => state.author?.authorData)._id
+// };
 export const socket = io('http://localhost:3000');
 
 
@@ -12,9 +15,9 @@ export default function Socket  () {
     useEffect(() => {
         socket.on('connect', () => {
             console.log('Connected to server');
-            // if (authorData?._id) {
-                socket.emit("userID", authorData?._id)
-            // }
+            if (authorData?._id) {
+                socket.emit("userID", {userID:authorData?._id})
+            }
         });
         socket.on("notification",(data)=>{
             toast.success(data)

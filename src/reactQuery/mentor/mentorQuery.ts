@@ -51,7 +51,7 @@ export const useUpdateAvailableTime = (refetch) => {
     onError() {},
   });
 };
-export const usGetAvailableTime = () => {
+export const useAvailableTime = () => {
   const apiCall = async (formData: { date: Date | string; time: number }) => {
     formData.date = new Date(formData.date).toDateString();
     console.log(formData.date);
@@ -65,7 +65,9 @@ export const usGetAvailableTime = () => {
 
   return useMutation(apiCall, {
     onSuccess() {},
-    onError() {},
+    onError() {
+     
+    },
   });
 };
 
@@ -80,7 +82,9 @@ export const useGetAvailableTime = (setSelectedDate, date: Date) => {
   return useQuery(["AvailableTime", date], apiCall, {
     onSuccess(data) {
       const time = data.map((i) => getIndexWithTime[i.time]);
+
       setSelectedDate(time || []);
+     
     },
     onError() {},
   });

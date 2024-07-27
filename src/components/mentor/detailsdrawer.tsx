@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
+  
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -15,14 +15,11 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 
 export function DrawerDialogDetails() {
   const [open, setOpen] = React.useState(false)

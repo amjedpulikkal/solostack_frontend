@@ -1,16 +1,5 @@
 import React from 'react'
-import { DatePickerDemo } from '@/components/datePicker'
-import { Input } from '@/components/ui/input'
-import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
+
 import { DataTable } from '@/components/mentor/dataTable'
 import { motion } from 'framer-motion'
 import { useSearchAuthors } from '@/reactQuery/admin/mentorApi'

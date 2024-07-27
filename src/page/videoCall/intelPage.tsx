@@ -17,7 +17,7 @@ function IntelPage() {
     // Set the canvas dimensions to match the window
     
     canvas.width = window.innerWidth-200;
-    canvas.height = window.innerHeight-300;
+    canvas.height = window.innerHeight-500;
     console.log(window.innerWidth,window.innerHeight)
 
     const ctx = canvas.getContext("2d") as CanvasRenderingContext2D
@@ -60,7 +60,7 @@ function IntelPage() {
             
             <img className="w-44 h-44 rounded-full z-10 outline outline-1  bg-slate-800" src="https://img.freepik.com/premium-photo/man-with-beard-beard-blue-circle-generative-ai_902639-79016.jpg?w=740" ref={div2Ref}></img>
             <img className="w-44 h-44 rounded-full z-10 outline outline-1  bg-slate-800"src="https://www.svgrepo.com/show/382101/male-avatar-boy-face-man-user.svg" ref={div1Ref}></img>
-            <canvas ref={canvasRef} style={{ position: "absolute", top: 0, left: 0 }} />
+            <canvas ref={canvasRef} className="absolute top-0 left-0 "  />
           </div>
          <div className="flex justify-center"> <Skeleton className="bg-transparent t">connecting...</Skeleton></div>
         </div>

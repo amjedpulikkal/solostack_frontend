@@ -2,7 +2,7 @@ import { TabsContent } from "@radix-ui/react-tabs";
 import { AnimatePresence, motion } from "framer-motion";
 import { Skeleton } from "../ui/skeleton";
 import { useEffect, useMemo, useState } from "react";
-import { usGetAvailableTime } from "@/reactQuery/mentor/mentorQuery";
+import { useAvailableTime } from "@/reactQuery/mentor/mentorQuery";
 import { Car } from "lucide-react";
 import { IoMdClose } from "react-icons/io";
 const container = {
@@ -40,11 +40,8 @@ import DialogBookMentor from "./dialogBookMentor";
 export default function StudentTabs(): JSX.Element {
   const [date, setDate] = useState<Date>(new Date());
   const [openAndData, setOpenAndData] = useState<{ isOpen: boolean, data: string }>({ isOpen: false, data: "" });
-
-  const [time, setTime] = useState<number>(() => {
-    return 4;
-  });
-  const { data, isLoading, isSuccess, mutate } = usGetAvailableTime();
+  const [time, setTime] = useState<number>(4);
+  const { data, isLoading, isSuccess, mutate } = useAvailableTime();
   const [category, setCategory] = useState<string[]>([]);
   if (isSuccess) {
     console.log(data);
@@ -63,7 +60,7 @@ export default function StudentTabs(): JSX.Element {
                   return (
                     <motion.div
                       whileHover={{ scale: 1.3 }}
-                      className="w-10 hover:border transition-colors h-10 outline outline-primary  bg-background rounded-full flex justify-center items-center text-primary"
+                      className="w-10 hover:border  h-10 outline outline-primary  bg-background rounded-full flex justify-center items-center text-primary"
                     >
                       {item}
                     </motion.div>

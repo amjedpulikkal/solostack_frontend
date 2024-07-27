@@ -3,7 +3,7 @@ export default function Test(): JSX.Element {
 
     return (
         <div className="w-screen h-screen flex justify-center items-center">
-            <span className="wrapper w-[800px] bg-transparent">
+            <span className="wrapper s w-[800px] bg-transparent">
                 <svg className="">
                     <text x="50%" y="50%" dy=".35em" text-anchor="middle">
                         SoloStack

@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
-import { toast } from "sonner";
 
+
+import { useToast } from "@/components/ui/use-toast";
+import { Button } from "./ui/button";
 type props = {
 
   endTime: Date
 }
 
 export function CountdownTimer({ endTime }: props): JSX.Element {
-
+  const {toast} = useToast();
 
   const endMillis = endTime.getTime();
   const startMillis = new Date().getTime();
@@ -47,14 +49,19 @@ export function CountdownTimer({ endTime }: props): JSX.Element {
       }
     }, 1000);
     if (hoursRemaining === 0 && minutesRemaining === 0 && secondsRemaining === 0) {
+      toast({
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+        action: <Button altText="Try again">Try again</Button>,
+      })
       clearInterval(timer);
     }
 
     return () => clearInterval(timer);
-  }, [secondsRemaining, hoursRemaining, minutesRemaining]);
+  }, [secondsRemaining, hoursRemaining, minutesRemaining,endMillis]);
 
   return (
-    <p>-{hoursRemaining < 10 ? "0" + hoursRemaining : hoursRemaining}:{minutesRemaining < 10 ? "0" + minutesRemaining : minutesRemaining}:{secondsRemaining < 10 ? "0" + secondsRemaining : secondsRemaining}</p>
+    <p>-{hoursRemaining < 10 ? "0" + hoursRemaining||"0" : hoursRemaining||"0" }:{minutesRemaining < 10 ? "0" + minutesRemaining ||"00" : minutesRemaining ||"00"}:{secondsRemaining < 10 ? "0" + secondsRemaining ||"00": secondsRemaining ||"00"}</p>
   )
 
 }

@@ -32,7 +32,7 @@ export default function AdminHome() {
                         <div className='mt-2 ml-2'>
 
                             <Button variant="outline" onClick={() => setOpen(!isOpen)} size="icon">
-                                <FaBars size={30} className={`h-[1.2rem] data-[da]:text-white w-[1.2rem]  transition-all ${isOpen ? "-rotate-90 scale-0" : "rotate-0 scale-100"}  text-green-600`} />
+                                <FaBars size={30}  className={`h-[1.2rem] data-[da]:text-white w-[1.2rem]  transition-all ${isOpen ? "-rotate-90 scale-0" : "rotate-0 scale-100"}  text-green-600`} />
                                 <IoCloseSharp className={`absolute h-[1.2rem] w-[1.2rem] ${!isOpen ? "-rotate-90 scale-0" : "rotate-0 scale-100"} transition-all  text-green-600`} />
 
                             </Button>

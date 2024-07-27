@@ -8,8 +8,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { IoSendOutline } from 'react-icons/io5';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { useSelector } from 'react-redux';
-
-
+import { FaRegFileImage } from "react-icons/fa6";
+import { FaPoll } from "react-icons/fa";
+import { FaRegFileCode } from "react-icons/fa";
 type props = {
   chatData: [
     user: {
@@ -37,6 +38,7 @@ export default function ChatMain({ chatData, handleKeyPress, inputRef, handleSen
   const author = useSelector((state: RootState) => state.author?.authorData)
   const chatDiv = useRef<HTMLDivElement>(null)
   const [isHidden, setIsHidden] = useState(false)
+  const [isHovered, setHovered] = useState(false)
   const allDate = new Set()
   let preV = ""
 
@@ -57,13 +59,20 @@ export default function ChatMain({ chatData, handleKeyPress, inputRef, handleSen
     };
   }, []);
   return (
-    <div className="w-full md:w-9/12 rounded-3xl md:ml-2   flex flex-col  ">
+    <div className="w-full md:w-9/12 rounded-3xl md:ml-2 border  flex flex-col  ">
       <div className="dark:bg-white/10  bg-black/10 w-full h-20  flex justify-start  gap-2 md:rounded-t-3xl px-3 items-center ">
         <img className="bg-black w-10 h-10 rounded-3xl " src={`https://d3sd9xkxgxzd5z.cloudfront.net/${currentGroup?.image}`} />
         <div className="">
           <p className="capitalize">{currentGroup?.groupName}</p>
           <p className="text-black/20 dark:text-white/20 w-1/2 text-clip">
-            @amjed_+pulikkal,@amjeded24234
+          you,{currentGroup?.subscriptsUsers?.map(data=>{
+            if(author._id===data._id){
+              return ""
+            }else{
+          
+            return   ","+data.personal_info.userName
+            }
+          })}
           </p>
         </div>
       </div>
@@ -182,9 +191,9 @@ export default function ChatMain({ chatData, handleKeyPress, inputRef, handleSen
                 <motion.div key={item._id} {...framerAni} className="w-full flex mt-5 ">
 
                   <div className="py-3 text-black/80 px-4 bg-black/5 dark:bg-white/5 rounded-b-3xl rounded-tr-3xl   dark:text-white md:w-1/2 w-10/12">
-                    <div className="flex gap-2 items-center "> 
+                    <div className="flex gap-2 items-center ">
                       <Avatar>
-                        <AvatarImage   className='w-12 rounded-full' src={item.senderData?.personal_info?.photo} />
+                        <AvatarImage className='w-12 rounded-full' src={item.senderData?.personal_info?.photo} />
                         <AvatarFallback>CN</AvatarFallback>
                       </Avatar>
                       <div className="">
@@ -217,22 +226,49 @@ export default function ChatMain({ chatData, handleKeyPress, inputRef, handleSen
           })
         )}
       </div>
-      <div className="dark:bg-white/10  bg-black/10 w-full h-20  md:px-0  md:rounded-b-3xl flex justify-between ">
-        <div className="flex justify-center items-center w-[8.35%] ">
-          <MdAddCircleOutline onClick={() => setIsHidden(!isHidden)}
-            className="text-white/80  hover:text-primary/70  transition-colors"
-            size={40}
-          />
+      <div className=" w-full h-24  md:px-0  md:rounded-b-3xl flex justify-between py-2">
+        <div className="flex justify-center items-center w-[8.35%] relative  z-20 ">
+          <motion.div onHoverStart={() => setHovered(true)} onHoverEnd={() => setHovered(false)} whileHover={{ height: 170 }} className='absolute flex justify-center pt-3 bg-white/5 h-12 w-12 bottom-3 -mt-24 -z-10 rounded-full '>
+            {isHovered && <div className='flex flex-col gap-2'>
+              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.4 }}>
+                <FaRegFileImage
+                  className="text-white  hover:text-primary/70  transition-colors"
+                  size={30}
+                />
+              </motion.div>
+              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.3 }}>
+
+                <FaRegFileCode
+                  className="   hover:text-primary/70  transition-colors"
+                  size={30}
+                />
+              </motion.div>
+              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2 }} >
+                <FaPoll
+                  className="   hover:text-primary/70  transition-colors"
+                  size={30}
+                />
+              </motion.div>
+
+            </div>}
+            <MdAddCircleOutline
+              className={`${isHovered ? "rotate-45 " : "rotate-0 "}  text-black absolute bottom-0  hover:text-primary/70 transition-all`}
+              size={48}
+            />
+          </motion.div>
         </div>
-        <div className="col-span-6 w-5/6 h-full flex justify-center items-center ">
+        <div className="col-span-6 w-5/6 h-full relative flex justify-center items-center ">
+          {/* <div className='absolute left-4 rounded-3xl overflow-hidden rotate-6 bg-black w-20 mb-20'>
+            <img src="/download.jpg" className='' alt="" />
+          </div> */}
           <Input
             onKeyDown={handleKeyPress}
             ref={inputRef}
             placeholder="sent message"
-            className="w-full h-full focus-visible:ring-0 rounded-none focus-visible:ring-offset-0 dark:bg-white/5 bg-black/30 "
+            className="w-full h-full rounded-full focus-visible:ring-0  focus-visible:ring-offset-0 dark:bg-white/5 bg-black/30 "
             type="text"
           />
-        </div>
+        </div>  
         <div className="flex  justify-center items-center w-[8.35%] ">
           <IoSendOutline
             className="text-white/80  hover:text-primary/70 transition-colors"

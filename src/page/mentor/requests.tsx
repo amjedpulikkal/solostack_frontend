@@ -100,7 +100,7 @@ export default function  Requests({requests,getAvailableTime}) {
   const handelAcceptRequest = ()=>{
     console.log(user,"------www-------")
     mutate({requests,user})
-    setOpen()
+    setOpen(false)
   }
 
   return (
@@ -109,9 +109,9 @@ export default function  Requests({requests,getAvailableTime}) {
      
 
       return (
-        <div onClick={()=>{setUser(item),setOpen(true)}} className="flex mt-1 items-center gap-1 hover:bg-white/30 p-1 transition-colors">
+        <div onClick={()=>{setUser(item),setOpen(true)}} className="flex mt-1 items-center gap-1 hover:bg-white/10 rounded p-1 transition-colors">
           <img
-            src="/download.png"
+            src={item?.studentId?.personal_info?.photo}
             className="w-10 h-10 rounded-full"
             alt=""
           />

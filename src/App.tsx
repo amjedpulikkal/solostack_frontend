@@ -3,7 +3,7 @@ import "./App.css";
 import { ThemeProvider } from "./components/theme-provider";
 import { Toaster } from "./components/ui/sonner";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import StripeTest from "@/components/stripe/stripe"
 // import CommunicationRoom from "./page/student/communication-room";
 
 
@@ -35,12 +35,15 @@ import { ProfileProtectedRouter } from "@/router/profileProtectedRouter";
 const Chat = lazy(() => import("./page/student/chat"));
 const Home = lazy(() => import("./page/student/homePage"));
 
-import MentorHome from "./page/mentor/home"
-const AdminChat = lazy(()=>import("./page/admin/chat"))
+import Test from "./components/test"
+import MentorTime from "./page/mentor/TimeUpdate"
+import MentorHome from "./page/mentor/home";
+import PaymentPage from "./page/payment";
+import PaymentSuccess from "./page/paymentSuccess";
+const AdminChat = lazy(() => import("./page/admin/chat"))
 const Sign = lazy(() => import("./page/auth/signin"));
-const SignBasicInformation = lazy(() => import("./page/auth/signUpbasicInformation"));
+// const SignBasicInformation = lazy(() => import("./page/auth/signUpbasicInformation"));
 const Oauth2 = lazy(() => import("./page/auth/Outh2"));
-const Test = lazy(() => import("./components/test"));
 const Login = lazy(() => import("./page/auth/login"));
 const SelectAuthor = lazy(() => import("@/page/auth/selectLoginAuthor"));
 const SelectSignUpAuthor = lazy(() => import("@/page/auth/selectSignUoAuthor"));
@@ -49,22 +52,15 @@ const AllStudent = lazy(() => import("./page/admin/allStudent"));
 const AllMentor = lazy(() => import("./page/admin/allMentor"));
 const MentorProfile = lazy(() => import("./page/mentor/profile"));
 const LandingPage = lazy(() => import("./page/landingPage"));
-const Socket = lazy(() => import("./page/socket"));
+// const Socket = lazy(() => import("./page/socket"));
 const VideoCall = lazy(() => import("./page/videoCall"));
 const CommunicationRoom = lazy(() => import("./page/student/communication-room"));
 
 function SuspenseFn({ Element }) {
-  const [element, setElement] = React.useState(null);
-
-  React.useEffect(() => {
-    startTransition(() => {
-      setElement(Element);
-    });
-  }, [Element]);
 
   return (
     <Suspense fallback={<Test />}>
-      {element}
+      {Element}
     </Suspense>
   );
 }
@@ -79,12 +75,12 @@ function App() {
         <SwitchUserProvider>
           <BrowserRouter>
             <Routes>
-            <Route path="/" element={<SuspenseFn Element={<LandingPage />} />} />
+              <Route path="/" element={<SuspenseFn Element={<LandingPage />} />} />
+              <Route path="/test" element={<SuspenseFn Element={<Test />} />} />
               <Route element={<CommonRoute />}>
                 <Route path="/login" element={<SuspenseFn Element={<SelectAuthor />} />} />
                 <Route path="/student/login" element={<SuspenseFn Element={<Login />} />} />
                 <Route path="/mentor/login" element={<SuspenseFn Element={<Login />} />} />
-                <Route path="/test" element={<SuspenseFn Element={<Test />} />} />
                 <Route path="/signUp" element={<SuspenseFn Element={<SelectSignUpAuthor />} />} />
                 <Route path="/student/signUp" element={<SuspenseFn Element={<Sign />} />} />
                 <Route path="/mentor/signUp" element={<SuspenseFn Element={<Sign />} />} />
@@ -92,40 +88,47 @@ function App() {
                   path="/verify-forget-password/:token"
                   element={<VerifyForgetPassword />}
                 />
-                 <Route path="/oauth/:provider/:token" element={<SuspenseFn Element={<Oauth2 />} />} />
+                <Route path="/oauth/:provider/:token"  element={<SuspenseFn Element={<Oauth2 />} />} />
               </Route>
               {/* mentor - Router  */}
-              <Route path="/VideoCall" element={<SuspenseFn Element={<VideoCall />} />} />
+              <Route path="/VideoCall/:id" element={<SuspenseFn Element={<VideoCall />} />} />
 
               <Route path="/admin/*" element={<SuspenseFn Element={<AdminHome />} />}>
-                <Route path="" element={<></>} />
+                <Route index element={<></>} />
 
-                <Route path="allStudent" element={<SuspenseFn Element={<AllStudent />} />} />
-                <Route path="allMentor" element={<SuspenseFn Element={<AllMentor />} />} />
-                <Route path="chat"element={<SuspenseFn Element={<AdminChat />} />} />
+                  <Route path="allStudent" element={<SuspenseFn Element={<AllStudent />} />} />
+                  <Route path="allMentor" element={<SuspenseFn Element={<AllMentor />} />} />
+                <Route path="chat" element={<SuspenseFn Element={<AdminChat />} />} />
+
                 <Route path="*" element={<Page404 />} />
               </Route>
-              <Route element={<MentorProtectedRouter />}>
-              {/* <Route path="/mentor" element={<SuspenseFn Element={<MentorHome />} />} /> */}
-              <Route path="/mentor" element={<MentorHome />} />
-
+              <Route  path="/mentor/*" element={<MentorProtectedRouter />}>
+                <Route index element={<SuspenseFn Element={<MentorHome />} />} />
+              
+                <Route path="update-Time" element={<MentorTime/>} />
               </Route>
               <Route element={<ProfileProtectedRouter />}>
-              <Route path="/mentor/:userName" element={<SuspenseFn Element={<MentorProfile />} />} />
+                <Route path="/mentor/:userName" element={<SuspenseFn Element={<MentorProfile />} />} />
                 <Route path="/student/:userName" element={<StudentProfile />} />
               </Route>
 
               <Route path="/student/*" element={<StudentParentRoute />}>
                 <Route index element={<SuspenseFn Element={<Home />} />} />
-                <Route path="chat" element={<SuspenseFn Element={<Chat />} />} /> 
-                <Route path="mentor" element={<StudentTabs />} />
-                {/* <Route path='sing/basicInformation' element={<SignBasicInformation />} /> */}
+                <Route path="chat" element={<Suspense fallback={<Test />}><Chat /></Suspense>} />
+                <Route path="mentor"  element={<StudentTabs />} />
+                <Route path="payment" element={<PaymentPage/>}/>
+                <Route path="paymentSuccess" element={<PaymentSuccess/>}/>
+
+
+                
                 <Route
                   path="communication-room"
                   element={<SuspenseFn Element={<CommunicationRoom />} />}
                 />
                 <Route path="*" element={<Page404 />} />
+
               </Route>
+                {/* <Route path="/stripe" element={<StripeTest />} /> */}
               {/* Student - Router  */}
               <Route path="/*" element={<Page404 />} />
             </Routes>

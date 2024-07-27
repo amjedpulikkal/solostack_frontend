@@ -3,7 +3,10 @@ export const  studentApi={
     login:"/api/student/login",
     verifyOtp:'/api/student/verify',
     searchStudent:"/api/student/searchStudent",
-    getTodyReview:"/api/student/getTodyReview"
+    getTodyReview:"/api/student/getTodyReview",
+    stripeAPI:"/api/stripe/create-payment-intent",
+    stripeAPIIsSucceeded:"/api/stripe/isSucceeded"
+    
     
 }
 

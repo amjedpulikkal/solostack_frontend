@@ -245,3 +245,43 @@ body::-webkit-scrollbar-thumb {
   stroke-width: 10px;
 }
 
+.loader12 {
+  width: 20px;
+  height: 12px;
+  display: block;
+  margin: auto;
+  position: relative;
+  border-radius: 4px;
+  color: #FFF;
+  background: currentColor;
+  box-sizing: border-box;
+  animation: animloader12 0.6s 0.3s ease infinite alternate;
+}
+.loader12::after,
+.loader12::before {
+  content: '';  
+  box-sizing: border-box;
+  width: 20px;
+  height: 12px;
+  background: currentColor;
+  position: absolute;
+  border-radius: 4px;
+  top: 0;
+  right: 110%;
+  animation: animloader12  0.6s ease infinite alternate;
+}
+.loader12::after {
+  left: 110%;
+  right: auto;
+  animation-delay: 0.6s;
+}
+
+@keyframes animloader12 {
+  0% {
+    width: 20px;
+  }
+  100% {
+    width: 48px;
+  }
+}
+

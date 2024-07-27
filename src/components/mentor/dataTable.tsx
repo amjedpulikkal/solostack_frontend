@@ -1,11 +1,5 @@
-"use client"
-
 import * as React from "react"
-// import {
-//   CaretSortIcon,
-//   ChevronDownIcon,
-//   DotsHorizontalIcon,
-// } from "@radix-ui/react-icons"
+
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -23,11 +17,10 @@ import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
+
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
+
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
@@ -40,114 +33,6 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-// const data: Payment[] = [
-//   {
-//     id: "m5gr84i9",
-//     user: 3006,
-//     userName: "rewrsuccess",
-//     email: "ken99@yahoo.com",
-//     status: "active"
-
-//   },
-//   {
-//     id: "3u1reuv4",
-//     user: 242,
-//     userName: "rewrsuccess",
-//     email: "Abe45@gmail.com",
-//     status: "active"
-//   },
-//   {
-//     id: "derv1ws0",
-//     user: 837,
-//     userName: "rewrprocessing",
-//     email: "Monserrat44@gmail.com",
-//     status: "active"
-//   },
-//   {
-//     id: "5kma53ae",
-//     user: 874,
-//     userName: "rewrsuccess",
-//     email: "Silas22@gmail.com",
-//     status: "active"
-//   },
-//   {
-//     id: "5kma53ae",
-//     user: 874,
-//     userName: "rewrsuccess",
-//     email: "Silas22@gmail.com",
-//     status: "active"
-//   },
-//   {
-//     id: "5kma53ae",
-//     user: 874,
-//     userName: "rewrsuccess",
-//     email: "Silas22@gmail.com",
-//     status: "active"
-//   },
-//   {
-//     id: "5kma53ae",
-//     user: 874,
-//     userName: "rewrsuccess",
-//     email: "Silas22@gmail.com",
-//     status: "active"
-//   },
-//   {
-//     id: "5kma53ae",
-//     user: 874,
-//     userName: "rewrsuccess",
-//     email: "Silas22@gmail.com",
-//     status: "active"
-//   },
-//   {
-//     id: "bhqecj4p",
-//     user: 721,
-//     userName: "rewrfailed",
-//     email: "carmella@hotmail.com",
-//     status: "active"
-//   },
-//   {
-//     id: "bhqecj4p",
-//     user: 721,
-//     userName: "rewrfailed",
-//     email: "carmella@hotmail.com",
-//     status: "active"
-//   },
-//   {
-//     id: "bhqecj4p",
-//     user: 721,
-//     userName: "rewrfailed",
-//     email: "carmella@hotmail.com",
-//     status: "active"
-//   },
-//   {
-//     id: "bhqecj4p",
-//     user: 721,
-//     userName: "rewrfailed---------",
-//     email: "carmella@hotmail.com",
-//     status: "active"
-//   },
-//   {
-//     id: "bhqecj4p",
-//     user: 721,
-//     userName: "rewrfailed",
-//     email: "carmella@hotmail.com",
-//     status: "active"
-//   },
-//   {
-//     id: "bhqecj4p",
-//     user: 721,
-//     userName: "rewrfailed",
-//     email: "carmella@hotmail.com",
-//     status: "active"
-//   },
-//   {
-//     id: "bhqecj4p",
-//     user: 721,
-//     userName: "rewrfailed",
-//     email: "carmella@hotmail.com",
-//     status: "active"
-//   },
-// ]
 
 export type Payment = {
   id: string
@@ -159,6 +44,7 @@ export type Payment = {
   joinedAt: string
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const columns: ColumnDef<Payment>[] = [
   {
     id: "select",
