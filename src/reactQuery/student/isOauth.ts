@@ -5,7 +5,7 @@ import axios from 'axios';
 import { toast } from "sonner"
 import { studentApi } from "@/api";
 
-
+axios.defaults.withCredentials = true;
 export const isOauth = () => {
     const queryClient = useQueryClient();
 

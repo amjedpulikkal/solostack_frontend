@@ -3,7 +3,7 @@ import { RootState } from "@/redux/store";
 import axios from "axios";
 import { useMutation, useQuery } from "react-query";
 import { useSelector } from "react-redux";
-
+axios.defaults.withCredentials = true;
 export const useGetGroup = (userID: string) => {
   const apiCall = async () => {
     console.log(userID, "---if");

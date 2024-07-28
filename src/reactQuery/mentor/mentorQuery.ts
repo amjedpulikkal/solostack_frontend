@@ -2,6 +2,7 @@ import { mentorApi } from "@/api";
 import axios from "axios";
 import { useMutation, useQuery } from "react-query";
 import React from "react"
+axios.defaults.withCredentials = true;
 const getTimeWithIndex = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
 const getIndexWithTime = {
   9: 0,

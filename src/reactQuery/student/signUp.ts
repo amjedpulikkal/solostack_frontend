@@ -5,7 +5,7 @@ import { toast } from "sonner"
 import { useDispatch } from "react-redux";
 import { setAuthorData, setAuthor } from "@/redux/slices/authorSlice";
 import { useNavigate } from "react-router-dom";
-import { useAuthor } from "@/components/switchUser-provider";
+
 import { studentApi, mentorApi } from "@/api";
 import { IFormData } from "../../type"
 import { useCookies } from "react-cookie";
@@ -15,10 +15,9 @@ import { Iauthor } from "../../type";
 
 // }
 
-
+axios.defaults.withCredentials = true;
 export const useSingUpQuery = () => {
-    const queryClient = useQueryClient();
-
+ 
     const postLogin = async (formData: IFormData) => {
         if (formData.author === "student") {
             const response = await axios.post(studentApi.signIn, formData);

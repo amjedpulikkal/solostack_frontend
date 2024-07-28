@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "react-query";
 import axios from 'axios';
 import { studentApi } from "@/api";
 
-
+axios.defaults.withCredentials = true;
 export const useSignOutQuery = () => {
     const queryClient = useQueryClient();
 

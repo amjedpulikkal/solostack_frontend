@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { mentorApi } from "@/api";
 import axios from "axios";
 import { useMutation } from "react-query";
-
+axios.defaults.withCredentials = true;
 export const useUpdateProfileIMage = (setOpen:React.Dispatch<React.SetStateAction<boolean>>) => {
     const dispatch = useDispatch()
     const apiCall = async (image: Blob|string) => {
