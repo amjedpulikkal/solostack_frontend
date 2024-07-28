@@ -29,7 +29,7 @@ const CheckoutForm: React.FC<{ clientSecret: string, amount: number, type: strin
     const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: 'http://localhost:5173/student/paymentSuccess',
+        return_url: `${ import.meta.env.VITE_calint_BASE_URL||"http://localhost:5173"}/student/paymentSuccess`,
       },
     }) as { error: StripeError; paymentIntent?: PaymentIntent };
 
