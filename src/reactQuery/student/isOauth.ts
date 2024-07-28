@@ -3,13 +3,14 @@ import { useMutation, useQueryClient } from "react-query";
 
 import axios from 'axios';
 import { toast } from "sonner"
+import { studentApi } from "@/api";
 
 
 export const isOauth = () => {
     const queryClient = useQueryClient();
 
     const tokenVerify = async (formData: any) => {
-        const response = await axios.post('/api/student/isOauth ', formData);
+        const response = await axios.post(studentApi.isOauth, formData);
         return response.data;
     };
 

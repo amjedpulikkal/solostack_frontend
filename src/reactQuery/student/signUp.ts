@@ -137,14 +137,14 @@ export const useLoginQuery = (author: Iauthor) => {
 }
 
 export const useForgetPasswordQuery = () => {
-    const queryClient = useQueryClient();
+    // const queryClient = useQueryClient();
     // const dispatch = useDispatch()
     // const navigate = useNavigate()
     // const {setAuthor} = useAuthor()
 
 
     const otpVerify = async (formData: { email: string }) => {
-        const response = await axios.post('/api/student/forgetPassword', formData);
+        const response = await axios.post(studentApi.forgetPassword, formData);
         return response.data;
     };
 

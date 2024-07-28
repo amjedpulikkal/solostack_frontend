@@ -49,7 +49,10 @@ export const studentApi = {
     searchStudent: createEndpoint("/student/searchStudent"),
     getTodyReview: createEndpoint("/student/getTodyReview"),
     stripeAPI: createEndpoint("/stripe/create-payment-intent"),
-    stripeAPIIsSucceeded: createEndpoint("/stripe/isSucceeded")
+    stripeAPIIsSucceeded: createEndpoint("/stripe/isSucceeded"),
+    signOut:createEndpoint("/student/signOut"),
+    isOauth:createEndpoint('/student/isOauth'),
+    forgetPassword:createEndpoint('/student/forgetPassword')
 };
 
 export const mentorApi = {
