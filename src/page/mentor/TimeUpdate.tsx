@@ -13,6 +13,7 @@ import { toast } from "sonner";
 
 import { DrawerDialogDetails } from "@/components/mentor/detailsdrawer";
 import Requests from "./requests";
+import { socket } from "../socket";
 
 
 export default function HomePage(): JSX.Element {
@@ -23,7 +24,9 @@ export default function HomePage(): JSX.Element {
   const GetAvailableTime = useGetAvailableTime(setSelectedDate, date);
   const { isLoading, mutate } = useUpdateAvailableTime(GetAvailableTime.refetch);
   // const bigToast = useToast();
-
+    socket.on("newObj",(data:any)=>{
+      console.log(data,"-------------------------------------------------sdfsdg")
+    })
 
   const handelSelectedDate = (index: number) => {
     if (selectedDate.includes(index)) {

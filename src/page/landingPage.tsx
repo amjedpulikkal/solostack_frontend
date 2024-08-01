@@ -217,14 +217,14 @@ function LandingPage() {
                 <div className='flex justify-center items-end absolute w-screen h-screen   -z-50 overflow-hidden '>
 
                     <motion.div
-                        animate={controls} variants={{ start: { scale: 150   }, stop: { scale: 0 } }}
+                        animate={controls} variants={{ start: { scale: 150   }, stop: { scale: 0,transition:{duration:0.5} } }}
 
                         transition={{ duration: 0.5 }} className='h-5 w-5 flex justify-center  bg-primary  rounded-full'>
 
                     </motion.div>
                 </div>
 
-                <motion.div className='mt-60 -mb-60'
+                <motion.div className="w-10 h-10 bg-primary  absolute -bottom-20"
                     onViewportEnter={() => controls.start("start")}
                     onViewportLeave={() => controls.start("stop")}
                 />
