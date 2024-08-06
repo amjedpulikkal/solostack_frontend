@@ -18,7 +18,7 @@ export default function STimerTab(): JSX.Element {
   const{data}  =useGetTodyReview()
   const date = new Date(data?.date)
   date.setHours(data?.time)
-  const isEnded = false
+  const isEnded = !data?.length
 
   console.log("date",isEnded)
   return (
@@ -31,30 +31,30 @@ export default function STimerTab(): JSX.Element {
            <TabsContent value="review" className={isEnded ? " ml-3 dark:bg-black/80 blur-md bg-white/30  " : "mt-3 ml-3"}>
             <motion.div {...framer_error} className="">
               <div className=" text-xl">
-                <p>{date?.toDateString()}</p>
+                <p>{date?.toDateString()|| ""}</p>
               </div>
               <div className="font-bold  text-8xl">
-                <p>{date?.getHours() > 12 ? date?.getHours() - 12 : date?.getHours()}:{date?.getMinutes() < 10 ? "0" + date?.getMinutes() : date?.getMinutes()}</p>
+                <p>{date?.getHours() > 12 ? date?.getHours() - 12 || "00" : date?.getHours()|| "00"}:{date?.getMinutes() < 10 ? "0" + date?.getMinutes()|| "00" : date?.getMinutes()|| "00"}</p>
               
               </div>
               <div  className="text-xl mt-3">
                 <p>Time remaining</p>
               </div>
               <div key={date.toString()}  className="font-medium text-5xl mt-1 ">
-             {!isEnded ?<CountdownTimer endTime={date} />:<>00:00:00</>}
+             {!isEnded ?<CountdownTimer endTime={date} />:"00:00:00"}
               </div>
             </motion.div>
           </TabsContent>
-          <div className=" m-3 flex justify-center w-full" >
+          <div className={isEnded ? "dark:bg-black/80 blur-md bg-white/30  m-3 flex justify-center w-full":" m-3 flex justify-center w-full"} >
           <Link to={`/videoCall/${data?._id}`}> <Button  className="rounded-lg">  Join now</Button></Link>
           </div>
         </div>
-        <div className="hidden md:block col-span-12 sm:col-span-7">
-          {isEnded &&<TabsContent value="review"  >
-            <div className="absolute pt-4 z-10 top-[130px] right-[232px]">
-            <Button className="rounded-2xl px-7 py-7 text-xl">Book new</Button>
+          {isEnded &&
+            <div className="absolute  z-10 flex justify-center bg items-center w-full h-full">
+            <Button className="rounded-2xl px-7 py-7 text-xl hover:shadow-lg hover:shadow-primary duration-100 transition-colors">Book new</Button>
             </div>
-          </TabsContent>}
+         }
+        <div className="hidden md:block col-span-12 sm:col-span-7">
           {/* <TabsContent value="Conversations" className={true ? "h-full w-full p-5  dark:bg-black/80 blur-md bg-white/30  " : "h-full w-full p-5"}  >
             <motion.div {...framer_error} className="h-full w-full rounded-3xl flex justify-center  items-end" style={{ backgroundImage: `url(https://nextui.org/_next/image?url=%2Fimages%2Fhero-card.webp&w=256&q=75)` }}  >
               <div className="h-14 rounded-3xl w-11/12 backdrop-blur-sm bg-black/30 mb-4 flex justify-between px-2 items-center text-primary-foreground dark:text-white ">

@@ -61,7 +61,8 @@ export function CountdownTimer({ endTime }: props): JSX.Element {
   }, [secondsRemaining, hoursRemaining, minutesRemaining,endMillis]);
 
   return (
-    <p>-{hoursRemaining < 10 ? "0" + hoursRemaining||"0" : hoursRemaining||"0" }:{minutesRemaining < 10 ? "0" + minutesRemaining ||"00" : minutesRemaining ||"00"}:{secondsRemaining < 10 ? "0" + secondsRemaining ||"00": secondsRemaining ||"00"}</p>
+    <></>
+    // <p>-{hoursRemaining < 10 ? "0" + hoursRemaining||"0" : hoursRemaining||"0" }:{minutesRemaining < 10 ? "0" + minutesRemaining ||"00" : minutesRemaining ||"00"}:{secondsRemaining < 10 ? "0" + secondsRemaining ||"00": secondsRemaining ||"00"}</p>
   )
 
 }
