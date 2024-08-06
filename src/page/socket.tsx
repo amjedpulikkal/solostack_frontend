@@ -7,8 +7,7 @@ import { toast } from 'sonner';
 // export const useAuthorData = ():string => {
 //     return useSelector((state: RootState) => state.author?.authorData)._id
 // };
-const server = import.meta.env.
- ||'http://localhost:3000'
+// const server = import.meta.env.||'http://localhost:3000'
 export const socket = io("https://api.solostack.online");
 
 
