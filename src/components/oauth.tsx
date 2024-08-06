@@ -11,7 +11,7 @@ import { FaLinkedin } from "react-icons/fa6";
 
 export function Authcomponents() {
 
-    const server = "http://localhost:3000/api/v1"
+    const server =  import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api/v1";
 
     const handelGoogle = (oauth: string) => {
       window.location.href = `${server}/student/auth/${oauth}`
