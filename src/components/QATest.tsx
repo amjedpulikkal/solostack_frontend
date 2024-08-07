@@ -131,7 +131,7 @@ export default function QATest({
             <div className="flex justify-center">
 
               <Button className="mt-10" onClick={handleButton}>
-                join new
+                join now
               </Button>
             </div>
           </div>

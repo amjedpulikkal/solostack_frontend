@@ -202,7 +202,7 @@ export default function App(): JSX.Element {
                     </AnimatePresence>
                   </div>
                   <div className="px-4 pb-2 pt-4">
-                    <Button className="uppercase h-16 w-full text-lg rounded-full " type="submit">{isLoading ? <DotLoader /> : "sign in"}</Button>
+                    <Button className="uppercase h-16 w-full text-lg rounded-full " type="submit">{isLoading ? <DotLoader /> : "sign up"}</Button>
                   </div>
                   <div className="p-4 text-center right-0 left-0 flex justify-center space-x-4 mt-16 lg:hidden ">
                     <a href="#">
