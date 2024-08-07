@@ -20,9 +20,9 @@ export default function MentorHome() {
                     </div>
 
                 </div>
-                <div>
+                {/* <div>
                     <HeatmapCharts />   
-                </div>
+                </div> */}
             </div>
         </>
     )

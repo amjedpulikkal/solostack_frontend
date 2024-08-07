@@ -67,7 +67,8 @@ export const mentorApi = {
     updateMentorProfileImage: createEndpoint("/mentor/update-image"),
     sendRequest: createEndpoint("/mentor/student/storeRequest"),
     searchMentor: createEndpoint("/mentor/searchMentor"),
-    acceptRequest: createEndpoint("/mentor/student/acceptRequest")
+    acceptRequest: createEndpoint("/mentor/student/acceptRequest"),
+    getTodyReview: createEndpoint("/mentor/getTodyReview"),
 };
 
 export const ChatGroupApi = {

@@ -16,78 +16,61 @@ export default function VideoCall(): JSX.Element {
   const [remoteVideoStream, setRemoteVideoStream] = useState<MediaStream | null>(null);
 const [remotePeerId,setRemotePeerId] = useState(null)
 
-  useEffect(() => {
-    if (!videoMuted && !audioMuted) {
-      console.log(!videoMuted && !audioMuted, videoMuted, audioMuted);
-      console.log(1);
-      console.log("seeeeeeeeeeeeeeeeet1111111");
-
-      // navigator.permissions.query({ name: "" }).then((res) => {
-      //   console.log(res);
-      // });
-
-      navigator.mediaDevices
-        .getUserMedia({
-          video: { width: { ideal: 1920 }, height: { ideal: 1080 } },
-          audio: true,
-        })
-        .then((mediaStream) => {
-          console.log("seeeeeeeeeeeeeeeeet222222222");
-          setVideoStream(mediaStream);
-          if (currentUserVideoRef.current) {
-            currentUserVideoRef.current.srcObject = mediaStream;
-            currentUserVideoRef.current.play();
-          }
-        });
-    } else if (videoMuted) {
-      navigator.mediaDevices.getUserMedia({ audio: true }).then((mediaStream) => {
-        setVideoStream(mediaStream);
-        if (currentUserVideoRef.current) {
-          currentUserVideoRef.current.srcObject = mediaStream;
-          currentUserVideoRef.current.play();
-        }
-        console.log(2);
-      });
-    } else if (audioMuted) {
-      navigator.mediaDevices
-        .getUserMedia({
-          video: { width: { ideal: 1920 }, height: { ideal: 1080 } },
-          audio: false,
-        })
-        .then((mediaStream) => {
-          setVideoStream(mediaStream);
-          if (currentUserVideoRef.current) {
-            currentUserVideoRef.current.srcObject = mediaStream;
-            currentUserVideoRef.current.play();
-          }
-          console.log(3);
-        });
-    } else {
-      navigator.mediaDevices.getDisplayMedia({ audio: false, video: false });
-      setVideoStream(null);
-      console.log("4");
+const setupMediaStream = async (constraints) => {
+  try {
+    const mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
+    if (currentUserVideoRef.current) {
+      currentUserVideoRef.current.srcObject = mediaStream;
+      currentUserVideoRef.current.play();
     }
-  }, [videoMuted, audioMuted]);
+    setVideoStream(mediaStream);
+  } catch (error) {
+    console.error('Error accessing media devices.', error);
+  }
+};
 
-  const toggleVideoMute = () => {
-    if (videoStream) {
-      videoStream.getVideoTracks().forEach((track) => {
-        track.enabled = !!videoMuted;
-      });
-      console.log(!videoMuted, "-----------", videoMuted);
+const clearMediaStream = () => {
+  if (videoStream) {
+    videoStream.getTracks().forEach(track => track.stop());
+  }
+  setVideoStream(null);
+};
 
-      setVideoMuted(!videoMuted);
-    }
-  };
+useEffect(() => {
+  clearMediaStream();
+  if (!videoMuted && !audioMuted) {
+    setupMediaStream({ video: { width: { ideal: 1920 }, height: { ideal: 1080 } }, audio: true });
+  } else if (videoMuted && !audioMuted) {
+    setupMediaStream({ audio: true });
+  } else if (!videoMuted && audioMuted) {
+    setupMediaStream({ video: { width: { ideal: 1920 }, height: { ideal: 1080 } }, audio: false });
+  } else {
+    navigator.mediaDevices.getDisplayMedia({ audio: false, video: false })
+      .then((mediaStream) => setVideoStream(mediaStream))
+      .catch((error) => console.error('Error accessing display media.', error));
+  }
 
-  const toggleAudioMute = () => {
-    if (videoStream) {
-      videoStream.getAudioTracks().forEach((track) => {
-        track.enabled = !!audioMuted;
-      });
-      setAudioMuted(!audioMuted);
-    }
-  };
+  return () => clearMediaStream(); 
+}, [videoMuted, audioMuted]);
+
+const toggleVideoMute = () => {
+  if (videoStream) {
+    videoStream.getVideoTracks().forEach(track => {
+      track.enabled = !videoMuted;
+    });
+    setVideoMuted(prev => !prev);
+  }
+};
+
+const toggleAudioMute = () => {
+  if (videoStream) {
+    videoStream.getAudioTracks().forEach(track => {
+      track.enabled = !audioMuted;
+    });
+    setAudioMuted(prev => !prev);
+  }
+};
+
 
   useEffect(() => {
     const peer = new Peer();

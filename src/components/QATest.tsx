@@ -63,8 +63,8 @@ export default function QATest({
   return (
     <>
      
-      <div className="w-screen h-screen bg-white dark:bg-black p-8 pl-20 gap-6 flex">
-        <div className=" w-3/5 h-3/5">
+      <div className=" p-10 gap-6 grid grid-cols-2">
+        <div className=" md:col-span-1 col-span-2 h-3/5">
           <div className="relative rounded-2xl">
             <video
               width={1920}
@@ -87,7 +87,7 @@ export default function QATest({
                 )}
               </div>
 
-              <div className="flex justify-center w-full gap-2">
+              <div className="flex justify-center w-full gap-2 mt-8">
                 <div
                   onClick={toggle.toggleVideoMute}
                   className="outline outline-1 dark:outline-white/40 outline-black/40 dark:hover:bg-white/15  hover:bg-black/15 transition-colors flex justify-center items-center rounded-full p-3"
@@ -120,16 +120,18 @@ export default function QATest({
               <ChangeAudioinput/>
           </div>
         </div>
-        <div className=" w-1/2 ">
+        <div className="  md:col-span-1 col-span-2 ">
           <div className=" mt-10 flex justify-center ">
             <IntelPage />
           </div>
           <div>
          
-          
+          <div className="flex justify-center">
+            
             <Button className="mt-10" onClick={handleButton}>
               join new
             </Button>
+          </div>
           </div>
         </div>
                  
