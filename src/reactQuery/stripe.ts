@@ -16,7 +16,14 @@ export const useStripeAPi = (body,setClientSecret) => {
   });
 };
 
+export const useIceServers=()=>{
+  const apiCall = async () => {
+    const response = await axios.get(studentApi.iceServers);
 
+    return response.data;
+  };
+  return useQuery("iceServers", apiCall, );
+}
 
 export const useStripeIsSucceeded = (setIsSucceeed,stripePaymentIntentId) => {
   const apiCall = async () => {

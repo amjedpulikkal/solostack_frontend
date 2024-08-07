@@ -52,7 +52,8 @@ export const studentApi = {
     stripeAPIIsSucceeded: createEndpoint("/stripe/isSucceeded"),
     signOut:createEndpoint("/student/signOut"),
     isOauth:createEndpoint('/student/isOauth'),
-    forgetPassword:createEndpoint('/student/forgetPassword')
+    forgetPassword:createEndpoint('/student/forgetPassword'),
+    iceServers:createEndpoint("/ice-servers")
 };
 
 export const mentorApi = {

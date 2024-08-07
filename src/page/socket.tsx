@@ -8,7 +8,9 @@ import { toast } from 'sonner';
 //     return useSelector((state: RootState) => state.author?.authorData)._id
 // };
 // const server = import.meta.env.||'http://localhost:3000'
-export const socket = io("https://api.solostack.online");
+// export const socket = io("https://api.solostack.online");
+export const socket = io('http://localhost:3000');
+
 
 
 export default function Socket  () {
