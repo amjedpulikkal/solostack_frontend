@@ -18,7 +18,7 @@ export default function STimerTab(): JSX.Element {
   const{data}  =useGetTodyReview()
   const date = new Date(data?.date)
   date.setHours(data?.time)
-  const isEnded = !data?.length
+  const isEnded = data?.length === 0
 
   console.log("date",isEnded)
   return (
