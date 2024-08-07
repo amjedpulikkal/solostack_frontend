@@ -1,8 +1,8 @@
-import  {
+import {
   Dispatch,
   RefObject,
   SetStateAction,
-  
+
 } from "react";
 
 
@@ -19,7 +19,7 @@ import { Button } from "./ui/button";
 import { ChangeVideo } from "@/page/videoCall/changeVideo";
 import { ChangeVoice } from "@/page/videoCall/changeVoice";
 import { ChangeAudioinput } from "@/page/videoCall/chageAudiooutput";
-import {socket} from "@/page/socket";
+import { socket } from "@/page/socket";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -40,7 +40,7 @@ type props = {
     toggleVideoMute: () => void;
     startPage: Dispatch<SetStateAction<boolean>>;
   },
-  peerId:string,
+  peerId: string,
 };
 export default function QATest({
   videoRef,
@@ -53,16 +53,18 @@ export default function QATest({
 
   const { id } = useParams();
   const author = useSelector((state: RootState) => state.author?.author)
-  const handleButton =()=>{
+  const handleButton = () => {
 
-    socket.emit("joinVideoCall",{peerId:peerId,id,author})
+    socket.emit("joinVideoCall", { peerId: peerId, id, author })
     // toggle.startPage(false)
   }
-
+  socket.on("userWaiting", data => {
+    console.log(data,"userWaiting")
+  })
 
   return (
     <>
-     
+
       <div className=" p-10 gap-6 grid grid-cols-2">
         <div className=" md:col-span-1 col-span-2 h-3/5">
           <div className="relative rounded-2xl">
@@ -115,9 +117,9 @@ export default function QATest({
             </div>
           </div>
           <div className=" w-full h-20 mt-3 flex justify-around ">
-              <ChangeVideo/>
-              <ChangeVoice/>
-              <ChangeAudioinput/>
+            <ChangeVideo />
+            <ChangeVoice />
+            <ChangeAudioinput />
           </div>
         </div>
         <div className="  md:col-span-1 col-span-2 ">
@@ -125,16 +127,16 @@ export default function QATest({
             <IntelPage />
           </div>
           <div>
-         
-          <div className="flex justify-center">
-            
-            <Button className="mt-10" onClick={handleButton}>
-              join new
-            </Button>
-          </div>
+
+            <div className="flex justify-center">
+
+              <Button className="mt-10" onClick={handleButton}>
+                join new
+              </Button>
+            </div>
           </div>
         </div>
-                 
+
         <div className="absolute top-0 right-0">
           <RoundCountdownTimer time={60} />
         </div>
