@@ -26,7 +26,7 @@ type props = {
     toggleAudioMute: () => void;
     toggleVideoMute: () => void;
   };
-  
+  endCall:()=>void
   
   remoteVideoStream: MediaStream,
 
@@ -37,7 +37,7 @@ export function VideoCallMain({
   toggle,
   videoMuted,
   audioMuted,
-
+  endCall,
   remoteVideoStream,
   
 }: props): JSX.Element {
@@ -117,7 +117,7 @@ export function VideoCallMain({
           </div>
           <div className="outline outline-1 dark:outline-white/40 outline-black/40 dark:hover:bg-white/15  hover:bg-black/15 transition-colors flex justify-center items-center rounded-full p-3">
           
-              <MdCallEnd className="text-primary" size={30} />
+              <MdCallEnd onClick={endCall} className="text-primary" size={30} />
           
           </div>
           

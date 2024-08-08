@@ -13,10 +13,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useEffect ,useState} from "react";
+interface ChangeVideoProps {
+  onSelectDevice: (deviceId: string) => void;
+}
+export function ChangeVideo({onSelectDevice}:ChangeVideoProps) {
 
-export function ChangeVideo() {
-
-  const [position, setPosition] = useState("bottom")
+  const [position, setPosition] = useState("")
   const [label, setLabel] = useState<string>("")
 
   const [videoList,setVideList] = useState< MediaDeviceInfo[]|[]>([])
@@ -28,8 +30,8 @@ export function ChangeVideo() {
 
        const devices = await navigator.mediaDevices.enumerateDevices();
        const videoDevices = devices.filter(device => device.kind === 'videoinput');
-      
-       console.log(videoDevices)
+      console.log(videoDevices  )
+    
        setVideList(videoDevices)
       },3000)
 
@@ -41,6 +43,12 @@ export function ChangeVideo() {
    
    getMediaDeviceList()
  },[])
+
+ const handleSelectDevice = (deviceId: string, label: string) => {
+  setLabel(label);
+  
+  onSelectDevice(deviceId);
+};
 
   return (
     <DropdownMenu >
@@ -56,7 +64,7 @@ export function ChangeVideo() {
 
           {videoList.map((item=>{
             return (
-              <DropdownMenuRadioItem className="rounded-2xl" onClick={()=>setLabel(item.label)} value={item.deviceId}>{item.label}</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem key={item.label} className="rounded-2xl" onClick={() => handleSelectDevice(item.deviceId, item.label)} value={item.deviceId}>{item.label}</DropdownMenuRadioItem>
             )
           }))}
           

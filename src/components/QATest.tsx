@@ -16,7 +16,7 @@ import { RoundCountdownTimer } from "../page/videoCall/RoundCountdowntimer";
 import IntelPage from "../page/videoCall/intelPage";
 import { Button } from "./ui/button";
 
-import { ChangeVideo } from "@/page/videoCall/changeVideo";
+// import { ChangeVideo } from "@/page/videoCall/changeVideo";
 import { ChangeVoice } from "@/page/videoCall/changeVoice";
 import { ChangeAudioinput } from "@/page/videoCall/chageAudiooutput";
 import { socket } from "@/page/socket";
@@ -41,6 +41,8 @@ type props = {
     startPage: Dispatch<SetStateAction<boolean>>;
   },
   peerId: string,
+  ChangeVideo: React.ReactNode,
+  ChangeVoice:React.ReactNode
 };
 export default function QATest({
   videoRef,
@@ -49,6 +51,8 @@ export default function QATest({
   videoMuted,
   toggle,
   peerId,
+  ChangeVideo,
+  ChangeVoice
 }: props) {
 
   const { id } = useParams();
@@ -59,7 +63,7 @@ export default function QATest({
     // toggle.startPage(false)
   }
   socket.on("userWaiting", data => {
-    console.log(data,"userWaiting")
+    console.log(data, "userWaiting")
   })
 
   return (
@@ -117,9 +121,9 @@ export default function QATest({
             </div>
           </div>
           <div className=" w-full h-20 mt-3 flex justify-around ">
-            <ChangeVideo />
-            <ChangeVoice />
-            <ChangeAudioinput />
+            {ChangeVideo}
+            {ChangeVoice}
+            {/* <ChangeAudioinput /> */}
           </div>
         </div>
         <div className="  md:col-span-1 col-span-2 ">

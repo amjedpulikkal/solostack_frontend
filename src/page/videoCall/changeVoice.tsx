@@ -13,7 +13,7 @@ import {
 import { useEffect ,useState} from "react";
 import { CiMicrophoneOn } from "react-icons/ci";
 
-export function ChangeVoice() {
+export function ChangeVoice({onSelectDevice}:{onSelectDevice:(deviceId: string)=>void}) {
 
   const [position, setPosition] = useState("bottom")
   const [label, setLabel] = useState<string>("")
@@ -56,7 +56,7 @@ export function ChangeVoice() {
 
           {videoList.map((item=>{
             return (
-              <DropdownMenuRadioItem className="rounded-2xl" onClick={()=>setLabel(item.label)} value={item.deviceId}>{item.label}</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem key={item.label} className="rounded-2xl" onClick={()=>{setLabel(item.label),onSelectDevice(item.deviceId)}} value={item.deviceId}>{item.label}</DropdownMenuRadioItem>
             )
           }))}
           
