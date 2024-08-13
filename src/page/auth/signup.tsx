@@ -50,9 +50,7 @@ export default function App(): JSX.Element {
   const handleClick = (author: Iauthor) => {
     if (author === "mentor") {
       navigate("/mentor/signUp")
-    } else if (author === "tutor") {
-      navigate("/tutor/signUp")
-    } else if (author === "student") {
+    } else  {
       navigate("/student/signUp")
     }
     setAuthor(author)
