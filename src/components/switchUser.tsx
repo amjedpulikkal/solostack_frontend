@@ -40,12 +40,12 @@ export function SwitchUser({ author, handleClick}:props) {
                             <p className="ml-2">Mentor</p>
                         </div>
                     </DropdownMenuRadioItem >
-                    <DropdownMenuRadioItem value="tutor" >
+                    {/* <DropdownMenuRadioItem value="tutor" >
                         <div className=" flex justify-between items-center">
                             <PiChalkboardTeacherFill size={35} />
                             <p className="ml-2">Tutor</p>
                         </div>
-                    </DropdownMenuRadioItem >
+                    </DropdownMenuRadioItem > */}
                 </DropdownMenuRadioGroup>
             </DropdownMenuContent>
         </DropdownMenu>

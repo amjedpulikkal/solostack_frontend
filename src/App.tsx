@@ -32,10 +32,10 @@ import MentorHome from "./page/mentor/home";
 import PaymentPage from "./page/payment";
 import PaymentSuccess from "./page/paymentSuccess";
 const AdminChat = lazy(() => import("./page/admin/chat"))
-const Sign = lazy(() => import("./page/auth/signin"));
+const Sign = lazy(() => import("./page/auth/signup"));
 
 const Oauth2 = lazy(() => import("./page/auth/Outh2"));
-const Login = lazy(() => import("./page/auth/login"));
+const SignIn = lazy(() => import("./page/auth/signIn"));
 const SelectAuthor = lazy(() => import("@/page/auth/selectLoginAuthor"));
 const SelectSignUpAuthor = lazy(() => import("@/page/auth/selectSignUoAuthor"));
 const AdminHome = lazy(() => import("./page/admin/home"));
@@ -71,9 +71,9 @@ function App() {
               <Route path="/" element={<SuspenseFn Element={<LandingPage />} />} />
               <Route path="/test" element={<SuspenseFn Element={<Test />} />} />
               <Route element={<CommonRoute />}>
-                <Route path="/login" element={<SuspenseFn Element={<SelectAuthor />} />} />
-                <Route path="/student/login" element={<SuspenseFn Element={<Login />} />} />
-                <Route path="/mentor/login" element={<SuspenseFn Element={<Login />} />} />
+                <Route path="/signIn" element={<SuspenseFn Element={<SelectAuthor />} />} />
+                <Route path="/student/signIn" element={<SuspenseFn Element={<SignIn />} />} />
+                <Route path="/mentor/signIn" element={<SuspenseFn Element={<SignIn />} />} />
                 <Route path="/signUp" element={<SuspenseFn Element={<SelectSignUpAuthor />} />} />
                 <Route path="/student/signUp" element={<SuspenseFn Element={<Sign />} />} />
                 <Route path="/mentor/signUp" element={<SuspenseFn Element={<Sign />} />} />

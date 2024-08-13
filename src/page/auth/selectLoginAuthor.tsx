@@ -11,11 +11,11 @@ export default function SelectAuthor(): JSX.Element {
 
     const handleClick = (author: Iauthor) => {
         if (author === "mentor") {
-            navigate("/mentor/login")
+            navigate("/mentor/signIn")
         } else if (author === "tutor") {
-            navigate("/tutor/login")
+            navigate("/tutor/signIn")
         } else if (author === "student") {
-            navigate("/student/login")
+            navigate("/student/signIn")
         }
     }
 
