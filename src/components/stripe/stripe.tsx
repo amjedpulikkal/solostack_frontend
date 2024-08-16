@@ -51,15 +51,15 @@ const CheckoutForm: React.FC<{ clientSecret: string, amount: number, type: strin
   }, [elements]);
   return (
     <>
-      <div className='flex p-10'>
-        <div className='w-1/2   h-full'>
+      <div className='md:flex p-10'>
+        <div className='md:w-1/2 w-full  h-full'>
           <IoMdArrowRoundBack className='text-3xl -mt-8 hover:text-primary transition-colors' onClick={() => setIsInitial(true)} />
           <div className='flex h-full pl-10 pt-10'>
 
             <p className='uppercase  font-extrabold'>{type}</p> <p className='text-9xl  font-bold'>{amount}</p>
           </div>
         </div>
-        <div className='w-1/2 h-full'>
+        <div className='md:w-1/2 w-full h-full'>
 
             {isLoading && <div className="w-full h-full flex justify-center items-center">
               <span className="loader12 text-primary"></span>
