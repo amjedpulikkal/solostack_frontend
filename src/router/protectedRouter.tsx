@@ -1,5 +1,7 @@
 import NaveBar from "@/components/navBar";
+import NaveBarForM from "@/components/student/naveBarForM";
 import { useAuthor } from "@/components/switchUser-provider";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { Page404 } from "@/page/404";
 import { RootState } from "@/redux/store";
 import { Iauthor } from "@/type";
@@ -9,6 +11,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 export function StudentParentRoute(): JSX.Element {
   const navigate = useNavigate();
   // const { author } = useAuthor();
+  const isDesktop = useMediaQuery("(min-width: 768px)")
 
   const author = useSelector(
     (state: RootState) => state.author?.author
@@ -29,14 +32,16 @@ export function StudentParentRoute(): JSX.Element {
         <div className="w-screen h-screen overflow-hidden">
           {!isChatPage ? (
             <>
-              <NaveBar />
-              <div className="w-full h-full overflow-auto scrollbar pb-20">
+              {isDesktop && <NaveBar />}
+              <div className="w-full h-full overflow-auto scrollbar ">
                 <Outlet />
               </div>
+              {!isDesktop && <NaveBarForM/>}
             </>
           ) : (
             <Outlet />
           )}
+
         </div>
       </>
     );
