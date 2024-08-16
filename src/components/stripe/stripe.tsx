@@ -51,7 +51,7 @@ const CheckoutForm: React.FC<{ clientSecret: string, amount: number, type: strin
   }, [elements]);
   return (
     <>
-      <div className='md:flex p-10'>
+      <div className='md:flex p-10 pb-20 md:pb-0'>
         <div className='md:w-1/2 w-full  h-full'>
           <IoMdArrowRoundBack className='text-3xl -mt-8 hover:text-primary transition-colors' onClick={() => setIsInitial(true)} />
           <div className='flex h-full pl-10 pt-10'>
