@@ -48,8 +48,8 @@ export default function StudentTabs(): JSX.Element {
     <div className="h-full w-full p-5 ">
       <div className="w-full flex justify-end relative">
         <div className="grid grid-cols-6  gap-2 w-full pe-4">
-          <div className="flex col-span-3 justify-end bg-secondary rounded-ss-full  rounded-es-full  rounded-se-full rounded-ee-full">
-            <motion.div className="w-full h-full  gap-1 flex justify-around items-center">
+          <div className="flex  md:col-span-3 col-span-6 justify-end bg-secondary rounded-ss-full  rounded-es-full  rounded-se-full rounded-ee-full">
+            <motion.div className="w-full h-full  gap-1 flex justify-around items-center ">
               {[9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
                 if (time === index) {
                   return (
@@ -76,12 +76,12 @@ export default function StudentTabs(): JSX.Element {
             </motion.div>
           </div>
           <Input
-            className="col-span-1"
+            className="md:col-span-1 col-span-6"
             type="search"
             placeholder="Search mentor"
           />
           <Input
-            className="col-span-1"
+            className="md:col-span-1 col-span-2 "
             // onPaste={(e) => setCategory([...category, e.target?.value])}
             type="search"
             placeholder="category"
@@ -114,9 +114,9 @@ export default function StudentTabs(): JSX.Element {
 
         {/* </AnimatePresence> */}
       </div>
-      {(!data?.length && !isLoading) && <div className="w-screen h-full flex justify-center flex-col gap-4">
+      {(!data?.length && !isLoading) && <div className="md:w-screen h-full flex justify-center flex-col gap-4">
 
-        <img src="/undraw_diary_re_4jpc.svg" className="h-3/4" alt="" />
+        <img src="/undraw_diary_re_4jpc.svg" className="md:h-3/4 w-[80%] " alt="" />
 
         <p className="text-center text-pri text-4xl">No results found</p>
       </div>}
@@ -131,7 +131,7 @@ export default function StudentTabs(): JSX.Element {
       >
         {isLoading &&
           [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2].map(() =>
-            <motion.div  className="col-span-2 animate-pulse  bg-muted  rounded-3xl h-60  w-48 flex justify-center  items-end ">
+            <motion.div  className="col-span-2 animate-pulse   bg-muted  rounded-3xl h-60  w-48 flex justify-center  items-end ">
               {/* <Skeleton
                 className=""
 
