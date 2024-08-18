@@ -45,7 +45,6 @@ export default function NaveBar(): JSX.Element {
             <p className="text-xl">
               {data.wallet}
             </p>
-
           </div>
         </div>
         <ModeToggle />
