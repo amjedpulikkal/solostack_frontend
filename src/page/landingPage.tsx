@@ -81,15 +81,15 @@ function LandingPage() {
                 <div className=' w-full flex justify-center z-30'>
                     <div className=' md:w-1/2 w-full'>
 
-                        <p className='text-center zen-dots-regular md:text-[62px]'>
+                        <p className='text-center zen-dots-regular md:text-[62px] text-3xl'>
                             Unlock Your Coding Potential with  Solo<samp className=' text-primary zen-dots-regular '>Stack</samp>
                         </p>
-                        <div className=' flex justify-center '>
+                        <div className=' flex justify-center md:mt-0 mt-3'>
                             <p className='yantramanav-regular w-80 font-[20px]  text-center'>
                                 Connect with mentors, learn from experienced developers, and grow your coding network
                             </p>
                         </div>
-                        <div className='flex justify-center mt-3'>
+                        <div className='flex justify-center md:mt-0 mt-6 '>
                             <motion.button whileHover={{ scale: 1.2 }} onClick={() => navigate("/signUp")} className=' zen-dots-regular text-lg bg-primary h-10 px-4 py-2 text-primary-foreground hover:bg-primary/90 rounded-3xl'>Get Start</motion.button>
                         </div>
                     </div>
@@ -104,10 +104,10 @@ function LandingPage() {
                 <motion.img initial={{ x: 700 }} animate={{ x: 1 }} transition={{ delay: 0.3, type: "just" }} src="Group 2232 (1).png " className='w-64  md:block hidden absolute right-0 -mt-52' alt="" />
                 <motion.img initial={{ x: -700 }} animate={{ x: 1 }} transition={{ delay: 0.4 }} src="/Group 2217 (2).png" className='w-[460px] md:block hidden' alt="" />
             </div>
-            <div className='flex justify-center f'>
-                <p className='md:text-[65px] font-bold'>What is Solo<samp className=' text-primary  '>Stack</samp>?</p>
+            <div className='flex justify-center md:mt-0 mt-3'>
+                <p className='md:text-[65px] text-3xl font-bold'>What is Solo<samp className=' text-primary  '>Stack</samp>?</p>
             </div >
-            <div className='md:flex  md:justify-center  gap-7  w-full  px-11 '>
+            <div className='md:flex  md:justify-center  gap-7  w-full  px-11 md:mt-0 mt-3 '>
                 <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
@@ -118,7 +118,7 @@ function LandingPage() {
                         <motion.img whileHover={{ scale: 1.4 }} src="/download-removebg-preview 1.png" alt="" />
                     </div>
                     <div className='md:w-3/5 h-full'>
-                        <p className='md:text-[30px] font-semibold'>Breaking Down Barriers in Learning</p>
+                        <p className='md:text-[30px] text-2xl md:mt-0 mt-3 font-semibold'>Breaking Down Barriers in Learning</p>
 
                         <p className='mt-8 text-lg'>
                             Solostack is a platform designed to bridge the gap between self-taught developers and experienced mentors. Whether you're a student seeking guidance or a mentor eager to share your knowledge, Solostack fosters a supportive community for all.
@@ -127,9 +127,9 @@ function LandingPage() {
                     <img src="/Group 2219 (1).png" className='md:block hidden absolute bottom-0 left-0 h-28' alt="" />
                 </motion.div>
                 <motion.div initial={{ scale: 0 }}   viewport={{ once: true }}
-                    whileInView={{ scale: 1 }} className='relative md:mt-0 mt-10 text-center flex gap-12 justify-center md:w-1/2 w-full py-5 h-80 bg-[#2b2a2a60]  rounded-3xl' >
+                    whileInView={{ scale: 1 }} className='relative md:mt-0 mt-10 text-center flex gap-12 justify-center md:w-1/2 w-full md:py-5 md:px-0 px-1 h-80 bg-[#2b2a2a60]  rounded-3xl' >
                     <div className='md:w-3/5 h-full'>
-                        <p className='md:text-[30px] font-semibold'>Learn from the Best, Become the Best</p>
+                        <p className='md:text-[30px] text-2xl md:mt-0 mt-3 font-semibold'>Learn from the Best, Become the Best</p>
 
                         <p className='mt-8 text-lg'>
                             Our platform connects students with mentors based on skill level, project needs, and interests. Get personalized mentorship, overcome challenges, and gain valuable insights from industry professionals.
@@ -168,18 +168,18 @@ function LandingPage() {
                 </div>
 
             </div>
-            <p className='text-center md:text-[45px] px-36 mt-10  font-bold'>
+            <p className='text-center md:text-[45px] text-3xl md:px-36 mt-10  font-bold'>
                 Unleash Your Coding Potential with Solo<samp className=' text-primary  '>Stack</samp> Powerful Features
             </p>
 
             <img className='absolute left-0 h-[450px]' src="/642c72250420bf7456b54c37_Blob_Splashes_-_Green_Gradient_Clay_-_Hovering-tl-removebg-preview 2.png" alt="" />
             <img className='absolute right-0 mt-60  h-[450px]' src="/642c72250420bf7456b54c37_Blob_Splashes_-_Green_Gradient_Clay_-_Hovering-tl-removebg-preview 1.png" alt="" />
             <div className='w-full flex justify-center md:px-32 mt-10 '>
-                <div className='w-full md:px-8  py-6 dark:bg-black/30 backdrop-blur-md bg-white/30  z-50 rounded-3xl overflow-hidden'>
                     <motion.div initial={{ x: -650 }}  viewport={{ once: true }} whileInView={{ x: 0 }}>
                         <p className='md:text-[30px]'> . Seamless Video Calls</p>
                         <p className='md:w-3/5'>Schedule and conduct high-quality video sessions with your mentor/student. Discuss projects, share your screen, and receive real-time feedback in a face-to-face setting.</p>
                     </motion.div>
+                <div className='w-full md:px-8  py-6 dark:bg-black/30 backdrop-blur-md bg-white/30  z-50 rounded-3xl overflow-hidden'>
 
                     <motion.div initial={{ x: 650 }}  viewport={{ once: true }} transition={{ delay: 0.3 }} whileInView={{ x: 0 }} className='flex justify-end items-end flex-col'>
                         <p className='text-[30px]'> Interactive Chat Community.</p>
