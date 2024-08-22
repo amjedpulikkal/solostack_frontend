@@ -79,9 +79,9 @@ function LandingPage() {
             </div>
             <div className='relative' ref={constraintsRef}>
                 <div className=' w-full flex justify-center z-30'>
-                    <div className='w-1/2'>
+                    <div className=' md:w-1/2 w-full'>
 
-                        <p className='text-center zen-dots-regular text-[62px]'>
+                        <p className='text-center zen-dots-regular md:text-[62px]'>
                             Unlock Your Coding Potential with  Solo<samp className=' text-primary zen-dots-regular '>Stack</samp>
                         </p>
                         <div className=' flex justify-center '>
@@ -95,47 +95,47 @@ function LandingPage() {
                     </div>
                 </div>
                 <motion.img {...imgAnimation} drag dragConstraints={constraintsRef}
-                    className=' absolute top-0 left-36' src="/Group 2221 (1).png" alt="" />
-                <motion.img {...imgAnimation2} drag dragConstraints={constraintsRef} src="/Blend Group 6.png" className='absolute top-52 left-52' alt="" />
+                    className='md:block hidden  absolute top-0 left-36' src="/Group 2221 (1).png" alt="" />
+                <motion.img {...imgAnimation2} drag dragConstraints={constraintsRef} src="/Blend Group 6.png" className='absolute  md:block hidden top-52 left-52' alt="" />
                 <motion.img
 
                     {...imgAnimation2} drag dragConstraints={constraintsRef}
-                    className='absolute right-36 top-3 h-28 rotate-12' src="/Group 2222.png" alt="" />
-                <motion.img initial={{ x: 700 }} animate={{ x: 1 }} transition={{ delay: 0.3, type: "just" }} src="Group 2232 (1).png " className='w-64  absolute right-0 -mt-52' alt="" />
-                <motion.img initial={{ x: -700 }} animate={{ x: 1 }} transition={{ delay: 0.4 }} src="/Group 2217 (2).png" className='w-[460px]' alt="" />
+                    className='md:block hidden absolute right-36 top-3 h-28 rotate-12' src="/Group 2222.png" alt="" />
+                <motion.img initial={{ x: 700 }} animate={{ x: 1 }} transition={{ delay: 0.3, type: "just" }} src="Group 2232 (1).png " className='w-64  md:block hidden absolute right-0 -mt-52' alt="" />
+                <motion.img initial={{ x: -700 }} animate={{ x: 1 }} transition={{ delay: 0.4 }} src="/Group 2217 (2).png" className='w-[460px] md:block hidden' alt="" />
             </div>
             <div className='flex justify-center f'>
-                <p className='text-[65px] font-bold'>What is Solo<samp className=' text-primary  '>Stack</samp>?</p>
+                <p className='md:text-[65px] font-bold'>What is Solo<samp className=' text-primary  '>Stack</samp>?</p>
             </div >
-            <div className='flex justify-center  gap-7 p- w-full  px-11 '>
+            <div className='md:flex  md:justify-center  gap-7  w-full  px-11 '>
                 <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     
-                    className=' relative flex gap-12 justify-center w-1/2 py-5 h-80 bg-[#2b2a2a60]  rounded-3xl' >
-                    <div className='h-1/2 w-1/4 bg-[#454545] rounded-full flex justify-center items-center'>
+                    className='text-center  relative flex md:gap-12 justify-center md:w-1/2 w-full md:py-5 h-80 bg-[#2b2a2a60]  rounded-3xl' >
+                    <div className='h-1/2 md:block hidden w-1/4 bg-[#454545] rounded-full flex justify-center items-center'>
                         <motion.img whileHover={{ scale: 1.4 }} src="/download-removebg-preview 1.png" alt="" />
                     </div>
-                    <div className='w-3/5 h-full'>
-                        <p className='text-[30px] font-semibold'>Breaking Down Barriers in Learning</p>
+                    <div className='md:w-3/5 h-full'>
+                        <p className='md:text-[30px] font-semibold'>Breaking Down Barriers in Learning</p>
 
                         <p className='mt-8 text-lg'>
                             Solostack is a platform designed to bridge the gap between self-taught developers and experienced mentors. Whether you're a student seeking guidance or a mentor eager to share your knowledge, Solostack fosters a supportive community for all.
                         </p>
                     </div>
-                    <img src="/Group 2219 (1).png" className='absolute bottom-0 left-0 h-28' alt="" />
+                    <img src="/Group 2219 (1).png" className='md:block hidden absolute bottom-0 left-0 h-28' alt="" />
                 </motion.div>
                 <motion.div initial={{ scale: 0 }}   viewport={{ once: true }}
-                    whileInView={{ scale: 1 }} className='relative flex gap-12 justify-center w-1/2 py-5 h-80 bg-[#2b2a2a60]  rounded-3xl' >
-                    <div className='w-3/5 h-full'>
-                        <p className='text-[30px] font-semibold'>Learn from the Best, Become the Best</p>
+                    whileInView={{ scale: 1 }} className='relative md:mt-0 mt-10 text-center flex gap-12 justify-center md:w-1/2 w-full py-5 h-80 bg-[#2b2a2a60]  rounded-3xl' >
+                    <div className='md:w-3/5 h-full'>
+                        <p className='md:text-[30px] font-semibold'>Learn from the Best, Become the Best</p>
 
                         <p className='mt-8 text-lg'>
                             Our platform connects students with mentors based on skill level, project needs, and interests. Get personalized mentorship, overcome challenges, and gain valuable insights from industry professionals.
                         </p>
                     </div>
-                    <div className='h-1/2 w-1/4 bg-[#454545] rounded-full flex justify-center items-center'>
+                    <div className='h-1/2 w-1/4 bg-[#454545] md:block hidden rounded-full flex justify-center items-center'>
                         <motion.img  viewport={{ once: true }} whileHover={{ scale: 1.4 }} src="/Screenshot_from_2024-05-30_11-44-28-removebg-preview 1.png" alt="" />
                     </div>
                     {/* <img src="/Group%202222.png" className='absolute bottom-0 right-10 h-28' alt="" /> */}
@@ -143,8 +143,8 @@ function LandingPage() {
                 </motion.div>
             </div >
             <img className='absolute right-0 h-52'  src="/642c72250420bf7456b54c37_Blob_Splashes_-_Green_Gradient_Clay_-_Hovering-tl-removebg-preview 1.png" alt="" />
-            <div className='flex justify-around mt-20'>
-                <div className='w-1/4 h-[450px] bg-[#2b2a2a60] rounded-full'>
+            <div className='flex md:justify-around md:px-0 px-14 flex-col md:flex-row justify-center items-center mt-20'>
+                <div className='md:w-1/4 h-[450px] bg-[#2b2a2a60] rounded-full'>
                     <div className='flex justify-center'>
                         <div className='w-[90%] h-80 -mt-14 bg-background rounded-full flex justify-center flex-col items-center'>
                             <motion.img   viewport={{ once: true }} initial={{ scale: 0 }} whileInView={{ scale: 1 }} src="/Vector.png" alt="" />
@@ -155,7 +155,7 @@ function LandingPage() {
                         Accelerate your learning with the help of experienced mentors.
                     </p>
                 </div>
-                <div className='w-1/4 h-[450px] bg-[#2b2a2a60] rounded-full'>
+                <div className='md:w-1/4 h-[450px] bg-[#2b2a2a60] rounded-full'>
                     <div className='flex justify-center'>
                         <div className='w-[90%] h-80 -mt-14 bg-background rounded-full flex justify-center flex-col items-center'>
                             <motion.img   viewport={{ once: true }} initial={{ scale: 0 }} whileInView={{ scale: 1 }} src="/Vector.png" alt="" />
@@ -168,17 +168,17 @@ function LandingPage() {
                 </div>
 
             </div>
-            <p className='text-center text-[45px] px-36 mt-10  font-bold'>
+            <p className='text-center md:text-[45px] px-36 mt-10  font-bold'>
                 Unleash Your Coding Potential with Solo<samp className=' text-primary  '>Stack</samp> Powerful Features
             </p>
 
             <img className='absolute left-0 h-[450px]' src="/642c72250420bf7456b54c37_Blob_Splashes_-_Green_Gradient_Clay_-_Hovering-tl-removebg-preview 2.png" alt="" />
             <img className='absolute right-0 mt-60  h-[450px]' src="/642c72250420bf7456b54c37_Blob_Splashes_-_Green_Gradient_Clay_-_Hovering-tl-removebg-preview 1.png" alt="" />
-            <div className='w-full flex justify-center px-32 mt-10 '>
-                <div className='w-full px-8  py-6 dark:bg-black/30 backdrop-blur-md bg-white/30  z-50 rounded-3xl overflow-hidden'>
+            <div className='w-full flex justify-center md:px-32 mt-10 '>
+                <div className='w-full md:px-8  py-6 dark:bg-black/30 backdrop-blur-md bg-white/30  z-50 rounded-3xl overflow-hidden'>
                     <motion.div initial={{ x: -650 }}  viewport={{ once: true }} whileInView={{ x: 0 }}>
-                        <p className='text-[30px]'> . Seamless Video Calls</p>
-                        <p className='w-3/5'>Schedule and conduct high-quality video sessions with your mentor/student. Discuss projects, share your screen, and receive real-time feedback in a face-to-face setting.</p>
+                        <p className='md:text-[30px]'> . Seamless Video Calls</p>
+                        <p className='md:w-3/5'>Schedule and conduct high-quality video sessions with your mentor/student. Discuss projects, share your screen, and receive real-time feedback in a face-to-face setting.</p>
                     </motion.div>
 
                     <motion.div initial={{ x: 650 }}  viewport={{ once: true }} transition={{ delay: 0.3 }} whileInView={{ x: 0 }} className='flex justify-end items-end flex-col'>
@@ -199,7 +199,7 @@ function LandingPage() {
                 </div>
             </div>
 
-            <div className='zen-dots-regular text flex flex-col items-center justify-center pb-32  mt-32 relative overflow- z-50'>
+            <div className='zen-dots-regular  flex flex-col items-center justify-center pb-32  mt-32 relative  z-50'>
                 <div >
 
                     <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}  viewport={{ once: true }} className='text-[35px]' >
