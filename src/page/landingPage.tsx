@@ -113,7 +113,7 @@ function LandingPage() {
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     
-                    className='text-center  relative flex md:gap-12 justify-center md:w-1/2 w-full md:py-5 h-80 bg-[#2b2a2a60]  rounded-3xl' >
+                    className='text-center  relative flex md:gap-12 justify-center md:w-1/2 w-full md:py-5 h-80 dark:bg-[#2b2a2a60] bg-none  rounded-3xl' >
                     <div className='h-1/2 md:block hidden w-1/4 bg-[#454545] rounded-full flex justify-center items-center'>
                         <motion.img whileHover={{ scale: 1.4 }} src="/download-removebg-preview 1.png" alt="" />
                     </div>
@@ -127,7 +127,7 @@ function LandingPage() {
                     <img src="/Group 2219 (1).png" className='md:block hidden absolute bottom-0 left-0 h-28' alt="" />
                 </motion.div>
                 <motion.div initial={{ scale: 0 }}   viewport={{ once: true }}
-                    whileInView={{ scale: 1 }} className='relative md:mt-0 mt-10 text-center flex gap-12 justify-center md:w-1/2 w-full py-5 h-80 bg-[#2b2a2a60]  rounded-3xl' >
+                    whileInView={{ scale: 1 }} className='relative md:mt-0 mt-10 text-center flex gap-12 justify-center md:w-1/2 w-full py-5 h-80 dark:bg-[#2b2a2a60] bg-none rounded-3xl' >
                     <div className='md:w-3/5 h-full md:mt-0 mt-3'>
                         <p className='md:text-[30px] font-semibold text-[20px]'>Learn from the Best, Become the Best</p>
 
@@ -144,7 +144,7 @@ function LandingPage() {
             </div >
             <img className='absolute right-0 h-52'  src="/642c72250420bf7456b54c37_Blob_Splashes_-_Green_Gradient_Clay_-_Hovering-tl-removebg-preview 1.png" alt="" />
             <div className='flex md:justify-around md:px-0 px-14 flex-col md:flex-row justify-center items-center mt-20'>
-                <div className='md:w-1/4 h-[450px] bg-[#2b2a2a60] rounded-full'>
+                <div className='md:w-1/4 h-[450px] dark:bg-[#2b2a2a60] bg-none rounded-full'>
                     <div className='flex justify-center'>
                         <div className='w-[90%] h-80 -mt-14 bg-background rounded-full flex justify-center flex-col items-center'>
                             <motion.img   viewport={{ once: true }} initial={{ scale: 0 }} whileInView={{ scale: 1 }} src="/Vector.png" alt="" />
@@ -155,7 +155,7 @@ function LandingPage() {
                         Accelerate your learning with the help of experienced mentors.
                     </p>
                 </div>
-                <div className='md:w-1/4 h-[450px] bg-[#2b2a2a60] rounded-full'>
+                <div className='md:w-1/4 h-[450px] dark:bg-[#2b2a2a60] bg-none rounded-full'>
                     <div className='flex justify-center'>
                         <div className='w-[90%] h-80 -mt-14 bg-background rounded-full flex justify-center flex-col items-center'>
                             <motion.img   viewport={{ once: true }} initial={{ scale: 0 }} whileInView={{ scale: 1 }} src="/Vector.png" alt="" />
