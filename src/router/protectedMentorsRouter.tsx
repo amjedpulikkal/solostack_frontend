@@ -15,7 +15,7 @@ export function MentorProtectedRouter(): JSX.Element {
 
   React.useEffect(() => {
     if (!isMentor) {
-      navigate("/login");
+      navigate("/signIn");
     }
   }, [isMentor, navigate]);
 

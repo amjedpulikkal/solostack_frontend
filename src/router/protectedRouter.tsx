@@ -22,7 +22,7 @@ export function StudentParentRoute(): JSX.Element {
 
   React.useEffect(() => {
     if (!isStudent) {
-      navigate("/login");
+      navigate("/signIn");
     }
   }, [isStudent, navigate]);
 

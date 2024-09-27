@@ -47,9 +47,9 @@ export default function StudentTabs(): JSX.Element {
   return (
     <div className="h-full w-full p-5 ">
       <div className="w-full flex justify-end relative">
-        <div className="grid grid-cols-6  gap-2 w-full pe-4">
-          <div className="flex  md:col-span-3 col-span-6 justify-end bg-secondary rounded-ss-full  rounded-es-full  rounded-se-full rounded-ee-full">
-            <motion.div className="w-full h-full  gap-1 flex justify-around items-center ">
+        <div className="grid grid-cols-6  gap-2 w-full ">
+          <div className="flex  md:col-span-3 col-span-6 p-1 justify-end bg-secondary rounded-ss-full  rounded-es-full  rounded-se-full rounded-ee-full">
+            <motion.div className="w-full h-full  gap-1 flex justify-around items-center   scrollbar ">
               {[9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
                 if (time === index) {
                   return (
