@@ -19,7 +19,7 @@ export const useGetAllGroups = (setData) => {
     })
 }
 
-export const useCreateNewGroups=()=>{
+export const useCreateNewGroups=(callBack)=>{
 
     const apiCall = async ({imageFile,groupName}) => {
         
@@ -33,5 +33,8 @@ export const useCreateNewGroups=()=>{
 
     };
 
-    return useMutation(apiCall)
+    return useMutation(apiCall,{onSuccess:(data)=>{
+        console.log(data)
+        callBack()
+    }})
 }

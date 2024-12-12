@@ -89,7 +89,7 @@ function LandingPage() {
                                 Connect with mentors, learn from experienced developers, and grow your coding network
                             </p>
                         </div>
-                        <div className='flex justify-center md:mt-0 mt-6'>
+                        <div className='flex justify-center md:mt-0 pt-6'>
                             <motion.button whileHover={{ scale: 1.2 }} onClick={() => navigate("/signUp")} className=' zen-dots-regular text-lg bg-primary h-10 px-4 py-2 text-primary-foreground hover:bg-primary/90 rounded-3xl'>Get Start</motion.button>
                         </div>
                     </div>

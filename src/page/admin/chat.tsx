@@ -66,7 +66,7 @@ export default function AdminChat() {
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
-    const { mutate} = useCreateNewGroups()
+    const { mutate, } = useCreateNewGroups(()=> useGetAllGroups(setData))
     // const handelCreateGroups=(e:React.FormEvent<HTMLFormElement>)=>{
     //     e.preventDefault()
      
