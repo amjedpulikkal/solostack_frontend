@@ -118,7 +118,7 @@ export default function StudentLogin({ author }: props): JSX.Element {
                   <a onClick={() => setOpen(!open)}>Forgot your password?</a>
                 </div>
               <div className="pb-2 flex justify-center pt-4">
-                <TurnstileWidget key={isLoading} setWidget={setWidget} />
+                <TurnstileWidget  setWidget={setWidget} />
               </div>
               <div className="px-4 pb-2 pt-4">
                 <Button disabled={!!Object.keys(errors).length||!widget} type="submit" className="uppercase  w-full h-14 text-lg rounded-full " style={{ backgroundColor: "#28CB8B" }}>{isLoading ? <DotLoader /> : "sign in"}</Button>
