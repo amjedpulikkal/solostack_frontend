@@ -78,3 +78,9 @@ export const ChatGroupApi = {
     getAllGroupsWithID: createEndpoint("/group-chat/groups/"),
     getChatHistory: createEndpoint("/group-chat/chat-history/"),
 };
+
+
+export const adminApi = {
+    login: createEndpoint("/admin/login"),
+   
+};

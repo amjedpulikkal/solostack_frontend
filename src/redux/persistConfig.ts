@@ -4,7 +4,7 @@ import { PersistConfig } from 'redux-persist/es/types';
 const persistConfig: PersistConfig<any> = {
   key: 'root', 
   storage, 
-  whitelist: ['author'], 
+  whitelist: ['author','admin'], 
 };
 
 export default persistConfig;

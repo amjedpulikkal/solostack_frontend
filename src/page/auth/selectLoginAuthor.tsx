@@ -39,7 +39,7 @@ export default function SelectAuthor(): JSX.Element {
             </div>
           </div>
           <div className="flex mt-3 -mb-10">
-            <p>Or <Link to="/signIn" className="text-right text-gray-400 hover:underline hover:text-back-100">signUp</Link> to </p>
+            <p>Or <Link to="/signUp" className="text-right text-gray-400 hover:underline hover:text-back-100">signUp</Link> to </p>
             <div className="flex items-center ml-1">
               <img 
                 src="/SoloStack (2).png"

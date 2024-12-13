@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import NaveBar from './navbar'
 import { FaBars } from "react-icons/fa";
 import { Button } from '@/components/ui/button';
 import { IoCloseSharp } from "react-icons/io5";
 
 
-import {  NavLink, Outlet } from 'react-router-dom';
+import {  NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 
@@ -13,13 +13,28 @@ import { PiChalkboardTeacherFill, PiStudentBold, } from 'react-icons/pi';
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { MdError } from "react-icons/md";
 import { GrNotification } from 'react-icons/gr';
-
+import { useSelector } from "react-redux";
 import { MdOutlineMailOutline } from "react-icons/md";
+import { RootState } from '@/redux/store';
 
 export default function AdminHome() {
     const [isOpen, setOpen] = useState(false)
     const [currentLoc, setCurrentLoc] = useState<string>("")
+    const navigate = useNavigate();
 
+    
+    const isAdmin = useSelector(
+        (state: RootState) => state.admin?.isLoggedIn
+      ) as unknown as boolean   ;
+     
+
+      React.useEffect(() => {
+        console.log(isAdmin)
+        if (!isAdmin) {
+          navigate("/admin/login");
+        }
+      }, [isAdmin, navigate]);
+    
 
     return (
 

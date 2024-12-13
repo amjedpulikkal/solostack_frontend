@@ -31,6 +31,7 @@ import MentorTime from "./page/mentor/TimeUpdate"
 import MentorHome from "./page/mentor/home";
 import PaymentPage from "./page/payment";
 import PaymentSuccess from "./page/paymentSuccess";
+import AdminLogin from "./page/admin/login";
 const AdminChat = lazy(() => import("./page/admin/chat"))
 const Sign = lazy(() => import("./page/auth/signup"));
 
@@ -82,6 +83,7 @@ function App() {
                   element={<VerifyForgetPassword />}
                 />
                 <Route path="/oauth/:provider/:token" element={<SuspenseFn Element={<Oauth2 />} />} />
+                <Route path="/admin/login" element={<SuspenseFn Element={<AdminLogin />} />} />
               </Route>
               {/* mentor - Router  */}
               <Route path="/VideoCall/:id" element={<SuspenseFn Element={<VideoCall />} />} />

@@ -11,7 +11,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 export function StudentParentRoute(): JSX.Element {
   const navigate = useNavigate();
   // const { author } = useAuthor();
-  const isDesktop = useMediaQuery("(min-width: 768px)")
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const author = useSelector(
     (state: RootState) => state.author?.author
@@ -36,12 +36,11 @@ export function StudentParentRoute(): JSX.Element {
               <div className="w-full h-full overflow-auto scrollbar ">
                 <Outlet />
               </div>
-              {!isDesktop && <NaveBarForM/>}
+              {!isDesktop && <NaveBarForM />}
             </>
           ) : (
             <Outlet />
           )}
-
         </div>
       </>
     );
@@ -53,7 +52,13 @@ export function CommonRoute(): JSX.Element {
   const author = useSelector(
     (state: RootState) => state.author?.author
   ) as unknown as Iauthor;
+  const isAdmin = useSelector(
+    (state: RootState) => state.admin?.isLoggedIn
+  ) as unknown as boolean;
 
+  console.log(isAdmin)
+
+  
   React.useEffect(() => {
     if (author === "mentor") {
       navigate("/mentor");
@@ -61,6 +66,8 @@ export function CommonRoute(): JSX.Element {
       navigate("/student");
     } else if (author === "tutor") {
       navigate("/student");
+    }else if(isAdmin){
+      navigate("/admin")
     }
   }, [author, navigate]);
 
