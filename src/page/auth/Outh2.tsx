@@ -21,7 +21,7 @@ export default function Outh2() {
     const data = useSelector((state: RootState) => state.author?.authorData) as unknown as StudentData
     useEffect(() => {
         const fetchData = async () => {
-            if (token) {
+            // if (token) {
                 setCookie('jwtToken', token, { path: '/', });
                 console.log(provider, token);
                 try {
@@ -36,11 +36,11 @@ export default function Outh2() {
                     // Handle error appropriately
                     console.error("Error fetching data:", error);
                 }
-            }
+            // }
         };
         fetchData();
 
-    }, [crateIsOauthUpMutation, dispatch, navigate, provider, setCookie, token]);
+    }, [ provider, token]);
     return (
         <>
             hello world!  hi {data?.email}

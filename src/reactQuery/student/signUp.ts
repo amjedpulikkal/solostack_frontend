@@ -64,7 +64,7 @@ export const useOtpVerifyQuery = () => {
 
             console.log("data", data);
             dispatch(setAuthorData(data))
-            navigate(`/oauth/provider/${cookies.jwtToken}`)
+            navigate(`/oauth/provider/${(cookies.jwtToken || "1")}`)
         },
         onError() {
             toast.error("otp not valid");
