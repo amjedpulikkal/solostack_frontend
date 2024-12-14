@@ -65,7 +65,7 @@ export default function StudentLogin({ author }: props): JSX.Element {
             <div className="flex justify-center ">
               <img src="/SoloStack (2).png" className='hidden dark:block' alt="" />
             </div>
-            <Authcomponents />
+            {/* <Authcomponents /> */}
             <p className=" dark:text-gray-100  text-gray-700 ">
               or use email your account student
             </p>
