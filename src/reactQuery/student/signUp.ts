@@ -95,20 +95,19 @@ export const useLoginQuery = (author: Iauthor) => {
     const otpVerify = async (formData: IFormInput) => {
         if (formData.author === "student") {
 
-            const response = await axios.post(studentApi.login, formData);
-            return response.data;
+        // Added { withCredentials: true } as the 3rd argument
+        const response = await axios.post(studentApi.login, formData, { withCredentials: true });
+        return response.data;
 
-        } else if (formData.author === "mentor") {
+    } else if (formData.author === "mentor") {
 
-            const response = await axios.post(mentorApi.login, formData);
-            return response.data;
+        // Added { withCredentials: true } as the 3rd argument
+        const response = await axios.post(mentorApi.login, formData, { withCredentials: true });
+        return response.data;
 
-        } else if (formData.author === "tutor") {
-
-            // const response = await axios.post(mentorApi.login, formData);
-            // return response.data;
-
-        }
+    } else if (formData.author === "tutor") {
+        // Handle tutor logic here when ready
+    }
     };
 
     return useMutation(otpVerify, {
